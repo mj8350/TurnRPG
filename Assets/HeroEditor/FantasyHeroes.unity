@@ -2906,7 +2906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b56af0dc484132b6371bbf4fd0d1e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 616707876}
+  Character: {fileID: 0}
   ClipCharge: {fileID: 7400000, guid: 20538db717b94efeaa004e68d9284e3f, type: 2}
   FireTransform: {fileID: 990887916}
   ArrowPrefab: {fileID: 1846010953453456, guid: 971d61eacf474871bfa0e3a415b5bb11, type: 3}
@@ -3037,7 +3037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e9f2aa926f4741b8fed51b449fa3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 616707876}
+  Character: {fileID: 0}
   UpperClipName: {fileID: 36084265}
   LowerClipName: {fileID: 74841501}
 --- !u!4 &252790126
@@ -5243,17 +5243,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594383738}
   m_CullTransparentMesh: 0
---- !u!114 &616707876 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114665035860700710, guid: ff726cbf10a6436a8c11071a7641036f, type: 3}
-  m_PrefabInstance: {fileID: 990887914}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9bab99a464f488298c9d9629a889d97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &620118095
 GameObject:
   m_ObjectHideFlags: 0
@@ -6809,7 +6798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c23b91487e4a87b5a557fee10f2ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 616707876}
+  Character: {fileID: 0}
   EditorOnlyButtons:
   - {fileID: 59757114}
   - {fileID: 1193305462}
@@ -8495,6 +8484,10 @@ PrefabInstance:
     - target: {fileID: 1109986072035710, guid: ff726cbf10a6436a8c11071a7641036f, type: 3}
       propertyPath: m_Name
       value: Human
+      objectReference: {fileID: 0}
+    - target: {fileID: 1109986072035710, guid: ff726cbf10a6436a8c11071a7641036f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4305108561794920, guid: ff726cbf10a6436a8c11071a7641036f, type: 3}
       propertyPath: m_RootOrder
@@ -17412,7 +17405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54fb20a22c0b4ade8ed65a122758aa30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 616707876}
+  Character: {fileID: 0}
   BowExample: {fileID: 198793439}
   Firearm: {fileID: 990887915}
   ArmL: {fileID: 1638837016}
@@ -17420,6 +17413,7 @@ MonoBehaviour:
   FireButton: 324
   ReloadButton: 114
   FixedArm: 0
+  Fight: 0
   AngleToTarget: 0
   AngleToArm: 0
 --- !u!1 &1973783070
