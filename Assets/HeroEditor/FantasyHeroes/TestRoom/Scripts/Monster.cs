@@ -48,6 +48,7 @@ namespace Assets.HeroEditor.FantasyHeroes.TestRoom.Scripts
         /// </summary>
         public void SetState(MonsterState state)
         {
+            Debug.Log("행동");
             Animator.SetInteger("State", (int) state);
         }
 
