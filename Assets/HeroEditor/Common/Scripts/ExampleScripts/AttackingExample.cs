@@ -22,6 +22,8 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
         [Header("Check to disable arm auto rotation.")]
 	    public bool FixedArm;
 
+        public bool Fight = false;
+
         public void Start()
         {
             if ((Character.WeaponType == WeaponType.Firearm1H || Character.WeaponType == WeaponType.Firearm2H) && Firearm.Params.Type == FirearmType.Unknown)
@@ -34,34 +36,37 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
         {
             if (Character.Animator.GetInteger("State") >= (int) CharacterState.DeathB) return;
 
-            switch (Character.WeaponType)
+            if (Fight)
             {
-                case WeaponType.Melee1H:
-                case WeaponType.Melee2H:
-                case WeaponType.MeleePaired:
-                    if (Input.GetKeyDown(FireButton))
-                    {
-                        Character.Slash();
-                    }
-                    break;
-                case WeaponType.Bow:
-                    BowExample.ChargeButtonDown = Input.GetKeyDown(FireButton);
-                    BowExample.ChargeButtonUp = Input.GetKeyUp(FireButton);
-                    break;
-                case WeaponType.Firearm1H:
-                case WeaponType.Firearm2H:
-                    Firearm.Fire.FireButtonDown = Input.GetKeyDown(FireButton);
-                    Firearm.Fire.FireButtonPressed = Input.GetKey(FireButton);
-                    Firearm.Fire.FireButtonUp = Input.GetKeyUp(FireButton);
-                    Firearm.Reload.ReloadButtonDown = Input.GetKeyDown(ReloadButton);
-                    break;
-	            case WeaponType.Supplies:
-		            if (Input.GetKeyDown(FireButton))
-		            {
-			            Character.Animator.Play(Time.frameCount % 2 == 0 ? "UseSupply" : "ThrowSupply", 0); // Play animation randomly.
-		            }
-		            break;
-			}
+                switch (Character.WeaponType)
+                {
+                    case WeaponType.Melee1H:
+                    case WeaponType.Melee2H:
+                    case WeaponType.MeleePaired:
+                        if (Input.GetKeyDown(FireButton))
+                        {
+                            Character.Slash();
+                        }
+                        break;
+                    case WeaponType.Bow:
+                        BowExample.ChargeButtonDown = Input.GetKeyDown(FireButton);
+                        BowExample.ChargeButtonUp = Input.GetKeyUp(FireButton);
+                        break;
+                    case WeaponType.Firearm1H:
+                    case WeaponType.Firearm2H:
+                        Firearm.Fire.FireButtonDown = Input.GetKeyDown(FireButton);
+                        Firearm.Fire.FireButtonPressed = Input.GetKey(FireButton);
+                        Firearm.Fire.FireButtonUp = Input.GetKeyUp(FireButton);
+                        Firearm.Reload.ReloadButtonDown = Input.GetKeyDown(ReloadButton);
+                        break;
+                    case WeaponType.Supplies:
+                        if (Input.GetKeyDown(FireButton))
+                        {
+                            Character.Animator.Play(Time.frameCount % 2 == 0 ? "UseSupply" : "ThrowSupply", 0); // Play animation randomly.
+                        }
+                        break;
+                }
+            }
 
             if (Input.GetKeyDown(FireButton))
             {
