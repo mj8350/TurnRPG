@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c23b91487e4a87b5a557fee10f2ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 740458101}
+  Character: {fileID: 887621189}
   EditorOnlyButtons:
   - {fileID: 0}
   - {fileID: 0}
@@ -248,6 +248,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 68507740}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &274835241 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2849978128093389806, guid: ef4fdcc67e1451c46bd56d1cbfe8fdae, type: 3}
+  m_PrefabInstance: {fileID: 1677259007}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &306756854
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +345,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &396284504 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8438179645880639573, guid: ef4fdcc67e1451c46bd56d1cbfe8fdae, type: 3}
+  m_PrefabInstance: {fileID: 1677259007}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9bab99a464f488298c9d9629a889d97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &542005703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -397,17 +413,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2ef385d7619b3a42abca1c8d79aad87, type: 3}
---- !u!114 &740458101 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5008746839377455062, guid: 44f8524edc64f2146b22fb2807ad88fc, type: 3}
-  m_PrefabInstance: {fileID: 1096920621}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9bab99a464f488298c9d9629a889d97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &855232507
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &855232508
 Transform:
   m_ObjectHideFlags: 0
@@ -487,13 +492,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b56af0dc484132b6371bbf4fd0d1e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 740458101}
+  Character: {fileID: 396284504}
   ClipCharge: {fileID: 7400000, guid: 20538db717b94efeaa004e68d9284e3f, type: 2}
   FireTransform: {fileID: 0}
   ArrowPrefab: {fileID: 1846010953453456, guid: 971d61eacf474871bfa0e3a415b5bb11, type: 3}
   CreateArrows: 0
   ChargeButtonDown: 0
   ChargeButtonUp: 0
+--- !u!114 &887621189 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1943026562890308925, guid: f09935441256f564e88dcf948abe8435, type: 3}
+  m_PrefabInstance: {fileID: 1636354218}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9bab99a464f488298c9d9629a889d97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &943037368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -624,7 +640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1330308069
 Transform:
   m_ObjectHideFlags: 0
@@ -652,9 +668,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e9f2aa926f4741b8fed51b449fa3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 740458101}
+  Character: {fileID: 887621189}
   UpperClipName: {fileID: 0}
   LowerClipName: {fileID: 0}
+--- !u!4 &1334776011 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2095279559584701201, guid: ef4fdcc67e1451c46bd56d1cbfe8fdae, type: 3}
+  m_PrefabInstance: {fileID: 1677259007}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1636354218
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -865,11 +886,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54fb20a22c0b4ade8ed65a122758aa30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 740458101}
+  Character: {fileID: 396284504}
   BowExample: {fileID: 863228368}
   Firearm: {fileID: 0}
-  ArmL: {fileID: 0}
-  ArmR: {fileID: 0}
+  ArmL: {fileID: 274835241}
+  ArmR: {fileID: 1334776011}
   FireButton: 324
   ReloadButton: 114
   FixedArm: 0

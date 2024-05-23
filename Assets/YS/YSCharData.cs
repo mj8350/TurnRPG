@@ -5,8 +5,8 @@ using UnityEngine;
 public class YSCharData : ScriptableObject
 {
     [SerializeField]
-    private string CharName;
-    public string ZombieName { get { return CharName; } }
+    private string charName;
+    public string CharName { get { return charName; } }
     [SerializeField]
     private int hp;
     public int Hp { get { return hp; } }

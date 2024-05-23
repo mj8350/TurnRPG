@@ -26,8 +26,8 @@ namespace Assets.HeroEditor.Common.Scripts.EditorScripts
 
             CharacterEditor.Character = character;
             AnimationManager.Character = character;
-            AttackingExample.Character = character;
-            BowExample.Character = character;
+            //AttackingExample.Character = character;
+            //BowExample.Character = character;
         }
 
         public void Awake()

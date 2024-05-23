@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Assets.HeroEditor.Common.Scripts.CharacterScripts;
 using Assets.HeroEditor.Common.Scripts.CharacterScripts.Firearms;
 using Assets.HeroEditor.Common.Scripts.CharacterScripts.Firearms.Enums;
@@ -22,19 +23,21 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
         [Header("Check to disable arm auto rotation.")]
 	    public bool FixedArm;
 
-        public bool Fight = false;
+        public bool Fight = true;
 
         public void Start()
         {
+            Fight = true;
             if ((Character.WeaponType == WeaponType.Firearm1H || Character.WeaponType == WeaponType.Firearm2H) && Firearm.Params.Type == FirearmType.Unknown)
             {
                 throw new Exception("Firearm params not set.");
             }
+
         }
-        
+
         public void Update()
         {
-            if (Character.Animator.GetInteger("State") >= (int) CharacterState.DeathB) return;
+            if (Character.Animator.GetInteger("State") >= (int)CharacterState.DeathB) return;
 
             if (Fight)
             {
@@ -66,12 +69,22 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
                         }
                         break;
                 }
+
+
+                if (Input.GetKeyDown(FireButton))
+                {
+                    Character.GetReady();
+                    if(Character.WeaponType != WeaponType.Bow)
+                        StartCoroutine(Relex_());
+                }
             }
 
-            if (Input.GetKeyDown(FireButton))
-            {
-                Character.GetReady();
-            }
+        }
+
+        private IEnumerator Relex_()
+        {
+            yield return new WaitForSeconds(0.5f);
+            Character.Relax();
         }
 
         /// <summary>
@@ -106,9 +119,16 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
 
             if (Character.IsReady())
             {
-                RotateArm(arm, weapon, FixedArm ? arm.position + 1000 * Vector3.right : Camera.main.ScreenToWorldPoint(Input.mousePosition), -40, 40);
+                //RotateArm(arm, weapon, FixedArm ? arm.position + 1000 * Vector3.right : Camera.main.ScreenToWorldPoint(Input.mousePosition), -40, 40);
+                //RotateArm(arm, weapon, Vector2.right, -40, 40);
+                arm.transform.localEulerAngles = new Vector3(0, 0, 20);
             }
+
+            
+
         }
+
+        
 
         public float AngleToTarget;
         public float AngleToArm;

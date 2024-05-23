@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using Assets.HeroEditor.Common.Scripts.CharacterScripts;
 using UnityEngine;
 
@@ -26,13 +27,13 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
         public void Update()
         {
             if (ChargeButtonDown)
-            {
+            {/*
                 _chargeTime = Time.time;
                 Character.Animator.SetInteger("Charge", 1);
-            }
+            //}
 
-            if (ChargeButtonUp)
-            {
+            //if (ChargeButtonUp)
+            //{
                 var charged = Time.time - _chargeTime > ClipCharge.length;
 
                 Character.Animator.SetInteger("Charge", charged ? 2 : 3);
@@ -40,11 +41,32 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
                 if (charged && CreateArrows)
                 {
 	                CreateArrow();
-                }
+                }*/
+                StartCoroutine(Bow());
             }
         }
+        public IEnumerator Bow()
+        {
+            _chargeTime = Time.time;
+            Character.Animator.SetInteger("Charge", 1);
+            //}
 
-		private void CreateArrow()
+            //if (ChargeButtonUp)
+            //{
+            yield return new WaitForSeconds(0.8f);
+            var charged = Time.time - _chargeTime > ClipCharge.length;
+
+            Character.Animator.SetInteger("Charge", charged ? 2 : 3);
+
+            if (charged && CreateArrows)
+            {
+                CreateArrow();
+            }
+            yield return new WaitForSeconds(0.3f);
+            Character.Relax();
+        }
+
+        private void CreateArrow()
 		{
 			var arrow = Instantiate(ArrowPrefab, FireTransform);
 			var sr = arrow.GetComponent<SpriteRenderer>();
