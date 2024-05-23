@@ -1,0 +1,47 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public struct Player
+{
+    public int id;
+    public string CharName; // 캐릭터 이름
+    public int Accuracy; // 명중률
+    public int P_Defense; // 물리방어력
+    public int M_Defense; // 마법방어력
+    public int Strength; // 공격력
+    public int Magic; // 마법력
+    public int Critical; // 치명타 
+    public int Speed; // 속도
+
+    public int MaxHP;
+    public int CurHP;
+
+    public int Level;
+    public int EXP;
+}
+
+public class GameManager : Singleton<GameManager>
+{
+    public Player[] player;
+    public PHM_CharStat charStat;
+    public Transform[] transforms;
+
+    private void Awake()
+    {
+        base.Awake();
+    }
+
+    public void CreateUserData(int id)
+    {
+        transforms[id].GetChild(0).TryGetComponent<PHM_CharStat>(out charStat);
+        player[id].CharName = charStat.CharName;
+        player[id].Accuracy = charStat.Accuracy;
+        player[id].P_Defense = charStat.P_Defense;
+        player[id].M_Defense = charStat.M_Defense;
+        player[id].Strength = charStat.Strength;
+        player[id].Magic = charStat.Magic;
+        player[id].Critical = charStat.Critical;
+        player[id].Speed = charStat.Speed;
+    }
+}
