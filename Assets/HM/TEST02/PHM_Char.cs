@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class PHM_Char : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public PHM_CreateStats stats;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
         
     }
