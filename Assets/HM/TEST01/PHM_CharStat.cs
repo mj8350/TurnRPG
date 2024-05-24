@@ -19,15 +19,17 @@ public class PHM_CharStat : MonoBehaviour
     public int Critical; // 치명타 
     public int Speed; // 속도
 
-    //public PHM_Stat STR; // 힘 스텟
-    //public PHM_Stat DEX; // 민첩 스텟
-    //public PHM_Stat LUK; // 운 스텟 (명중률 관련?)
-    //public PHM_Stat INT; // 마력 스텟
+   
+    // 전사 : 높은 방어력, 높은 공격력 위주.
+    // 마법사 : 높은 마법력, 광역 딜 담당.
+    // 궁수 : 높은 명중률, 밸런스 형.
+    // 도적 : 높은 치명타, 빠른 속도.
+    // 사제 : 가장 빠른 속도를 가져 팀 버프에 도움.
 
 
-    public delegate void ChangeHPDelegate(int changeHP);
-    ChangeHPDelegate HPDelegate;
-    public static event ChangeHPDelegate changeHP;
+    //public delegate void ChangeHPDelegate(int changeHP);
+    //ChangeHPDelegate HPDelegate;
+    //public static event ChangeHPDelegate changeHP;
 
     private void Start()
     {
@@ -39,12 +41,12 @@ public class PHM_CharStat : MonoBehaviour
     }
 
 
-    private void ModifyHP(int newHP)
-    {
-        curHP = newHP;
-        // 체력 관련 이벤트
-        changeHP?.Invoke(newHP);
-    }
+    //private void ModifyHP(int newHP)
+    //{
+    //    curHP = newHP;
+    //    // 체력 관련 이벤트
+    //    changeHP?.Invoke(newHP);
+    //}
         
 
 }

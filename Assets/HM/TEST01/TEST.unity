@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 306653782}
   - component: {fileID: 306653781}
   m_Layer: 0
-  m_Name: Char02
+  m_Name: Wizard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,14 +153,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da4f52be0e8c9d418236830548b52ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharName: 
-  Accuracy: 0
-  P_Defense: 0
-  M_Defense: 0
-  Strength: 0
-  Magic: 0
-  Critical: 0
-  Speed: 0
+  CharName: Wizard
+  Accuracy: 60
+  P_Defense: 20
+  M_Defense: 50
+  Strength: 10
+  Magic: 70
+  Critical: 20
+  Speed: 40
 --- !u!212 &306653782
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 1345092253}
   - component: {fileID: 1345092252}
   m_Layer: 0
-  m_Name: Char04
+  m_Name: Thief
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,14 +350,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da4f52be0e8c9d418236830548b52ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharName: 
-  Accuracy: 0
-  P_Defense: 0
-  M_Defense: 0
-  Strength: 0
+  CharName: Thief
+  Accuracy: 70
+  P_Defense: 20
+  M_Defense: 20
+  Strength: 70
   Magic: 0
-  Critical: 0
-  Speed: 0
+  Critical: 80
+  Speed: 60
 --- !u!212 &1345092253
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 1821411794}
   - component: {fileID: 1821411793}
   m_Layer: 0
-  m_Name: Char01
+  m_Name: Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -455,14 +455,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da4f52be0e8c9d418236830548b52ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharName: 
-  Accuracy: 0
-  P_Defense: 0
-  M_Defense: 0
-  Strength: 0
+  CharName: Warrior
+  Accuracy: 60
+  P_Defense: 70
+  M_Defense: 60
+  Strength: 80
   Magic: 0
-  Critical: 0
-  Speed: 0
+  Critical: 30
+  Speed: 30
 --- !u!212 &1821411794
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -542,7 +542,7 @@ GameObject:
   - component: {fileID: 1865228066}
   - component: {fileID: 1865228065}
   m_Layer: 0
-  m_Name: Char05
+  m_Name: Priests
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -560,14 +560,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da4f52be0e8c9d418236830548b52ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharName: 
-  Accuracy: 0
-  P_Defense: 0
-  M_Defense: 0
-  Strength: 0
-  Magic: 0
-  Critical: 0
-  Speed: 0
+  CharName: Priests
+  Accuracy: 60
+  P_Defense: 20
+  M_Defense: 20
+  Strength: 10
+  Magic: 30
+  Critical: 10
+  Speed: 70
 --- !u!212 &1865228066
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 1877594034}
   - component: {fileID: 1877594033}
   m_Layer: 0
-  m_Name: Char03
+  m_Name: Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -665,14 +665,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da4f52be0e8c9d418236830548b52ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharName: 
-  Accuracy: 0
-  P_Defense: 0
-  M_Defense: 0
-  Strength: 0
+  CharName: Archer
+  Accuracy: 70
+  P_Defense: 30
+  M_Defense: 30
+  Strength: 60
   Magic: 0
-  Critical: 0
-  Speed: 0
+  Critical: 50
+  Speed: 50
 --- !u!212 &1877594034
 SpriteRenderer:
   m_ObjectHideFlags: 0
