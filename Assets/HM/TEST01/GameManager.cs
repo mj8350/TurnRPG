@@ -6,6 +6,7 @@ public struct Player
 {
     public int id;
     public string CharName; // 캐릭터 이름
+    public string CharJob; // 캐릭터 직업
     public int Accuracy; // 명중률
     public int P_Defense; // 물리방어력
     public int M_Defense; // 마법방어력
@@ -27,6 +28,11 @@ public class GameManager : Singleton<GameManager>
     public PHM_CharStat charStat;
     public Transform[] transforms;
 
+
+    public GameObject[] Prefeb;
+
+
+
     private void Awake()
     {
         base.Awake();
@@ -36,6 +42,7 @@ public class GameManager : Singleton<GameManager>
     {
         transforms[id].GetChild(0).TryGetComponent<PHM_CharStat>(out charStat);
         player[id].CharName = charStat.CharName;
+        player[id].CharJob = charStat.CharJob;
         player[id].Accuracy = charStat.Accuracy;
         player[id].P_Defense = charStat.P_Defense;
         player[id].M_Defense = charStat.M_Defense;
@@ -44,4 +51,13 @@ public class GameManager : Singleton<GameManager>
         player[id].Critical = charStat.Critical;
         player[id].Speed = charStat.Speed;
     }
+
+    public void Player_Select(int pos, int charactor)
+    {
+        if (transforms[pos].childCount > 0)
+            Destroy(transforms[pos].GetChild(0).gameObject);
+        GameObject obj = Instantiate(Prefeb[charactor], transforms[pos]);
+        obj.transform.SetParent(transforms[pos]);
+    }
+
 }

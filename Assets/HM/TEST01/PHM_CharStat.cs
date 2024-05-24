@@ -11,6 +11,7 @@ public class PHM_CharStat : MonoBehaviour
     private int curMP;
 
     public string CharName; // 캐릭터 이름
+    public string CharJob; // 캐릭터 직업
     public int Accuracy; // 명중률
     public int P_Defense; // 물리방어력
     public int M_Defense; // 마법방어력
