@@ -980,6 +980,7 @@ GameObject:
   - component: {fileID: 8438179645880639573}
   - component: {fileID: 3270198954796774736}
   - component: {fileID: 2540766111981319780}
+  - component: {fileID: 8258671354513580517}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -1300,6 +1301,26 @@ MonoBehaviour:
   - {fileID: 8130773090088938706}
   - {fileID: 8130773090088938706}
   Firearm: {fileID: 1933151710422908862}
+--- !u!114 &8258671354513580517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119582640003751012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da4f52be0e8c9d418236830548b52ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharName: Archer
+  Accuracy: 70
+  P_Defense: 30
+  M_Defense: 30
+  Strength: 60
+  Magic: 0
+  Critical: 50
+  Speed: 50
 --- !u!1 &1126356353019908537
 GameObject:
   m_ObjectHideFlags: 0

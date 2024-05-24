@@ -21400,6 +21400,7 @@ GameObject:
   - component: {fileID: 1943026562890308925}
   - component: {fileID: 2610767381103534625}
   - component: {fileID: 7470701212832623254}
+  - component: {fileID: 3941101544914783184}
   m_Layer: 0
   m_Name: Priest
   m_TagString: Untagged
@@ -21717,6 +21718,26 @@ MonoBehaviour:
   - {fileID: 3534144146943307500}
   - {fileID: 3534144146943307500}
   Firearm: {fileID: 9185363998432594694}
+--- !u!114 &3941101544914783184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7507203005261002806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da4f52be0e8c9d418236830548b52ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharName: Priest
+  Accuracy: 60
+  P_Defense: 20
+  M_Defense: 20
+  Strength: 10
+  Magic: 30
+  Critical: 10
+  Speed: 70
 --- !u!1 &7594983676348293863
 GameObject:
   m_ObjectHideFlags: 0
