@@ -26811,6 +26811,7 @@ GameObject:
   - component: {fileID: 1376568701912467590}
   - component: {fileID: 1765802806440644742}
   - component: {fileID: 4213741776759944675}
+  - component: {fileID: 2328814433183401038}
   m_Layer: 0
   m_Name: Thief
   m_TagString: Untagged
@@ -27128,6 +27129,26 @@ MonoBehaviour:
   - {fileID: 1434300734115030313}
   - {fileID: 1434300734115030313}
   Firearm: {fileID: 3364949487983668464}
+--- !u!114 &2328814433183401038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8751584375282102596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da4f52be0e8c9d418236830548b52ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharName: Thief
+  Accuracy: 70
+  P_Defense: 20
+  M_Defense: 20
+  Strength: 70
+  Magic: 0
+  Critical: 80
+  Speed: 60
 --- !u!1 &8762380191943203255
 GameObject:
   m_ObjectHideFlags: 0

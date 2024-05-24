@@ -26506,6 +26506,7 @@ GameObject:
   - component: {fileID: 6263536136582523923}
   - component: {fileID: 6551622455315128021}
   - component: {fileID: 990420519861975527}
+  - component: {fileID: -9180203100772437366}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Untagged
@@ -26823,6 +26824,26 @@ MonoBehaviour:
   - {fileID: 694438032589367750}
   - {fileID: 694438032589367750}
   Firearm: {fileID: 187162468742207417}
+--- !u!114 &-9180203100772437366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638968109146237064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da4f52be0e8c9d418236830548b52ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharName: Wizard
+  Accuracy: 60
+  P_Defense: 20
+  M_Defense: 50
+  Strength: 10
+  Magic: 70
+  Critical: 20
+  Speed: 40
 --- !u!1 &8692041580790498465
 GameObject:
   m_ObjectHideFlags: 0
