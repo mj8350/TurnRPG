@@ -27142,6 +27142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharName: Thief
+  CharJob: 
   Accuracy: 70
   P_Defense: 20
   M_Defense: 20

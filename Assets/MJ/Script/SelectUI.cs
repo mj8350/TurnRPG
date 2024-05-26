@@ -38,7 +38,7 @@ public class SelectUI : MonoBehaviour
         else
             curChar[index]--;
 
-        int[] newChar = curChar;
+        int[] newChar = (int[])curChar.Clone();
         newChar[index] = -1;
         while (Array.IndexOf(newChar, curChar[index]) > -1)
         {
@@ -56,7 +56,7 @@ public class SelectUI : MonoBehaviour
         else
             curChar[index]++;
 
-        int[] newChar = curChar;
+        int[] newChar = (int[])curChar.Clone();
         newChar[index] = -1;
         while (Array.IndexOf(newChar, curChar[index]) > -1)
         {

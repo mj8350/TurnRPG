@@ -1314,6 +1314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharName: Archer
+  CharJob: 
   Accuracy: 70
   P_Defense: 30
   M_Defense: 30

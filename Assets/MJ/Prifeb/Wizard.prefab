@@ -26837,6 +26837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharName: Wizard
+  CharJob: 
   Accuracy: 60
   P_Defense: 20
   M_Defense: 50
