@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public struct Player
 {
-    public int id;
+    //public int id;
     public string CharName; // 캐릭터 이름
     public string CharJob; // 캐릭터 직업
     public int Accuracy; // 명중률
@@ -24,7 +25,7 @@ public struct Player
 
 public class GameManager : Singleton<GameManager>
 {
-    public Player[] player;
+    public Player[] player = new Player[3];
     public PHM_CharStat charStat;
     public Transform[] transforms;
 
@@ -38,9 +39,13 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
     }
 
-    public void CreateUserData(int id)
+    public void CreateUserData(int id, int charactor)
     {
-        transforms[id].GetChild(0).TryGetComponent<PHM_CharStat>(out charStat);
+        //if (transforms[id].GetChild(0).TryGetComponent<PHM_CharStat>(out charStat))
+        //Debug.Log($"charStat성공{charStat.CharName}");
+
+        Prefeb[charactor].TryGetComponent<PHM_CharStat>(out charStat);
+
         player[id].CharName = charStat.CharName;
         player[id].CharJob = charStat.CharJob;
         player[id].Accuracy = charStat.Accuracy;

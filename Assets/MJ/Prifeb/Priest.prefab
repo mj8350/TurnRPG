@@ -21730,8 +21730,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da4f52be0e8c9d418236830548b52ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharName: Priest
-  CharJob: 
+  CharName: "\uC0AC\uB77C"
+  CharJob: "\uC0AC\uC81C"
   Accuracy: 60
   P_Defense: 20
   M_Defense: 20

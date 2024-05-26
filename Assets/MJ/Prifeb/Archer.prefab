@@ -1313,8 +1313,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da4f52be0e8c9d418236830548b52ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharName: Archer
-  CharJob: 
+  CharName: "\uB4DC\uC6E8\uC778"
+  CharJob: "\uAD81\uC218"
   Accuracy: 70
   P_Defense: 30
   M_Defense: 30

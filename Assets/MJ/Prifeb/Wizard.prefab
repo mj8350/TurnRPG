@@ -26836,8 +26836,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da4f52be0e8c9d418236830548b52ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharName: Wizard
-  CharJob: 
+  CharName: "\uC544\uB974\uC0E4"
+  CharJob: "\uB9C8\uBC95\uC0AC"
   Accuracy: 60
   P_Defense: 20
   M_Defense: 50

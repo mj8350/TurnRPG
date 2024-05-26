@@ -27141,8 +27141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da4f52be0e8c9d418236830548b52ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharName: Thief
-  CharJob: 
+  CharName: "\uC2A4\uD154\uB77C"
+  CharJob: "\uB3C4\uC801"
   Accuracy: 70
   P_Defense: 20
   M_Defense: 20
