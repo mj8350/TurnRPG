@@ -19,8 +19,12 @@ public class PHM_CharStat : MonoBehaviour
     public int Magic; // 마법력
     public int Critical; // 치명타 
     public int Speed; // 속도
+    public int Helth; // 체력
+    public string SpecialAB; // 고유 능력
+    public string Skill01;
+    public string Skill02;
 
-   
+
     // 전사 : 높은 방어력, 높은 공격력 위주.
     // 마법사 : 높은 마법력, 광역 딜 담당.
     // 궁수 : 높은 명중률, 밸런스 형.

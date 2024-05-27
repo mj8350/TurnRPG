@@ -27143,13 +27143,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharName: "\uC2A4\uD154\uB77C"
   CharJob: "\uB3C4\uC801"
-  Accuracy: 70
-  P_Defense: 20
-  M_Defense: 20
-  Strength: 70
-  Magic: 0
-  Critical: 80
-  Speed: 60
+  Accuracy: 10
+  P_Defense: 4
+  M_Defense: 2
+  Strength: 9
+  Magic: 1
+  Critical: 12
+  Speed: 15
+  Helth: 7
+  SpecialAB: "30% \uD655\uB960\uB85C \uD655\uC815 \uCE58\uBA85\uD0C0"
+  Skill01: "\uB3C5\uCC0C\uB974\uAE30"
+  Skill02: "\uC601\uD63C\uCC38"
 --- !u!1 &8762380191943203255
 GameObject:
   m_ObjectHideFlags: 0

@@ -55,6 +55,7 @@ public class GameManager : Singleton<GameManager>
         player[id].Magic = charStat.Magic;
         player[id].Critical = charStat.Critical;
         player[id].Speed = charStat.Speed;
+        
     }
 
     public void Player_Select(int pos, int charactor)
