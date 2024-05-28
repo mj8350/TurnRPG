@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public struct Player
+[System.Serializable]
+public class Player
 {
     //public int id;
     public string CharName; // 캐릭터 이름
@@ -15,6 +15,10 @@ public struct Player
     public int Magic; // 마법력
     public int Critical; // 치명타 
     public int Speed; // 속도
+    public int Helth; // 체력
+    public string SpecialAB; // 고유 능력
+    public string Skill01;
+    public string Skill02;
 
     public int MaxHP;
     public int CurHP;
@@ -55,7 +59,12 @@ public class GameManager : Singleton<GameManager>
         player[id].Magic = charStat.Magic;
         player[id].Critical = charStat.Critical;
         player[id].Speed = charStat.Speed;
-        
+        player[id].Helth = charStat.Helth;
+
+        player[id].SpecialAB = charStat.SpecialAB;
+        player[id].Skill01 = charStat.Skill01;
+        player[id].Skill02 = charStat.Skill02;
+
     }
 
     public void Player_Select(int pos, int charactor)

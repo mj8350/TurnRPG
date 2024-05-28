@@ -79,16 +79,19 @@ public class SelectUI : MonoBehaviour
     }
     private void InfoChange(int index)
     {
+        
+
         NameUI[index].text = GameManager.Instance.player[index].CharName;
         JobUI[index].text = GameManager.Instance.player[index].CharJob;
 
         NameUI_C[index].text = GameManager.Instance.player[index].CharName;
         StatUI_C[index].text = $"공격력: {GameManager.Instance.player[index].Strength}, 마법력: {GameManager.Instance.player[index].Magic},\n" +
+            $"속도: {GameManager.Instance.player[index].Speed}, 체력: {GameManager.Instance.player[index].Helth}\n" +
             $"명중률: {GameManager.Instance.player[index].Accuracy}, 치명타: {GameManager.Instance.player[index].Critical},\n" +
             $"물리방여력: {GameManager.Instance.player[index].P_Defense},\n" +
-            $"마법방어력: {GameManager.Instance.player[index].M_Defense},\n" +
-            $"속도: {GameManager.Instance.player[index].Speed}";
-        AbilityUI_C[index].text = "(예시)사거리 증가";
+            $"마법방어력: {GameManager.Instance.player[index].M_Defense},\n";
+        AbilityUI_C[index].text = $"{GameManager.Instance.player[index].SpecialAB}\n" +
+            $"스킬: {GameManager.Instance.player[index].Skill01}, {GameManager.Instance.player[index].Skill02}";
     }
 
     public void OnClick_ClassBtn(int index)
