@@ -7,9 +7,7 @@ public class PHM_CharStat : MonoBehaviour
 {
     private int maxHP;
     private int curHP;
-    private int maxMP;
-    private int curMP;
-
+    
     public string CharName; // 캐릭터 이름
     public string CharJob; // 캐릭터 직업
     public int Accuracy; // 명중률
@@ -38,9 +36,6 @@ public class PHM_CharStat : MonoBehaviour
 
     private void Start()
     {
-        maxHP = curHP = 100;
-        maxMP = curMP = 100;
-
         //HPDelegate += ModifyHP; // 델리게이트 이벤트 구독
         //HPDelegate(30);
     }

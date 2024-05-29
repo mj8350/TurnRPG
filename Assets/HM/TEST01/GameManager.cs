@@ -27,6 +27,25 @@ public class Player
     public int EXP;
 }
 
+[System.Serializable]
+public class Monsters
+{
+    public string MonsterName; // 캐릭터 이름
+    public int Accuracy; // 명중률
+    public int P_Defense; // 물리방어력
+    public int M_Defense; // 마법방어력
+    public int Strength; // 공격력
+    public int Magic; // 마법력
+    public int Critical; // 치명타 
+    public int Speed; // 속도
+    public int Helth; // 체력
+
+    public int MaxHP;
+    public int CurHP;
+
+    public int Give_EXP;
+}
+
 public class GameManager : Singleton<GameManager>
 {
     public Player[] player = new Player[3];
@@ -74,5 +93,6 @@ public class GameManager : Singleton<GameManager>
         GameObject obj = Instantiate(Prefeb[charactor], transforms[pos]);
         obj.transform.SetParent(transforms[pos]);
     }
+
 
 }
