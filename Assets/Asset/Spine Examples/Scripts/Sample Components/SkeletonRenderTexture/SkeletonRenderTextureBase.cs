@@ -42,14 +42,9 @@ namespace Spine.Unity.Examples {
 		public Color color = Color.white;
 		public int maxRenderTextureSize = 1024;
 		public GameObject quad;
-		public Material quadMaterial;
 		protected Mesh quadMesh;
 		public RenderTexture renderTexture;
 		public Camera targetCamera;
-		[Tooltip("Shader passes to render to the RenderTexture. E.g. set the first element " +
-			"to -1 to render all shader passes, or set it to 0 to only render the first " +
-			"shader pass, which may be required when using URP.")]
-		public int[] shaderPasses = new int[1] { -1 };
 
 		protected CommandBuffer commandBuffer;
 		protected Vector2Int screenSize;

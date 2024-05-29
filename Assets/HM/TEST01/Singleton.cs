@@ -25,6 +25,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     protected void Awake()
     {
+
+        
         if (transform.parent != null && transform.root != null)
         {
             DontDestroyOnLoad(transform.root.gameObject);
@@ -33,5 +35,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
+        
+
+
     }
 }
