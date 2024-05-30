@@ -2497,18 +2497,6 @@ PrefabInstance:
       value: Monster_96_Cave Lizard
       objectReference: {fileID: 0}
     - target: {fileID: 7464684168989896499, guid: bf75a9c4dee2998499018e2df28e704d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7464684168989896499, guid: bf75a9c4dee2998499018e2df28e704d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7464684168989896499, guid: bf75a9c4dee2998499018e2df28e704d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7464684168989896499, guid: bf75a9c4dee2998499018e2df28e704d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.9953575
       objectReference: {fileID: 0}
@@ -4674,18 +4662,6 @@ PrefabInstance:
     - target: {fileID: 5893283217648903366, guid: 24fd1aebb629e6a488311add1860b6ad, type: 3}
       propertyPath: m_Name
       value: Monster_95_Jungle Lizard
-      objectReference: {fileID: 0}
-    - target: {fileID: 6334410150381593450, guid: 24fd1aebb629e6a488311add1860b6ad, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6334410150381593450, guid: 24fd1aebb629e6a488311add1860b6ad, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6334410150381593450, guid: 24fd1aebb629e6a488311add1860b6ad, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6334410150381593450, guid: 24fd1aebb629e6a488311add1860b6ad, type: 3}
       propertyPath: m_LocalPosition.x
