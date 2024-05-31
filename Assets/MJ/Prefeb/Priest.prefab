@@ -21401,6 +21401,7 @@ GameObject:
   - component: {fileID: 2610767381103534625}
   - component: {fileID: 7470701212832623254}
   - component: {fileID: 3941101544914783184}
+  - component: {fileID: 7179568573105395031}
   m_Layer: 0
   m_Name: Priest
   m_TagString: Untagged
@@ -21743,6 +21744,29 @@ MonoBehaviour:
   SpecialAB: "\uD790 \uC0AC\uC6A9 \uC2DC 10% \uD655\uB960 \uAD11\uC5ED\uD790"
   Skill01: "\uD68C\uBCF5"
   Skill02: "\uC18C\uC0DD"
+--- !u!114 &7179568573105395031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7507203005261002806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54fb20a22c0b4ade8ed65a122758aa30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Character: {fileID: 1943026562890308925}
+  BowExample: {fileID: 0}
+  Firearm: {fileID: 0}
+  ArmL: {fileID: 0}
+  ArmR: {fileID: 0}
+  FireButton: 324
+  ReloadButton: 114
+  FixedArm: 0
+  Fight: 1
+  AngleToTarget: 0
+  AngleToArm: 0
 --- !u!1 &7594983676348293863
 GameObject:
   m_ObjectHideFlags: 0

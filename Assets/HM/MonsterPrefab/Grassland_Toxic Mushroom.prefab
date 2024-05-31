@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1824620940781467198}
   - component: {fileID: 1824620940781467199}
   - component: {fileID: -202914134240401409}
+  - component: {fileID: 4474471838244659984}
   m_Layer: 0
   m_Name: Grassland_Toxic Mushroom
   m_TagString: Untagged
@@ -146,3 +147,15 @@ MonoBehaviour:
   Critical: 2
   Speed: 4
   Helth: 12
+--- !u!114 &4474471838244659984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824620940781467196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52164d3692a468438e4c86a3f08dd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

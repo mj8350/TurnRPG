@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23689257422049542}
   - component: {fileID: 114035945988098946}
   - component: {fileID: -1893379232120995427}
+  - component: {fileID: 7106161006033272930}
   m_Layer: 0
   m_Name: Dungeon_Bat
   m_TagString: Untagged
@@ -146,3 +147,15 @@ MonoBehaviour:
   Critical: 2
   Speed: 7
   Helth: 5
+--- !u!114 &7106161006033272930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173963413223136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52164d3692a468438e4c86a3f08dd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

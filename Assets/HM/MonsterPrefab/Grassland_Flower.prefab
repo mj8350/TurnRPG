@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23590253465248602}
   - component: {fileID: 114386139641908986}
   - component: {fileID: -6152385949121876480}
+  - component: {fileID: 4164843211850954364}
   m_Layer: 0
   m_Name: Grassland_Flower
   m_TagString: Untagged
@@ -146,3 +147,15 @@ MonoBehaviour:
   Critical: 14
   Speed: 6
   Helth: 9
+--- !u!114 &4164843211850954364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292224030697910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52164d3692a468438e4c86a3f08dd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

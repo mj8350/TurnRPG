@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23558762321626166}
   - component: {fileID: 114755461380605532}
   - component: {fileID: -1424452691526876635}
+  - component: {fileID: 7118104489207042304}
   m_Layer: 0
   m_Name: Jungle_Jungle Turtle
   m_TagString: Untagged
@@ -146,3 +147,15 @@ MonoBehaviour:
   Critical: 4
   Speed: 2
   Helth: 13
+--- !u!114 &7118104489207042304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186603498387190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52164d3692a468438e4c86a3f08dd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

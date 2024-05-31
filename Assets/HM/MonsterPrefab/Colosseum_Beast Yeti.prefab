@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23799062626892726}
   - component: {fileID: 114512347663640540}
   - component: {fileID: 1368070147604640487}
+  - component: {fileID: -8623358891132141331}
   m_Layer: 0
   m_Name: Colosseum_Beast Yeti
   m_TagString: Untagged
@@ -146,3 +147,15 @@ MonoBehaviour:
   Critical: 2
   Speed: 4
   Helth: 12
+--- !u!114 &-8623358891132141331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961134719360472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52164d3692a468438e4c86a3f08dd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

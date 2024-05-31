@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23350140157816772}
   - component: {fileID: 114049678491013634}
   - component: {fileID: -3156727603496532438}
+  - component: {fileID: -4180900336563122168}
   m_Layer: 0
   m_Name: Desert_Rock Turtle
   m_TagString: Untagged
@@ -146,3 +147,15 @@ MonoBehaviour:
   Critical: 4
   Speed: 2
   Helth: 13
+--- !u!114 &-4180900336563122168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094135730007002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52164d3692a468438e4c86a3f08dd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23334364635452426}
   - component: {fileID: 114748494399939278}
   - component: {fileID: 7376724402215882861}
+  - component: {fileID: -6313922565408365438}
   m_Layer: 0
   m_Name: Desert_Stone Golem
   m_TagString: Untagged
@@ -146,3 +147,15 @@ MonoBehaviour:
   Critical: 2
   Speed: 4
   Helth: 12
+--- !u!114 &-6313922565408365438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052317940946996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52164d3692a468438e4c86a3f08dd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

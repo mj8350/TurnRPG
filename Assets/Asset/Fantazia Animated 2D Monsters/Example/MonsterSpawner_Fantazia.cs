@@ -9,7 +9,7 @@ public class MonsterSpawner_Fantazia : MonoBehaviour
 {
     GameObject TheMonster; //The current created monster
     SkeletonAnimation monsterAnimator; //The animator script of the monster
-    public Text monsterNameText;
+    //public Text monsterNameText;
 
     public List<GameObject> AllMonsters = new List<GameObject>(); //a list of all monsters in the asset
 
@@ -121,7 +121,7 @@ public class MonsterSpawner_Fantazia : MonoBehaviour
         int nameIndexStart = MonsterName.IndexOf('_', 9);
         int nameIndexEnd = MonsterName.IndexOf('(', 9);
 
-        monsterNameText.text = "Monster "+ MonsterName.Substring (idIndexStart+1,nameIndexStart-idIndexStart-1)+ " : " +MonsterName.Substring(nameIndexStart + 1, nameIndexEnd - nameIndexStart -1);
+        //monsterNameText.text = "Monster "+ MonsterName.Substring (idIndexStart+1,nameIndexStart-idIndexStart-1)+ " : " +MonsterName.Substring(nameIndexStart + 1, nameIndexEnd - nameIndexStart -1);
     }
 
     public void ChangeAnimation(string AnimationName)  //Names are: Idle, Walk, Dead and Attack
@@ -130,25 +130,11 @@ public class MonsterSpawner_Fantazia : MonoBehaviour
             return;
 
         bool IsLoop = true;
-        if (AnimationName == "Dead")
+        if (AnimationName == "Dead"|| AnimationName == "Attack")
             IsLoop = false;
 
         //set the animation state to the selected one
         monsterAnimator.AnimationState.SetAnimation(0, AnimationName, IsLoop);
     }
 
-    public void RateUs()
-    {
-        System.Diagnostics.Process.Start("https://assetstore.unity.com/packages/slug/174782");
-    }
-
-    public void CheckCharacters()
-    {
-        System.Diagnostics.Process.Start("https://assetstore.unity.com/packages/slug/181572");
-    }
-
-    public void CheckNewMonsters()
-    {
-        System.Diagnostics.Process.Start("https://assetstore.unity.com/packages/slug/273047");
-    }
 }
