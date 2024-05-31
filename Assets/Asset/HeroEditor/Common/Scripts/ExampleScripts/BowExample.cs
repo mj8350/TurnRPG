@@ -45,8 +45,20 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
                 StartCoroutine(Bow());
             }
         }
+
+        public void ChangeObj(GameObject obj)
+        {
+            obj.TryGetComponent<Character>(out Character);
+        }
+
+        public void StartBow()
+        {
+            StartCoroutine(Bow());
+        }
+
         public IEnumerator Bow()
         {
+
             _chargeTime = Time.time;
             Character.Animator.SetInteger("Charge", 1);
             //}

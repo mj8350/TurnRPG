@@ -14694,7 +14694,7 @@ GameObject:
   - component: {fileID: 8701343595932303316}
   m_Layer: 0
   m_Name: ArmL
-  m_TagString: Untagged
+  m_TagString: ArcherArmL
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

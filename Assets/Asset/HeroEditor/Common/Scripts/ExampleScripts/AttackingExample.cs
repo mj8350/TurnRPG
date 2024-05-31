@@ -105,7 +105,8 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
             switch (Character.WeaponType)
             {
                 case WeaponType.Bow:
-                    arm = ArmL;
+                    //arm = ArmL;
+                    arm = GameObject.FindWithTag("ArcherArmL").transform;
                     weapon = Character.BowRenderers[3].transform;
                     break;
                 case WeaponType.Firearm1H:

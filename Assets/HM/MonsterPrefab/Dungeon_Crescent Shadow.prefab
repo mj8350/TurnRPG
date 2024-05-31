@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23873628203936996}
   - component: {fileID: 114009041052976668}
   - component: {fileID: -6798122130150298278}
+  - component: {fileID: 9221209778310366197}
   m_Layer: 0
   m_Name: Dungeon_Crescent Shadow
   m_TagString: Untagged
@@ -146,3 +147,15 @@ MonoBehaviour:
   Critical: 14
   Speed: 6
   Helth: 9
+--- !u!114 &9221209778310366197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402651372332534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52164d3692a468438e4c86a3f08dd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
