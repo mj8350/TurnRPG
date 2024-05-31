@@ -94,5 +94,4 @@ public class GameManager : Singleton<GameManager>
         obj.transform.SetParent(transforms[pos]);
     }
 
-
 }
