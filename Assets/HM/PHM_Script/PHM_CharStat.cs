@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
-public class PHM_CharStat : MonoBehaviour
+public class PHM_CharStat : MonoBehaviour, IDamage
 {
     private int maxHP;
     private int curHP;
@@ -40,6 +40,11 @@ public class PHM_CharStat : MonoBehaviour
         //HPDelegate(30);
     }
 
+    public void TakeDamage(int damage)
+    {
+        Debug.Log($"{CharName}이(가) {damage}의 데미지를 입었습니다.");
+    }
+
 
     //private void ModifyHP(int newHP)
     //{
@@ -47,6 +52,6 @@ public class PHM_CharStat : MonoBehaviour
     //    // 체력 관련 이벤트
     //    changeHP?.Invoke(newHP);
     //}
-        
+
 
 }

@@ -26812,6 +26812,7 @@ GameObject:
   - component: {fileID: 1765802806440644742}
   - component: {fileID: 4213741776759944675}
   - component: {fileID: 2328814433183401038}
+  - component: {fileID: -6031035177752647334}
   m_Layer: 0
   m_Name: Thief
   m_TagString: Untagged
@@ -27154,6 +27155,29 @@ MonoBehaviour:
   SpecialAB: "30% \uD655\uB960\uB85C \uD655\uC815 \uCE58\uBA85\uD0C0"
   Skill01: "\uB3C5\uCC0C\uB974\uAE30"
   Skill02: "\uC601\uD63C\uCC38"
+--- !u!114 &-6031035177752647334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8751584375282102596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54fb20a22c0b4ade8ed65a122758aa30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Character: {fileID: 1376568701912467590}
+  BowExample: {fileID: 0}
+  Firearm: {fileID: 0}
+  ArmL: {fileID: 0}
+  ArmR: {fileID: 0}
+  FireButton: 324
+  ReloadButton: 0
+  FixedArm: 0
+  Fight: 1
+  AngleToTarget: 0
+  AngleToArm: 0
 --- !u!1 &8762380191943203255
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23627698914113214}
   - component: {fileID: 114139131827494240}
   - component: {fileID: -7016869728570123339}
+  - component: {fileID: 5313948812794743905}
   m_Layer: 0
   m_Name: Dungeon_Magma Golem
   m_TagString: Untagged
@@ -146,3 +147,15 @@ MonoBehaviour:
   Critical: 4
   Speed: 2
   Helth: 13
+--- !u!114 &5313948812794743905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218476967775406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52164d3692a468438e4c86a3f08dd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

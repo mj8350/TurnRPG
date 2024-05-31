@@ -26507,6 +26507,7 @@ GameObject:
   - component: {fileID: 6551622455315128021}
   - component: {fileID: 990420519861975527}
   - component: {fileID: -9180203100772437366}
+  - component: {fileID: -5178194787156970759}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Untagged
@@ -26849,6 +26850,29 @@ MonoBehaviour:
   SpecialAB: "3% \uD655\uB960\uB85C \uC989\uC0AC (\uBCF4\uC2A4\uB294 1%)."
   Skill01: "\uD574\uC77C"
   Skill02: "\uACE0\uC555\uC808\uB2E8"
+--- !u!114 &-5178194787156970759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638968109146237064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54fb20a22c0b4ade8ed65a122758aa30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Character: {fileID: 6263536136582523923}
+  BowExample: {fileID: 0}
+  Firearm: {fileID: 0}
+  ArmL: {fileID: 0}
+  ArmR: {fileID: 0}
+  FireButton: 324
+  ReloadButton: 0
+  FixedArm: 0
+  Fight: 1
+  AngleToTarget: 0
+  AngleToArm: 0
 --- !u!1 &8692041580790498465
 GameObject:
   m_ObjectHideFlags: 0

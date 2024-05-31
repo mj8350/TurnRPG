@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8106897273384166218}
   - component: {fileID: 4961549631356656444}
   - component: {fileID: 4288308616317151346}
+  - component: {fileID: 8954006527347833639}
   m_Layer: 0
   m_Name: Colosseum_Cave Lizard
   m_TagString: Untagged
@@ -146,3 +147,15 @@ MonoBehaviour:
   Critical: 14
   Speed: 6
   Helth: 9
+--- !u!114 &8954006527347833639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7008904895217257991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52164d3692a468438e4c86a3f08dd71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

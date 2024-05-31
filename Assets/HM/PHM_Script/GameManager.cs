@@ -94,5 +94,11 @@ public class GameManager : Singleton<GameManager>
         obj.transform.SetParent(transforms[pos]);
     }
 
+    public void Damage(GameObject obj, int damage)
+    {
+        if(obj.TryGetComponent<IDamage>(out IDamage idam))
+            idam.TakeDamage(damage);
+    }
+
 
 }
