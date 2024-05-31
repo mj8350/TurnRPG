@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c23b91487e4a87b5a557fee10f2ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 1864985420}
+  Character: {fileID: 0}
   EditorOnlyButtons:
   - {fileID: 0}
   - {fileID: 0}
@@ -408,6 +408,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Human 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8638968109146237064, guid: e2ef385d7619b3a42abca1c8d79aad87, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -551,6 +555,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Human 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8751584375282102596, guid: 0af6b2f1449dd1c44bd4a3ff877a57c9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -608,6 +616,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Human
       objectReference: {fileID: 0}
+    - target: {fileID: 5476095651855104634, guid: 44f8524edc64f2146b22fb2807ad88fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -657,7 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e9f2aa926f4741b8fed51b449fa3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 1864985420}
+  Character: {fileID: 0}
   UpperClipName: {fileID: 0}
   LowerClipName: {fileID: 0}
 --- !u!4 &1334776011 stripped
@@ -676,6 +688,10 @@ PrefabInstance:
     - target: {fileID: 7507203005261002806, guid: f09935441256f564e88dcf948abe8435, type: 3}
       propertyPath: m_Name
       value: Human 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507203005261002806, guid: f09935441256f564e88dcf948abe8435, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8210750799472269718, guid: f09935441256f564e88dcf948abe8435, type: 3}
       propertyPath: m_LocalPosition.x
@@ -886,17 +902,6 @@ MonoBehaviour:
   Fight: 0
   AngleToTarget: 0
   AngleToArm: 0
---- !u!114 &1864985420 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6263536136582523923, guid: e2ef385d7619b3a42abca1c8d79aad87, type: 3}
-  m_PrefabInstance: {fileID: 542005703}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9bab99a464f488298c9d9629a889d97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

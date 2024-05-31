@@ -39,6 +39,13 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
         {
             if (Character.Animator.GetInteger("State") >= (int)CharacterState.DeathB) return;
 
+
+            if (Input.GetKeyDown(FireButton))
+                PlayerStartAttack();
+        }
+
+        public void PlayerStartAttack()
+        {
             if (Fight)
             {
                 switch (Character.WeaponType)
@@ -46,39 +53,33 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
                     case WeaponType.Melee1H:
                     case WeaponType.Melee2H:
                     case WeaponType.MeleePaired:
-                        if (Input.GetKeyDown(FireButton))
-                        {
                             Character.Slash();
-                        }
                         break;
                     case WeaponType.Bow:
-                        BowExample.ChargeButtonDown = Input.GetKeyDown(FireButton);
-                        BowExample.ChargeButtonUp = Input.GetKeyUp(FireButton);
+                        BowExample.StartBow();
+                        //BowExample.ChargeButtonDown = Input.GetKeyDown(FireButton);
+                        //BowExample.ChargeButtonUp = Input.GetKeyUp(FireButton);
                         break;
                     case WeaponType.Firearm1H:
                     case WeaponType.Firearm2H:
-                        Firearm.Fire.FireButtonDown = Input.GetKeyDown(FireButton);
-                        Firearm.Fire.FireButtonPressed = Input.GetKey(FireButton);
-                        Firearm.Fire.FireButtonUp = Input.GetKeyUp(FireButton);
-                        Firearm.Reload.ReloadButtonDown = Input.GetKeyDown(ReloadButton);
+                        //Firearm.Fire.FireButtonDown = Input.GetKeyDown(FireButton);
+                        //Firearm.Fire.FireButtonPressed = Input.GetKey(FireButton);
+                        //Firearm.Fire.FireButtonUp = Input.GetKeyUp(FireButton);
+                        //Firearm.Reload.ReloadButtonDown = Input.GetKeyDown(ReloadButton);
                         break;
                     case WeaponType.Supplies:
-                        if (Input.GetKeyDown(FireButton))
-                        {
                             Character.Animator.Play(Time.frameCount % 2 == 0 ? "UseSupply" : "ThrowSupply", 0); // Play animation randomly.
-                        }
                         break;
                 }
 
 
-                if (Input.GetKeyDown(FireButton))
-                {
+                //if (Input.GetKeyDown(FireButton))
+                //{
                     Character.GetReady();
-                    if(Character.WeaponType != WeaponType.Bow)
+                    if (Character.WeaponType != WeaponType.Bow)
                         StartCoroutine(Relex_());
-                }
+                //}
             }
-
         }
 
         private IEnumerator Relex_()

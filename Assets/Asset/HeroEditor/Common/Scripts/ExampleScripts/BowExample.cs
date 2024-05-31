@@ -24,27 +24,27 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
 
         private float _chargeTime;
 
-        public void Update()
-        {
-            if (ChargeButtonDown)
-            {/*
-                _chargeTime = Time.time;
-                Character.Animator.SetInteger("Charge", 1);
-            //}
+        //public void Update()
+        //{
+        //    if (ChargeButtonDown)
+        //    {/*
+        //        _chargeTime = Time.time;
+        //        Character.Animator.SetInteger("Charge", 1);
+        //    //}
 
-            //if (ChargeButtonUp)
-            //{
-                var charged = Time.time - _chargeTime > ClipCharge.length;
+        //    //if (ChargeButtonUp)
+        //    //{
+        //        var charged = Time.time - _chargeTime > ClipCharge.length;
 
-                Character.Animator.SetInteger("Charge", charged ? 2 : 3);
+        //        Character.Animator.SetInteger("Charge", charged ? 2 : 3);
 
-                if (charged && CreateArrows)
-                {
-	                CreateArrow();
-                }*/
-                StartCoroutine(Bow());
-            }
-        }
+        //        if (charged && CreateArrows)
+        //        {
+	       //         CreateArrow();
+        //        }*/
+        //        StartCoroutine(Bow());
+        //    }
+        //}
 
         public void ChangeObj(GameObject obj)
         {

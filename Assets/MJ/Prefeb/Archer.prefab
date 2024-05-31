@@ -981,6 +981,8 @@ GameObject:
   - component: {fileID: 3270198954796774736}
   - component: {fileID: 2540766111981319780}
   - component: {fileID: 8258671354513580517}
+  - component: {fileID: 9149151549841875727}
+  - component: {fileID: -5208389799535971236}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -1326,6 +1328,48 @@ MonoBehaviour:
   SpecialAB: "40% \uD655\uB960\uB85C \uD655\uC815\uACF5\uACA9"
   Skill01: "\uD654\uC5FC\uD654\uC0B4"
   Skill02: "\uD654\uC0B4\uBE44"
+--- !u!114 &9149151549841875727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119582640003751012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54fb20a22c0b4ade8ed65a122758aa30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Character: {fileID: 8438179645880639573}
+  BowExample: {fileID: -5208389799535971236}
+  Firearm: {fileID: 0}
+  ArmL: {fileID: 0}
+  ArmR: {fileID: 0}
+  FireButton: 324
+  ReloadButton: 114
+  FixedArm: 0
+  Fight: 1
+  AngleToTarget: 0
+  AngleToArm: 0
+--- !u!114 &-5208389799535971236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119582640003751012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b56af0dc484132b6371bbf4fd0d1e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Character: {fileID: 8438179645880639573}
+  ClipCharge: {fileID: 7400000, guid: 20538db717b94efeaa004e68d9284e3f, type: 2}
+  FireTransform: {fileID: 0}
+  ArrowPrefab: {fileID: 0}
+  CreateArrows: 0
+  ChargeButtonDown: 0
+  ChargeButtonUp: 0
 --- !u!1 &1126356353019908537
 GameObject:
   m_ObjectHideFlags: 0
