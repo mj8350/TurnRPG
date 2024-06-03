@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - ArcherArmL
+  - SelectRing
+  - Monster
   layers:
   - Default
   - TransparentFX
