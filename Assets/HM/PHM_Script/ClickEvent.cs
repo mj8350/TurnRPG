@@ -11,12 +11,16 @@ public class ClickEvent : MonoBehaviour
 {
     private RaycastHit2D hit;
     private Vector2 targetPosition;
+    private bool onMonsterSelected;
     private bool onSelected;
     private GameObject selectedObj;
     [SerializeField]
     GameObject selectedRingPrefabs;
-    [SerializeField]
-    private Image image;
+    [SerializeField] private Image rouletteImage;
+    [SerializeField] private Image ItemImage;
+    [SerializeField] private Image SkillImage;
+    private bool onItem;
+    private bool onSkill;
 
     private void Update()
     {
@@ -40,7 +44,7 @@ public class ClickEvent : MonoBehaviour
 
     void BoolOnonSelected()
     {
-        if (hit.collider != null)
+        if (hit.collider != null && hit.collider.CompareTag("Monster"))
         {
             targetPosition = hit.transform.position;
             selectedObj = hit.collider.gameObject;
@@ -50,11 +54,18 @@ public class ClickEvent : MonoBehaviour
             FightManager.Instance.SetTargetMonster(selectedObj);
             //AttackObject(selectedObj);
         }
+        else if(hit.collider != null && hit.collider.CompareTag("Player"))
+        {
+            targetPosition = hit.transform.position;
+            selectedObj = hit.collider.gameObject;
+            InstantiateSelectRing();
+            Debug.Log(selectedObj.transform);
+        }
         else
         {
             onSelected = false;
-            Destroy(GameObject.FindGameObjectWithTag("SelectRing"));
-            image.gameObject.SetActive(false);
+            DestroySelectRing();
+            rouletteImage.gameObject.SetActive(false);
         }
     }
 
@@ -65,20 +76,76 @@ public class ClickEvent : MonoBehaviour
             onSelected = true;
             if (GameObject.FindGameObjectWithTag("SelectRing") == null)
             {
-                Instantiate(selectedRingPrefabs, targetPosition, Quaternion.identity);
+                Instantiate(selectedRingPrefabs, targetPosition + new Vector2(0,0.5f), Quaternion.identity);
             }
             else
             {
-                GameObject.FindGameObjectWithTag("SelectRing").transform.position = targetPosition;
+                GameObject.FindGameObjectWithTag("SelectRing").transform.position = targetPosition + new Vector2(0, 0.5f);
             }
-            image.gameObject.SetActive(true);
+            //image.gameObject.SetActive(true);
         }
         else
         {
-            GameObject.FindGameObjectWithTag("SelectRing").transform.position = targetPosition;
-            image.gameObject.SetActive(true);
+            if (GameObject.FindGameObjectWithTag("SelectRing") == null)
+            {
+                Instantiate(selectedRingPrefabs, targetPosition + new Vector2(0, 0.5f), Quaternion.identity);
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("SelectRing").transform.position = targetPosition + new Vector2(0, 0.5f);
+            }
+            //image.gameObject.SetActive(true);
+        }
+        
+    }
+
+    public void DestroySelectRing()
+    {
+        Destroy(GameObject.FindGameObjectWithTag("SelectRing"));
+    }
+
+    public void Attacking()
+    {
+        if(onSelected)
+        {
+            rouletteImage.gameObject.SetActive(true);
         }
     }
+
+    public void ShowItemInfo()
+    {
+        if (!onItem)
+        {
+            ItemImage.gameObject.SetActive(true);
+            onItem = true;
+        }
+        else
+        {
+            ItemImage.gameObject.SetActive(false);
+            onItem = false;
+        }
+        
+    }
+
+    public void ShowSkillInfo()
+    {
+        if (!onSkill)
+        {
+            SkillImage.gameObject.SetActive(true);
+            onSkill = true;
+        }
+        else
+        {
+            SkillImage.gameObject.SetActive(false);
+            onSkill = false;
+        }
+    }
+
+    public void HideSkillInfo()
+    {
+        SkillImage.gameObject.SetActive(false);
+        onSkill = false;
+    }    
 
     //void AttackObject(GameObject obj)
     //{
