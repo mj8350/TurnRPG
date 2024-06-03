@@ -30,14 +30,12 @@ public class YS_CharacterManager : MonoBehaviour
 
         // ½ºÅÝ, ´É·ÂÄ¡
         public float turn = 0f;
-        public int maxHp;
         public int curHp;
+        public int maxHp;        
         public int power;
         public int magic;
-        public int hide;
         public int speed;
         public int lucky;
-        public int wisdom;
         // Hp bar, NowTurn
         public Transform hpBar;
         public GameObject nowTurn;
