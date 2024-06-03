@@ -16,6 +16,7 @@ public class Roulette : MonoBehaviour
     private bool isRouletteRunning = false;
     private Coroutine rouletteCoroutine;
     private bool isAttackSuccessful = false; // 공격 성공 여부를 기록하는 변수
+    private ClickEvent clickEvent;
 
     private void Awake()
     {
@@ -24,6 +25,8 @@ public class Roulette : MonoBehaviour
 
         // 스탑 버튼에 클릭 이벤트 추가
         stopButton.onClick.AddListener(StopRoulette);
+
+        clickEvent = GameObject.FindFirstObjectByType<ClickEvent>();
     }
 
     private void OnEnable()
@@ -74,7 +77,7 @@ public class Roulette : MonoBehaviour
                     //FightManager.Instance.ApplyDamageToSelectedMonster(5);
                     FightManager.Instance.PlayerTurnAttack(0);
                     Invoke("InitRoulette", 1);
-                    
+                    Invoke("HideSkillInfo", 1);
                 }
                 else
                 {
@@ -86,6 +89,7 @@ public class Roulette : MonoBehaviour
                 isAttackSuccessful = false;
                 Debug.Log("공격 실패!");
                 Invoke("InitRoulette", 1);
+                Invoke("HideSkillInfo", 1);
             }
         }
     }
@@ -96,7 +100,7 @@ public class Roulette : MonoBehaviour
         {
             // 1부터 100까지 랜덤한 숫자 선택하여 표시
             randomNumber = Random.Range(1, 101);
-            showText.text = randomNumber.ToString() + "%";
+            showText.text = randomNumber.ToString();
 
             // 잠시 대기
             yield return new WaitForSeconds(0.05f);
@@ -107,7 +111,13 @@ public class Roulette : MonoBehaviour
     {
         // 초기화
         gameObject.SetActive(false);
-        showText.text = "0%";
+        showText.text = "0";
         isAttackSuccessful = false;
+        clickEvent.DestroySelectRing();
+    }
+
+    public void HideSkillInfo()
+    {
+        clickEvent.HideSkillInfo();
     }
 }

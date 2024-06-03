@@ -46,17 +46,17 @@ public class FightManager : MonoBehaviour
         targetMonster = monster;
     }
 
-    public void ApplyDamageToSelectedMonster(int damage)
-    {
-        if (targetMonster != null)
-        {
-            GameManager.Instance.Damage(targetMonster, damage);
-        }
-        else
-        {
-            Debug.Log("No monster selected.");
-        }
-    }
+    //public void ApplyDamageToSelectedMonster(int damage)
+    //{
+    //    if (targetMonster != null)
+    //    {
+    //        GameManager.Instance.Damage(targetMonster, damage);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("No monster selected.");
+    //    }
+    //}
 
     public void MonsterTurn(int pos)
     {
