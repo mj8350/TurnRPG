@@ -21403,6 +21403,7 @@ GameObject:
   - component: {fileID: 3941101544914783184}
   - component: {fileID: 7179568573105395031}
   - component: {fileID: 3896257152953690431}
+  - component: {fileID: -6277500635745793625}
   m_Layer: 0
   m_Name: Priest
   m_TagString: Player
@@ -21803,6 +21804,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 1.3}
   serializedVersion: 2
   m_Radius: 1.3
+--- !u!114 &-6277500635745793625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7507203005261002806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66db479ed85320f448b0a3dd88f8e246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillsManager: {fileID: 0}
 --- !u!1 &7594983676348293863
 GameObject:
   m_ObjectHideFlags: 0

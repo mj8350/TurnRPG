@@ -18,6 +18,8 @@ public class Roulette : MonoBehaviour
     private bool isAttackSuccessful = false; // 공격 성공 여부를 기록하는 변수
     private ClickEvent clickEvent;
 
+    public CharSkillManager skillsManager;
+
     private void Awake()
     {
         // 시작 버튼에 클릭 이벤트 추가
@@ -77,7 +79,7 @@ public class Roulette : MonoBehaviour
                     //FightManager.Instance.ApplyDamageToSelectedMonster(5);
                     FightManager.Instance.PlayerTurnAttack(0);
                     Invoke("InitRoulette", 1);
-                    Invoke("HideSkillInfo", 1);
+                    //Invoke("HideSkillInfo", 1);
                 }
                 else
                 {
@@ -89,7 +91,7 @@ public class Roulette : MonoBehaviour
                 isAttackSuccessful = false;
                 Debug.Log("공격 실패!");
                 Invoke("InitRoulette", 1);
-                Invoke("HideSkillInfo", 1);
+                //Invoke("HideSkillInfo", 1);
             }
         }
     }
