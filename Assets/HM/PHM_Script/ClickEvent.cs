@@ -11,9 +11,9 @@ public class ClickEvent : MonoBehaviour
 {
     private RaycastHit2D hit;
     private Vector2 targetPosition;
-    private bool onMonsterSelected;
+    private bool onRoulette;
     private bool onSelected;
-    private GameObject selectedObj;
+    public GameObject selectedObj;
     [SerializeField]
     GameObject selectedRingPrefabs;
     [SerializeField] private Image rouletteImage;
@@ -65,7 +65,10 @@ public class ClickEvent : MonoBehaviour
         {
             onSelected = false;
             DestroySelectRing();
-            rouletteImage.gameObject.SetActive(false);
+            if (onRoulette)
+            {
+                HideRoulette();
+            }
         }
     }
 
@@ -108,6 +111,7 @@ public class ClickEvent : MonoBehaviour
     {
         if(onSelected)
         {
+            onRoulette = true;
             rouletteImage.gameObject.SetActive(true);
         }
     }
@@ -145,6 +149,12 @@ public class ClickEvent : MonoBehaviour
     {
         SkillImage.gameObject.SetActive(false);
         onSkill = false;
+    }    
+
+    public void HideRoulette()
+    {
+        rouletteImage.gameObject.SetActive(false);
+        onRoulette = false;
     }    
 
     //void AttackObject(GameObject obj)
