@@ -7,9 +7,16 @@ public class YS_Skills : MonoBehaviour
 {
     public TextMeshProUGUI messageText;
 
-    // 플레이어와 적의 체력, 여기서는 단순화를 위해 직접 값을 할당
     public int playerHealth = 100;
-    public int enemyHealth = 100;
+    public List<Enemy> enemies = new List<Enemy>();
+
+    void Start()
+    {
+         //적 리스트 초기화
+        enemies.Add(new Enemy("Goblin", 100));
+        enemies.Add(new Enemy("Orc", 100));
+        enemies.Add(new Enemy("Dragon", 100));
+    }
 
     // 스킬 사용 예시
     public void UseSkill(string skillName)
@@ -17,33 +24,74 @@ public class YS_Skills : MonoBehaviour
         switch (skillName)
         {
             case "Fireball":
-                // Fireball 스킬은 적에게 20의 데미지를 줍니다.
-                enemyHealth -= 20;
-                messageText.text = "적에게 20의 데미지를 주었습니다!";
+                //enemies -= 20;
+                messageText.text = "Enemies took 20 damage!";
                 break;
             case "Heal":
-                // Heal 스킬은 플레이어의 체력을 20 회복합니다.
+                // 힐 스킬은 플레이어의 체력을 회복
                 playerHealth += 20;
-                messageText.text = "체력을 20 회복했습니다!";
+                messageText.text = "Recovered 20 health!";
                 break;
-                // 다른 스킬들도 여기에 추가 가능
+            case "Explosion":
+                ApplyDamageToEnemies(50);
+                messageText.text = "Enemies took 50 damage!";
+                break;
+                
         }
 
-        // 게임 오버 조건 검사
+        // 게임 오버 조건 확인
         CheckGameOver();
+    }
+
+    void ApplyDamageToEnemies(int damage)
+    {
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.TakeDamage(damage);
+            Debug.Log(enemy.name + " took " + damage + " damage. Remaining health: " + enemy.health);
+        }
     }
 
     void CheckGameOver()
     {
-        if (enemyHealth <= 0)
+        // 모든 적의 체력이 0 이하인지 확인
+        bool allEnemiesDefeated = true;
+        foreach (Enemy enemy in enemies)
         {
-            messageText.text = "승리했습니다!";
+            if (enemy.health > 0)
+            {
+                allEnemiesDefeated = false;
+                break;
+            }
+        }
+
+        if (allEnemiesDefeated)
+        {
+            messageText.text = "Victory!";
             // 게임 오버 처리...
         }
         else if (playerHealth <= 0)
         {
-            messageText.text = "패배했습니다...";
+            messageText.text = "Defeat...";
             // 게임 오버 처리...
         }
     }
 }
+
+public class Enemy
+{
+    public string name;
+    public int health;
+
+    public Enemy(string name, int health)
+    {
+        this.name = name;
+        this.health = health;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+    }
+}
+
