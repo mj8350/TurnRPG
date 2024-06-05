@@ -35,6 +35,7 @@ public class FightManager : MonoBehaviour
 
         onAttack = false;
         monsterAi = GameObject.FindFirstObjectByType<MonsterAi>();
+
     }
 
     private void Update()
@@ -81,4 +82,6 @@ public class FightManager : MonoBehaviour
         GameObject obj = targetMonster;
         GameManager.Instance.Damage(obj, 5);
     }
+
+    
 }
