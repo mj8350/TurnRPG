@@ -48,10 +48,13 @@ public class MJ_Turn : MonoBehaviour
 
         for(int i = 0;i < turnList.Count; i++)
         {
+            FightManager.Instance.TurnQueue.Enqueue(turnList[i].Key);
+
             FindCharName(turnList[i].Key);
             FightUi.TurnUIChange(i, name);
-            
         }
+
+        
 
     }
 
