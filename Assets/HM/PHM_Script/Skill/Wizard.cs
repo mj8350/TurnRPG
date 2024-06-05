@@ -34,4 +34,14 @@ public class Wizard : MonoBehaviour
             skillsManager.ActivateSecondarySkill();
         }
     }
+
+    public void ActivePrimary()
+    {
+        skillsManager.ActivatePrimarySkill();
+    }
+
+    public void ActiveSecondary()
+    {
+        skillsManager.ActivateSecondarySkill();
+    }
 }
