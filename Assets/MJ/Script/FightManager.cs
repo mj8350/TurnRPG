@@ -19,6 +19,8 @@ public class FightManager : MonoBehaviour
 
     public Queue<int> TurnQueue = new Queue<int>();
 
+    public bool onAttack;
+
     private void Awake()
     {
         if (Instance == null)
@@ -31,7 +33,7 @@ public class FightManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-
+        onAttack = false;
         monsterAi = GameObject.FindFirstObjectByType<MonsterAi>();
     }
 

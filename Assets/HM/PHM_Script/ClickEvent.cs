@@ -21,22 +21,21 @@ public class ClickEvent : MonoBehaviour
     [SerializeField] private Image SkillImage;
     private bool onItem;
     private bool onSkill;
-    public bool onAttack;
 
     private void Awake()
     {
-        onAttack = false;
+        //rouletteImage.gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        if (onAttack)
+        //if (FightManager.Instance.onAttack)
             MouseClickDown();
     }
 
     void MouseClickDown()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (FightManager.Instance.onAttack&&Input.GetMouseButtonDown(0))
         {
             if (!EventSystem.current.IsPointerOverGameObject()) // 마우스가 UI 요소 위에 없는지 확인
             {
@@ -45,11 +44,13 @@ public class ClickEvent : MonoBehaviour
 
                 BoolOnonSelected();
             }
-            if(onSelected)
+            //if (onSelected)
             {
                 onRoulette = true;
+                if(!rouletteImage.gameObject.activeSelf)
                 rouletteImage.gameObject.SetActive(true);
             }
+
         }
     }
 
@@ -61,7 +62,7 @@ public class ClickEvent : MonoBehaviour
             selectedObj = hit.collider.gameObject;
 
             InstantiateSelectRing();
-            Debug.Log(selectedObj.transform);
+            Debug.Log(selectedObj.transform +"1");
             FightManager.Instance.SetTargetMonster(selectedObj);
             //AttackObject(selectedObj);
         }
@@ -116,7 +117,6 @@ public class ClickEvent : MonoBehaviour
     public void DestroySelectRing()
     {
         Destroy(GameObject.FindGameObjectWithTag("SelectRing"));
-        onAttack = false;
     }
 
     public void Attacking()
@@ -126,7 +126,8 @@ public class ClickEvent : MonoBehaviour
         //    onRoulette = true;
         //    rouletteImage.gameObject.SetActive(true);
         //}
-        onAttack = true;
+        Debug.Log("어택킨다");
+        FightManager.Instance.onAttack = true;
         if (onSkill)
         {
             SkillImage.gameObject.SetActive(false);
