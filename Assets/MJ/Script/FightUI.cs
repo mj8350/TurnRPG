@@ -1,41 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEngine.PlayerLoop;
 
 public class FightUI : MonoBehaviour
 {
     public Image[] caractor;
+    public TextMeshProUGUI[] plyName;
     public Image[] TurnImg;
     public Sprite[] TurnSp;
 
-    public TextMeshProUGUI PrimarySkill;
-    public TextMeshProUGUI SecondarySkill;
-
-    
-    
-    
-
-    private void Update()
+    private void Awake()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            Debug.Log(FightManager.Instance.TurnQueue.Dequeue());
-            
-            SkillInfo(FightManager.Instance.TurnQueue.Dequeue()); // 실험용
-        }
     }
 
-    public void ProfileUIChange(int num, string name)
+    public void ProfileUIChange(int num, string name, string PlayerName)
     {
+        caractor[num].gameObject.SetActive(true);
         for (int i = 0; i < 5; i++)
         {
             if (TurnSp[i].name == name)
             {
+                
                 caractor[num].sprite = TurnSp[i];
+                plyName[num].text = PlayerName;
                 break;
             }
         }
@@ -49,6 +38,7 @@ public class FightUI : MonoBehaviour
             if (TurnSp[i].name == spname)
             {
                 TurnImg[imgnum].sprite = TurnSp[i];
+                TurnImg[imgnum].gameObject.SetActive(true);
                 break;
             }
         }
@@ -65,16 +55,4 @@ public class FightUI : MonoBehaviour
             TurnImg[i].gameObject.SetActive(true);
     }
 
-    public void SkillInfo(int pos)
-    {
-        //pos = FightManager.Instance.TurnQueue.Dequeue();
-        if (pos < 3) // 플레이어 pos
-        {
-            PrimarySkill.text = GameManager.Instance.player[pos].Skill01.ToString();
-            SecondarySkill.text = GameManager.Instance.player[pos].Skill02.ToString();
-        }
-
-        Debug.Log(pos);
-   
-    }
 }

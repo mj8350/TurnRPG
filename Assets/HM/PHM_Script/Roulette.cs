@@ -35,7 +35,7 @@ public class Roulette : MonoBehaviour
 
     private void OnEnable()
     {
-        
+
     }
 
     private void OnDisable()
@@ -48,8 +48,9 @@ public class Roulette : MonoBehaviour
     {
         if (!isRouletteRunning)
         {
+            StartCoroutine("RoulettOver");
             // 애니메이션 시작
-            rouletteCoroutine = StartCoroutine(RouletteNumbers());
+            rouletteCoroutine = StartCoroutine("RouletteNumbers");
             isRouletteRunning = true;
             isAttackSuccessful = false; // 새로운 룰렛 시작 시 공격 판정 초기화
         }
@@ -57,13 +58,17 @@ public class Roulette : MonoBehaviour
         {
             // 룰렛을 재시작할 수 있도록
             StopCoroutine(rouletteCoroutine);
-            rouletteCoroutine = StartCoroutine(RouletteNumbers());
+            rouletteCoroutine = StartCoroutine("RouletteNumbers");
             isAttackSuccessful = false; // 새로운 룰렛 시작 시 공격 판정 초기화
         }
     }
 
     void StopRoulette()
     {
+
+        clickEvent.onAttack = false;
+        clickEvent.targetPosition = Vector2.zero;
+        StopCoroutine("RoulettOver");
         if (isRouletteRunning)
         {
             // 애니메이션 멈춤
@@ -73,6 +78,7 @@ public class Roulette : MonoBehaviour
 
             AttackJudgment();
         }
+
     }
 
     IEnumerator RouletteNumbers()
@@ -86,6 +92,13 @@ public class Roulette : MonoBehaviour
             // 잠시 대기
             yield return new WaitForSeconds(0.05f);
         }
+    }
+
+    IEnumerator RoulettOver()
+    {
+        yield return new WaitForSeconds(5);
+        StopCoroutine("RouletteNumbers");
+        StopRoulette();
     }
 
     public void InitRoulette()

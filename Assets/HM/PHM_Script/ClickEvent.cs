@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 public class ClickEvent : MonoBehaviour
 {
     private RaycastHit2D hit;
-    private Vector2 targetPosition;
+    public Vector2 targetPosition;
     private bool onRoulette;
     private bool onSelected;
     public GameObject selectedObj;
@@ -21,10 +21,17 @@ public class ClickEvent : MonoBehaviour
     [SerializeField] private Image SkillImage;
     private bool onItem;
     private bool onSkill;
+    public bool onAttack;
+
+    private void Awake()
+    {
+        onAttack = false;
+    }
 
     private void Update()
     {
-        MouseClickDown();
+        if (onAttack)
+            MouseClickDown();
     }
 
     void MouseClickDown()
@@ -38,7 +45,11 @@ public class ClickEvent : MonoBehaviour
 
                 BoolOnonSelected();
             }
-            
+            if(onSelected)
+            {
+                onRoulette = true;
+                rouletteImage.gameObject.SetActive(true);
+            }
         }
     }
 
@@ -105,21 +116,39 @@ public class ClickEvent : MonoBehaviour
     public void DestroySelectRing()
     {
         Destroy(GameObject.FindGameObjectWithTag("SelectRing"));
+        onAttack = false;
     }
 
     public void Attacking()
     {
-        if(onSelected)
+        //if(onSelected)
+        //{
+        //    onRoulette = true;
+        //    rouletteImage.gameObject.SetActive(true);
+        //}
+        onAttack = true;
+        if (onSkill)
         {
-            onRoulette = true;
-            rouletteImage.gameObject.SetActive(true);
+            SkillImage.gameObject.SetActive(false);
+            onSkill = false;
         }
+        if (onItem)
+        {
+            ItemImage.gameObject.SetActive(false);
+            onItem = false;
+        }
+
     }
 
     public void ShowItemInfo()
     {
         if (!onItem)
         {
+            if (onSkill)
+            {
+                SkillImage.gameObject.SetActive(false);
+                onSkill = false;
+            }
             ItemImage.gameObject.SetActive(true);
             onItem = true;
         }
@@ -135,6 +164,11 @@ public class ClickEvent : MonoBehaviour
     {
         if (!onSkill)
         {
+            if (onItem)
+            {
+                ItemImage.gameObject.SetActive(false);
+                onItem = false;
+            }
             SkillImage.gameObject.SetActive(true);
             onSkill = true;
         }

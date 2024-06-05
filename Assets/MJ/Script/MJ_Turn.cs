@@ -5,8 +5,8 @@ using UnityEngine;
 public class MJ_Turn : MonoBehaviour
 {
     [SerializeField]
-    public Dictionary<int,int> turnDic = new Dictionary<int,int>();
-    private List<KeyValuePair<int, int>> turnList = new List<KeyValuePair<int, int>> ();
+    public Dictionary<int, int> turnDic = new Dictionary<int, int>();
+    private List<KeyValuePair<int, int>> turnList = new List<KeyValuePair<int, int>>();
 
     private PHM_CharStat[] playerStat = new PHM_CharStat[3];
     private PHM_MonsterStat[] monsterStat = new PHM_MonsterStat[3];
@@ -19,20 +19,28 @@ public class MJ_Turn : MonoBehaviour
         FightUi = FindFirstObjectByType<FightUI>();
 
         Invoke("DicAdd", 0.01f);
-        
 
 
-        
+
+
     }
 
     public void DicAdd()
     {
         for (int i = 0; i < 3; i++)
         {
-            if (FightManager.Instance.PlayerPos[i].GetChild(0).TryGetComponent<PHM_CharStat>(out playerStat[i]))
-                turnDic.Add(i, playerStat[i].Speed);
-            if(FightManager.Instance.MonsterPos[i].GetChild(0).TryGetComponent<PHM_MonsterStat>(out monsterStat[i]))
-                turnDic.Add(i+3, monsterStat[i].Speed);
+            if (FightManager.Instance.PlayerPos[i].childCount > 0)
+            {
+                if (FightManager.Instance.PlayerPos[i].GetChild(0).TryGetComponent<PHM_CharStat>(out playerStat[i]))
+                    turnDic.Add(i, playerStat[i].Speed);
+
+            }
+            if (FightManager.Instance.MonsterPos[i].childCount > 0)
+            {
+                if (FightManager.Instance.MonsterPos[i].GetChild(0).TryGetComponent<PHM_MonsterStat>(out monsterStat[i]))
+                    turnDic.Add(i + 3, monsterStat[i].Speed);
+
+            }
         }
         foreach (KeyValuePair<int, int> dic in turnDic)
         {
@@ -46,7 +54,7 @@ public class MJ_Turn : MonoBehaviour
             return sort;
         });
 
-        for(int i = 0;i < turnList.Count; i++)
+        for (int i = 0; i < turnList.Count; i++)
         {
             FightManager.Instance.TurnQueue.Enqueue(turnList[i].Key);
 
@@ -54,7 +62,7 @@ public class MJ_Turn : MonoBehaviour
             FightUi.TurnUIChange(i, name);
         }
 
-        
+
 
     }
 
