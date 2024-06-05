@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class FightUI : MonoBehaviour
 {
+    public Image[] caractor;
     public Image[] TurnImg;
     public Sprite[] TurnSp;
 
@@ -13,18 +14,25 @@ public class FightUI : MonoBehaviour
         
     }
 
-
+    public void ProfileUIChange(int num, string name)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (TurnSp[i].name == name)
+            {
+                caractor[num].sprite = TurnSp[i];
+                break;
+            }
+        }
+    }
 
 
     public void TurnUIChange(int imgnum, string spname)
     {
         for(int i = 0; i < TurnSp.Length; i++)
         {
-            Debug.Log(TurnSp[i]);
-            Debug.Log(spname);
             if (TurnSp[i].name == spname)
             {
-                Debug.Log("¹Ù²Þ");
                 TurnImg[imgnum].sprite = TurnSp[i];
                 break;
             }

@@ -17,6 +17,8 @@ public class FightManager : MonoBehaviour
     //private BowExample BowExample;
     private AttackingExample AttackingExample;
 
+    public Queue<int> TurnQueue = new Queue<int>();
+
     private void Awake()
     {
         if (Instance == null)
