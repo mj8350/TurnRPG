@@ -4999,6 +4999,7 @@ MonoBehaviour:
   - {fileID: 1768252714}
   fightUI: {fileID: 0}
   spname: 
+  PlayerName: 
 --- !u!4 &974275587
 Transform:
   m_ObjectHideFlags: 0
@@ -12781,11 +12782,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455f7d84ece43824fb761062abedaae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetPosition: {x: 0, y: 0}
   selectedObj: {fileID: 0}
   selectedRingPrefabs: {fileID: 7541050645966124060, guid: 239d8b11bb8bb1f4094ed5f4d4c7870d, type: 3}
   rouletteImage: {fileID: 450346258}
   ItemImage: {fileID: 1277404308}
   SkillImage: {fileID: 1574492633}
+  onAttack: 0
 --- !u!4 &2118181999
 Transform:
   m_ObjectHideFlags: 0
@@ -13195,6 +13198,7 @@ MonoBehaviour:
   - {fileID: 1053601425}
   - {fileID: 2119785766}
   - {fileID: 480584636}
+  plyName: []
   TurnImg:
   - {fileID: 118914490}
   - {fileID: 194431559}
@@ -13233,8 +13237,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ab8ae3f88038aa34b89bb4a00a534915, type: 3}
   - {fileID: 21300000, guid: 867268f8aa9444441b3989844f32662d, type: 3}
   - {fileID: 21300000, guid: 11977aea6822125428ae63f3202e1b16, type: 3}
-  PrimarySkill: {fileID: 0}
-  SecondarySkill: {fileID: 0}
+  PrimarySkill: {fileID: 5538187}
+  SecondarySkill: {fileID: 823142836}
 --- !u!1 &2146477062
 GameObject:
   m_ObjectHideFlags: 0

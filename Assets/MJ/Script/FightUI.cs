@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,8 +12,20 @@ public class FightUI : MonoBehaviour
     public Image[] TurnImg;
     public Sprite[] TurnSp;
 
+    public TextMeshProUGUI PrimarySkill;
+    public TextMeshProUGUI SecondarySkill;
+
     private void Awake()
     {
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log(FightManager.Instance.PlayerPos[FightManager.Instance.TurnQueue.Dequeue()].GetChild(0).gameObject.name);
+            SkillTextInfo(FightManager.Instance.TurnQueue.Dequeue());
+        }
     }
 
     public void ProfileUIChange(int num, string name, string PlayerName)
@@ -55,4 +68,12 @@ public class FightUI : MonoBehaviour
             TurnImg[i].gameObject.SetActive(true);
     }
 
+    public void SkillTextInfo(int pos)
+    {
+        if(pos < 3)
+        {
+            PrimarySkill.text = GameManager.Instance.player[pos].Skill01.ToString(); // 자식에 있는 스텟 스크립트 찾아서 받아아야함.
+            SecondarySkill.text = GameManager.Instance.player[pos].Skill02.ToString();
+        }
+    }
 }
