@@ -65,9 +65,7 @@ public class Roulette : MonoBehaviour
 
     void StopRoulette()
     {
-
-        clickEvent.onAttack = false;
-        clickEvent.targetPosition = Vector2.zero;
+        FightManager.Instance.onAttack = false;
         StopCoroutine("RoulettOver");
         if (isRouletteRunning)
         {
