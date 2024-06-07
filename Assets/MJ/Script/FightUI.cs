@@ -23,9 +23,18 @@ public class FightUI : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log(FightManager.Instance.PlayerPos[FightManager.Instance.TurnQueue.Dequeue()].GetChild(0).gameObject.name);
-            SkillTextInfo(FightManager.Instance.TurnQueue.Dequeue());
+            int pos = FightManager.Instance.TurnQueue.Dequeue();
+            if (pos < 3)
+            {
+                Debug.Log(FightManager.Instance.PlayerPos[pos].GetChild(0).gameObject.name); // 큐에서 빼기 전에 이름 확인
+                SkillTextInfo(pos); // 큐에서 빼온 숫자를 인자로 넘겨줌
+            }
+            else
+            {
+                Debug.Log("몬스터 공격턴");
+            }
         }
+        
     }
 
     public void ProfileUIChange(int num, string name, string PlayerName)
@@ -70,10 +79,21 @@ public class FightUI : MonoBehaviour
 
     public void SkillTextInfo(int pos)
     {
-        if(pos < 3)
+        if (pos < 3)
         {
-            PrimarySkill.text = GameManager.Instance.player[pos].Skill01.ToString(); // 자식에 있는 스텟 스크립트 찾아서 받아아야함.
-            SecondarySkill.text = GameManager.Instance.player[pos].Skill02.ToString();
+
+            Transform playerTransform = FightManager.Instance.PlayerPos[pos];
+            PHM_CharStat playerStats = playerTransform.GetComponentInChildren<PHM_CharStat>();
+
+            if (playerStats != null)
+            {
+                PrimarySkill.text = playerStats.GetPrimarySkill().ToString();
+                SecondarySkill.text = playerStats.GetSecondarySkill().ToString();
+            }
+            else
+            {
+                Debug.LogError("PHM_CharStat 참조실패");
+            }
         }
     }
 }

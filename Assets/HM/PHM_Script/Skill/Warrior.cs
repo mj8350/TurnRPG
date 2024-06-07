@@ -12,8 +12,8 @@ public class Warrior : MonoBehaviour
         skillsManager = gameObject.AddComponent<CharSkillManager>();
 
         // 스킬 설정
-        skillsManager.primarySkill = gameObject.AddComponent<WarriorSkill01>();
-        skillsManager.secondarySkill = gameObject.AddComponent<WarriorSkill02>();
+        skillsManager.primarySkill = gameObject.AddComponent<TauntSkill>();
+        skillsManager.secondarySkill = gameObject.AddComponent<StunSkill>();
 
         //// 필요한 경우 스킬 활성화
         //skillsManager.ActivatePrimarySkill();

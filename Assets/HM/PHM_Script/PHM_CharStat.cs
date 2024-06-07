@@ -53,5 +53,25 @@ public class PHM_CharStat : MonoBehaviour, IDamage
     //    changeHP?.Invoke(newHP);
     //}
 
+    public void SetPrimarySkill(string skill)
+    {
+        Skill01 = skill;
+    }
 
+    // 주요 스킬을 반환하는 메서드
+    public string GetPrimarySkill()
+    {
+        return Skill01;
+    }
+
+    public void SetSecondarySkill(string skill)
+    {
+        Skill02 = skill;
+    }
+
+    // 주요 스킬을 반환하는 메서드
+    public string GetSecondarySkill()
+    {
+        return Skill02;
+    }
 }

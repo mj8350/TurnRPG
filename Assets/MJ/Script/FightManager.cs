@@ -11,7 +11,9 @@ public class FightManager : MonoBehaviour
 
     public Transform[] PlayerPos;
     public Transform[] MonsterPos;
-    private GameObject targetMonster;
+    public GameObject targetMonster;
+    public GameObject targetPlayer;
+    public GameObject tauntTarget;
 
     private MonsterAi monsterAi;
     //private BowExample BowExample;
@@ -20,6 +22,8 @@ public class FightManager : MonoBehaviour
     public Queue<int> TurnQueue = new Queue<int>();
 
     public bool onAttack;
+    public bool onTaunt;
+    public bool onStun;
 
     private void Awake()
     {
@@ -34,6 +38,8 @@ public class FightManager : MonoBehaviour
         }
 
         onAttack = false;
+        onTaunt = false;
+        onStun = false;
         monsterAi = GameObject.FindFirstObjectByType<MonsterAi>();
 
     }
@@ -65,10 +71,26 @@ public class FightManager : MonoBehaviour
 
     public void MonsterTurn(int pos)
     {
-        GameObject obj = PlayerPos[Random.Range(0, PlayerPos.Length)].GetChild(0).gameObject;
-
-        monsterAi.MonsterStart(0);
-        GameManager.Instance.Damage(obj, 5);
+        
+        if(onTaunt && !onStun) // 도발상태라면 도발타겟 공격
+        {
+            targetPlayer = tauntTarget;
+            monsterAi.MonsterStart(0);
+            GameManager.Instance.Damage(tauntTarget, 5);
+            onTaunt = false;
+        }
+        else if(!onTaunt && !onStun)
+        {
+            targetPlayer = PlayerPos[Random.Range(0, PlayerPos.Length)].GetChild(0).gameObject;
+            monsterAi.MonsterStart(0);
+            GameManager.Instance.Damage(targetPlayer, 5);
+        }
+        else if(onStun)
+        {
+            TurnQueue.Dequeue(); // 턴넘기기
+            onStun = false;
+        }
+        
     }
 
     public void PlayerTurnAttack(int who/*int pos*/)

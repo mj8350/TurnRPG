@@ -3347,7 +3347,12 @@ MonoBehaviour:
   - {fileID: 260293029}
   - {fileID: 1647350469}
   - {fileID: 1260038368}
+  targetMonster: {fileID: 0}
+  targetPlayer: {fileID: 0}
+  tauntTarget: {fileID: 0}
   onAttack: 0
+  onTaunt: 0
+  onStun: 0
 --- !u!4 &435637825
 Transform:
   m_ObjectHideFlags: 0
@@ -13240,8 +13245,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ab8ae3f88038aa34b89bb4a00a534915, type: 3}
   - {fileID: 21300000, guid: 867268f8aa9444441b3989844f32662d, type: 3}
   - {fileID: 21300000, guid: 11977aea6822125428ae63f3202e1b16, type: 3}
-  PrimarySkill: {fileID: 0}
-  SecondarySkill: {fileID: 0}
+  PrimarySkill: {fileID: 5538187}
+  SecondarySkill: {fileID: 823142836}
 --- !u!1 &2146477062
 GameObject:
   m_ObjectHideFlags: 0

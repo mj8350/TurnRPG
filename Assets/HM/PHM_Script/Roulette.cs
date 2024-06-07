@@ -122,7 +122,7 @@ public class Roulette : MonoBehaviour
             Debug.Log("공격 성공!");
             if (FightManager.Instance != null)
             {
-                FightManager.Instance.PlayerTurnAttack(0);
+                FightManager.Instance.PlayerTurnAttack(FightManager.Instance.TurnQueue.Dequeue()); // 오류 있음.
                 Invoke("InitRoulette", 1);
                 //Invoke("HideSkillInfo", 1);
             }
@@ -140,30 +140,30 @@ public class Roulette : MonoBehaviour
         }
     }
 
-    //public void SkillJudgment()
-    //{
-    //    // 랜덤 숫자에 따라 공격 성공 또는 실패 판정
-    //    if (randomNumber <= 50)
-    //    {
-    //        isAttackSuccessful = true;
-    //        Debug.Log("공격 성공!");
-    //        if (FightManager.Instance != null)
-    //        {
-    //            skillBtn.PrimarySkill();
-    //            Invoke("InitRoulette", 1);
-    //            Invoke("HideSkillInfo", 1);
-    //        }
-    //        else
-    //        {
-    //            Debug.LogError("FightManager instance is null.");
-    //        }
-    //    }
-    //    else
-    //    {
-    //        isAttackSuccessful = false;
-    //        Debug.Log("공격 실패!");
-    //        Invoke("InitRoulette", 1);
-    //        Invoke("HideSkillInfo", 1);
-    //    }
-    //}
+    public void SkillJudgment()
+    {
+        // 랜덤 숫자에 따라 공격 성공 또는 실패 판정
+        if (randomNumber <= 50)
+        {
+            isAttackSuccessful = true;
+            Debug.Log("공격 성공!");
+            if (FightManager.Instance != null)
+            {
+                skillBtn.PrimarySkill();
+                Invoke("InitRoulette", 1);
+                Invoke("HideSkillInfo", 1);
+            }
+            else
+            {
+                Debug.LogError("FightManager instance is null.");
+            }
+        }
+        else
+        {
+            isAttackSuccessful = false;
+            Debug.Log("공격 실패!");
+            Invoke("InitRoulette", 1);
+            Invoke("HideSkillInfo", 1);
+        }
+    }
 }

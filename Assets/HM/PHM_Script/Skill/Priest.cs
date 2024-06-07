@@ -12,8 +12,8 @@ public class Priest : MonoBehaviour
         skillsManager = gameObject.AddComponent<CharSkillManager>();
 
         // 스킬 설정
-        skillsManager.primarySkill = gameObject.AddComponent<PriestSkill01>();
-        skillsManager.secondarySkill = gameObject.AddComponent<PriestSkill02>();
+        skillsManager.primarySkill = gameObject.AddComponent<HealSkill>();
+        skillsManager.secondarySkill = gameObject.AddComponent<ResurrectionSkill>();
 
         //// 필요한 경우 스킬 활성화
         //skillsManager.ActivatePrimarySkill();
