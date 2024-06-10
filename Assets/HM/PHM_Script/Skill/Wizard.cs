@@ -43,4 +43,5 @@ public class Wizard : MonoBehaviour
     {
         skillsManager.ActivateSecondarySkill();
     }
+
 }

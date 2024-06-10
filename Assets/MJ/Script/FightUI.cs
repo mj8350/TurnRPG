@@ -38,12 +38,14 @@ public class FightUI : MonoBehaviour
                 monsterAi.MonsterStart(pos);
             }
 
-            if(FightManager.Instance.TurnQueue.Count == 0 )
-            {
-                FightManager.Instance.NewTurn();
-            }
         }
-        
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            FightManager.Instance.TurnQueue.Dequeue();
+            Debug.Log("턴넘기기");
+        }
+
+
     }
 
     public void ProfileUIChange(int num, string name, string PlayerName)

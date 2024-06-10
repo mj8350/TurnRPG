@@ -23,6 +23,8 @@ public class FightManager : MonoBehaviour
 
     public Queue<int> TurnQueue = new Queue<int>();
 
+    public CharSkillManager skillManager;
+
     public bool onAttack;
     public bool onTaunt;
     public bool onStun;
@@ -45,6 +47,7 @@ public class FightManager : MonoBehaviour
         monsterAi = GameObject.FindFirstObjectByType<MonsterAi>();
         turn = GameObject.FindFirstObjectByType<MJ_Turn>();
         fightUI = GameObject.FindFirstObjectByType<FightUI>();
+        skillManager = GameManager.FindFirstObjectByType<CharSkillManager>();
     }
 
     private void Update()
@@ -119,6 +122,14 @@ public class FightManager : MonoBehaviour
         //GameObject obj = MonsterPos[pos].GetChild(0).gameObject;
         GameObject obj = targetMonster;
         GameManager.Instance.Damage(obj, 5);
+    }
+
+    public void PlayerTurnSkill(int who)
+    {
+        PlayerPos[who].transform.GetChild(0).TryGetComponent<AttackingExample>(out AttackingExample);
+        AttackingExample.PlayerStartAttack();
+
+        skillManager.ActivatePrimarySkill();
     }
 
     

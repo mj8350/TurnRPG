@@ -6,6 +6,15 @@ using TMPro;
 
 public class Roulette : MonoBehaviour
 {
+    // 클릭 버튼 타입
+    public enum ButtonType
+    {
+        None,
+        Attack,
+        Skill1,
+        Skill2
+    }
+
     public TextMeshProUGUI showText;
     public Button startButton;
     public Button stopButton;
@@ -30,6 +39,7 @@ public class Roulette : MonoBehaviour
         stopButton.onClick.AddListener(StopRoulette);
 
         clickEvent = GameObject.FindFirstObjectByType<ClickEvent>();
+        skillsManager = GameObject.FindFirstObjectByType<CharSkillManager>();
         skillBtn = GameObject.FindFirstObjectByType<SkillButton>();
     }
 
@@ -42,7 +52,6 @@ public class Roulette : MonoBehaviour
     {
         InitRoulette();
     }
-
 
     void StartRoulette()
     {
@@ -75,6 +84,21 @@ public class Roulette : MonoBehaviour
             Debug.Log($"Random number: {randomNumber}");
 
             AttackJudgment();
+
+            //// 클릭된 버튼의 상태에 따라 적절한 저지먼트를 발동
+            //switch (clickEvent.GetClickedButton())
+            //{
+            //    case ButtonType.Attack:
+            //        AttackJudgment();
+            //        break;
+            //    case ButtonType.Skill1:
+            //        SkillJudgment_1();
+            //        break;
+            //    case ButtonType.Skill2:
+            //        SkillJudgment_2();
+            //        break;
+            //}
+
         }
 
     }
@@ -116,15 +140,14 @@ public class Roulette : MonoBehaviour
     public void AttackJudgment()
     {
         // 랜덤 숫자에 따라 공격 성공 또는 실패 판정
-        if (randomNumber <= 50)
+        if (randomNumber <= 100)
         {
             isAttackSuccessful = true;
             Debug.Log("공격 성공!");
             if (FightManager.Instance != null)
             {
-                FightManager.Instance.PlayerTurnAttack(FightManager.Instance.TurnQueue.Dequeue()); // 오류 있음.
+                FightManager.Instance.PlayerTurnAttack(FightManager.Instance.TurnQueue.Dequeue());
                 Invoke("InitRoulette", 1);
-                //Invoke("HideSkillInfo", 1);
             }
             else
             {
@@ -137,24 +160,22 @@ public class Roulette : MonoBehaviour
             Debug.Log("공격 실패!");
             FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
-            //Invoke("HideSkillInfo", 1);
         }
         FightManager.Instance.TrunOut();
         FightManager.Instance.TurnDraw();
     }
 
-    public void SkillJudgment()
+    public void SkillJudgment_1()
     {
         // 랜덤 숫자에 따라 공격 성공 또는 실패 판정
-        if (randomNumber <= 50)
+        if (randomNumber <= 100)
         {
             isAttackSuccessful = true;
             Debug.Log("공격 성공!");
             if (FightManager.Instance != null)
             {
-                skillBtn.PrimarySkill();
+                FightManager.Instance.PlayerTurnSkill(FightManager.Instance.TurnQueue.Dequeue());
                 Invoke("InitRoulette", 1);
-                Invoke("HideSkillInfo", 1);
             }
             else
             {
@@ -165,8 +186,35 @@ public class Roulette : MonoBehaviour
         {
             isAttackSuccessful = false;
             Debug.Log("공격 실패!");
+            FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
-            Invoke("HideSkillInfo", 1);
+        }
+    }
+
+    public void SkillJudgment_2()
+    {
+        // 랜덤 숫자에 따라 공격 성공 또는 실패 판정
+        if (randomNumber <= 100)
+        {
+            isAttackSuccessful = true;
+            Debug.Log("공격 성공!");
+            if (FightManager.Instance != null)
+            {
+                skillsManager.ActivateSecondarySkill();
+                FightManager.Instance.TurnQueue.Dequeue();
+                Invoke("InitRoulette", 1);
+            }
+            else
+            {
+                Debug.LogError("FightManager instance is null.");
+            }
+        }
+        else
+        {
+            isAttackSuccessful = false;
+            Debug.Log("공격 실패!");
+            FightManager.Instance.TurnQueue.Dequeue();
+            Invoke("InitRoulette", 1);
         }
     }
 }

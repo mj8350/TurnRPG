@@ -23,9 +23,33 @@ public class ClickEvent : MonoBehaviour
     private bool onSkill;
     private bool myturn;
 
-    private void Awake()
+    public Button attackButton; // 공격 버튼
+    public Button skill1Button; // 스킬1 버튼
+    public Button skill2Button; // 스킬2 버튼
+
+    // 클릭된 버튼 타입
+    private Roulette.ButtonType clickedButtonType = Roulette.ButtonType.None;
+
+    private void Start()
     {
-        //rouletteImage.gameObject.SetActive(false);
+        //// 공격 버튼에 클릭 이벤트 핸들러 지정
+        //attackButton.onClick.AddListener(() => ClickedButton(Roulette.ButtonType.Attack));
+        //// 스킬1 버튼에 클릭 이벤트 핸들러 지정
+        //skill1Button.onClick.AddListener(() => ClickedButton(Roulette.ButtonType.Skill1));
+        //// 스킬2 버튼에 클릭 이벤트 핸들러 지정
+        //skill2Button.onClick.AddListener(() => ClickedButton(Roulette.ButtonType.Skill2));
+    }
+
+    // 버튼이 클릭되었을 때 호출되는 함수
+    private void ClickedButton(Roulette.ButtonType buttonType)
+    {
+        clickedButtonType = buttonType;
+    }
+
+    // 클릭된 버튼의 타입을 반환하는 함수
+    public Roulette.ButtonType GetClickedButton()
+    {
+        return clickedButtonType;
     }
 
     private void Update()
@@ -149,6 +173,7 @@ public class ClickEvent : MonoBehaviour
         }
 
     }
+
 
     public void ShowItemInfo()
     {
