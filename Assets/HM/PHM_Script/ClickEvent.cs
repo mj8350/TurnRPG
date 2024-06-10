@@ -54,11 +54,17 @@ public class ClickEvent : MonoBehaviour
                 hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
                 BoolOnonSelected();
+
+                
             }
             //if (onSelected)
             {
                 onRoulette = true;
+<<<<<<< Updated upstream
                 //if(!rouletteImage.gameObject.activeSelf)
+=======
+                if (!rouletteImage.gameObject.activeSelf)
+>>>>>>> Stashed changes
                     rouletteImage.gameObject.SetActive(true);
             }
 

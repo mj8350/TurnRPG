@@ -23,7 +23,7 @@ public class FightUI : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            int pos = FightManager.Instance.TurnQueue.Dequeue();
+            int pos = FightManager.Instance.TurnQueue.Peek();
             if (pos < 3)
             {
                 Debug.Log(FightManager.Instance.PlayerPos[pos].GetChild(0).gameObject.name); // 큐에서 빼기 전에 이름 확인
@@ -99,6 +99,11 @@ public class FightUI : MonoBehaviour
             {
                 Debug.LogError("PHM_CharStat 참조실패");
             }
+        }
+        else
+        {
+            PrimarySkill.text = "몬스터 턴";
+            SecondarySkill.text = "몬스터 턴";
         }
     }
 }

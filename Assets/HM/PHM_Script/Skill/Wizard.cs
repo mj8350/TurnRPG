@@ -11,7 +11,6 @@ public class Wizard : MonoBehaviour
     {
         // 마법사의 스킬 매니저 설정
         skillsManager = gameObject.AddComponent<CharSkillManager>();
-        click = gameObject.AddComponent<ClickEvent>();
 
         // 마법사의 스킬 설정
         skillsManager.primarySkill = gameObject.AddComponent<TargetSkill>();

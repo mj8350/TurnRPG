@@ -9,12 +9,12 @@ public class HealSkill : BaseSkill
 
     private void Awake()
     {
-        click = gameObject.AddComponent<ClickEvent>();
+        click = GameObject.FindFirstObjectByType<ClickEvent>();
     }
 
     public override void Skill_Active()
     {
-        Debug.Log("타겟스킬 발동");
+        Debug.Log("힐 스킬 발동");
         targetObject = click.selectedObj;
         if (targetObject != null)
         {
@@ -33,8 +33,8 @@ public class HealSkill : BaseSkill
         PHM_CharStat healthComponent = targetObject.GetComponent<PHM_CharStat>();
         if (healthComponent != null)
         {
-            // 체력을 회복합니다.
-            int healingAmount = 20; // 회복량 (예시로 20 설정)
+            // 체력을 회복
+            int healingAmount = 5; // 회복량 (예시로 5 설정)
             healthComponent.Helth += healingAmount;
             Debug.Log("대상의 체력을 회복합니다.");
             Debug.Log(healthComponent.Helth);
