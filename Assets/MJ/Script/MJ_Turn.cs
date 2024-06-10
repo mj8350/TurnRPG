@@ -18,8 +18,8 @@ public class MJ_Turn : MonoBehaviour
     {
         FightUi = FindFirstObjectByType<FightUI>();
 
-        Invoke("DicAdd", 0.01f);
-
+        //Invoke("DicAdd", 0.01f);
+        DicAdd();
 
 
 
@@ -55,7 +55,7 @@ public class MJ_Turn : MonoBehaviour
         });
 
         NewTurn();
-
+        FightManager.Instance.TurnDraw();
 
 
     }

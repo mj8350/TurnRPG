@@ -25,6 +25,11 @@ public class MonsterAi : MonoBehaviour
         Anim.ChangeAnimation(MonsterPos[pos].GetChild(0).gameObject, "Attack");
         yield return new WaitForSeconds(1);
         Anim.ChangeAnimation(MonsterPos[pos].GetChild(0).gameObject, "Idle");
+        yield return new WaitForSeconds(0.2f);
+        FightManager.Instance.TurnQueue.Dequeue();
+        FightManager.Instance.TrunOut();
+        FightManager.Instance.TurnDraw();
+
     }
 
     

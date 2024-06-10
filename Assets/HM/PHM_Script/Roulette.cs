@@ -139,6 +139,8 @@ public class Roulette : MonoBehaviour
             Invoke("InitRoulette", 1);
             //Invoke("HideSkillInfo", 1);
         }
+        FightManager.Instance.TrunOut();
+        FightManager.Instance.TurnDraw();
     }
 
     public void SkillJudgment()

@@ -60,6 +60,14 @@ public class FightManager : MonoBehaviour
         turn.NewTurn();
     }
 
+    public void TurnDraw()
+    {
+        fightUI.DrawTurn();
+    }
+    public void TrunOut()
+    {
+        fightUI.TurnOut();
+    }
     public void SetTargetMonster(GameObject monster)
     {
         targetMonster = monster;
