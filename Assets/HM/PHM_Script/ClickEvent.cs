@@ -21,50 +21,34 @@ public class ClickEvent : MonoBehaviour
     [SerializeField] private Image SkillImage;
     private bool onItem;
     private bool onSkill;
-    private bool click;
 
     private void Awake()
     {
         //rouletteImage.gameObject.SetActive(false);
-        click = true;
     }
 
     private void Update()
     {
-        /*if (FightManager.Instance.onAttack)
+        if (FightManager.Instance.onAttack)
             MouseClickDown();
-        if (Input.GetMouseButtonUp(0))
-            click = true;*/
 
-        if(Input.GetMouseButtonDown(0))
-        {
-            Debug.Log(gameObject.name);
-        }
     }
 
     void MouseClickDown()
     {
-        if (click&&Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            click = false;
-            Debug.Log("눌림");
             if (!EventSystem.current.IsPointerOverGameObject()) // 마우스가 UI 요소 위에 없는지 확인
             {
                 Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
                 BoolOnonSelected();
-
-                
             }
             //if (onSelected)
             {
                 onRoulette = true;
-<<<<<<< Updated upstream
-                //if(!rouletteImage.gameObject.activeSelf)
-=======
                 if (!rouletteImage.gameObject.activeSelf)
->>>>>>> Stashed changes
                     rouletteImage.gameObject.SetActive(true);
             }
 
