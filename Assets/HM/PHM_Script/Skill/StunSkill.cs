@@ -9,7 +9,7 @@ public class StunSkill : BaseSkill
 
     private void Awake()
     {
-        click = gameObject.AddComponent<ClickEvent>();
+        click = GameObject.FindFirstObjectByType<ClickEvent>();
     }
 
     public override void Skill_Active()

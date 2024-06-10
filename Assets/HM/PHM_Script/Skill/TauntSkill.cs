@@ -9,7 +9,7 @@ public class TauntSkill : BaseSkill
 
     private void Awake()
     {
-        click = gameObject.AddComponent<ClickEvent>();
+        click = GameObject.FindFirstObjectByType<ClickEvent>();
     }
 
     public override void Skill_Active()

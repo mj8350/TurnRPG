@@ -18,6 +18,8 @@ public class FightManager : MonoBehaviour
     private MonsterAi monsterAi;
     //private BowExample BowExample;
     private AttackingExample AttackingExample;
+    private MJ_Turn turn;
+    private FightUI fightUI;
 
     public Queue<int> TurnQueue = new Queue<int>();
 
@@ -41,7 +43,8 @@ public class FightManager : MonoBehaviour
         onTaunt = false;
         onStun = false;
         monsterAi = GameObject.FindFirstObjectByType<MonsterAi>();
-
+        turn = GameObject.FindFirstObjectByType<MJ_Turn>();
+        fightUI = GameObject.FindFirstObjectByType<FightUI>();
     }
 
     private void Update()
@@ -52,6 +55,19 @@ public class FightManager : MonoBehaviour
             PlayerTurnAttack(0);
     }
 
+    public void NewTurn()
+    {
+        turn.NewTurn();
+    }
+
+    public void TurnDraw()
+    {
+        fightUI.DrawTurn();
+    }
+    public void TrunOut()
+    {
+        fightUI.TurnOut();
+    }
     public void SetTargetMonster(GameObject monster)
     {
         targetMonster = monster;

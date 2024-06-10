@@ -15,15 +15,18 @@ public class FightUI : MonoBehaviour
     public TextMeshProUGUI PrimarySkill;
     public TextMeshProUGUI SecondarySkill;
 
+    public MonsterAi monsterAi;
+
     private void Awake()
     {
+        monsterAi = GameObject.FindFirstObjectByType<MonsterAi>();
     }
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            int pos = FightManager.Instance.TurnQueue.Dequeue();
+            int pos = FightManager.Instance.TurnQueue.Peek();
             if (pos < 3)
             {
                 Debug.Log(FightManager.Instance.PlayerPos[pos].GetChild(0).gameObject.name); // 큐에서 빼기 전에 이름 확인
@@ -32,6 +35,12 @@ public class FightUI : MonoBehaviour
             else
             {
                 Debug.Log("몬스터 공격턴");
+                monsterAi.MonsterStart(pos);
+            }
+
+            if(FightManager.Instance.TurnQueue.Count == 0 )
+            {
+                FightManager.Instance.NewTurn();
             }
         }
         
@@ -65,15 +74,39 @@ public class FightUI : MonoBehaviour
             }
         }
     }
-
-    public void TurnOut(int num)
+    public int count=-1;
+    public void TurnOut()
     {
-        TurnImg[num].gameObject.SetActive(false);
+        TurnImg[count].gameObject.SetActive(false);
     }
 
-    public void NewTurn(int end)
+    public void DrawTurn()
     {
-        for( int i = 0;i < end;i++)
+        if (FightManager.Instance.TurnQueue.Count == 0)
+        {
+            FightManager.Instance.NewTurn();
+            NewTurn();
+            count = -1;
+        }
+
+        int pos = FightManager.Instance.TurnQueue.Peek();
+        if (pos < 3)
+        {
+            Debug.Log(FightManager.Instance.PlayerPos[pos].GetChild(0).gameObject.name); // 큐에서 빼기 전에 이름 확인
+            SkillTextInfo(pos); // 큐에서 빼온 숫자를 인자로 넘겨줌
+        }
+        else
+        {
+            Debug.Log("몬스터 공격턴");
+            monsterAi.MonsterStart(pos-3);
+        }
+        count++;
+        
+    }
+
+    public void NewTurn()
+    {
+        for( int i = 0;i < FightManager.Instance.TurnQueue.Count;i++)
             TurnImg[i].gameObject.SetActive(true);
     }
 
@@ -94,6 +127,11 @@ public class FightUI : MonoBehaviour
             {
                 Debug.LogError("PHM_CharStat 참조실패");
             }
+        }
+        else
+        {
+            PrimarySkill.text = "몬스터 턴";
+            SecondarySkill.text = "몬스터 턴";
         }
     }
 }

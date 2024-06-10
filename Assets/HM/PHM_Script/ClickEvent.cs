@@ -21,6 +21,7 @@ public class ClickEvent : MonoBehaviour
     [SerializeField] private Image SkillImage;
     private bool onItem;
     private bool onSkill;
+    private bool myturn;
 
     private void Awake()
     {
@@ -29,13 +30,18 @@ public class ClickEvent : MonoBehaviour
 
     private void Update()
     {
-        //if (FightManager.Instance.onAttack)
+        if (FightManager.Instance.onAttack)
             MouseClickDown();
+
+        if(FightManager.Instance.TurnQueue.Peek() < 3)
+            myturn = true;
+        else myturn = false;
+
     }
 
     void MouseClickDown()
     {
-        if (FightManager.Instance.onAttack&&Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             if (!EventSystem.current.IsPointerOverGameObject()) // 마우스가 UI 요소 위에 없는지 확인
             {
@@ -47,8 +53,8 @@ public class ClickEvent : MonoBehaviour
             //if (onSelected)
             {
                 onRoulette = true;
-                if(!rouletteImage.gameObject.activeSelf)
-                rouletteImage.gameObject.SetActive(true);
+                if (!rouletteImage.gameObject.activeSelf)
+                    rouletteImage.gameObject.SetActive(true);
             }
 
         }
@@ -126,57 +132,65 @@ public class ClickEvent : MonoBehaviour
         //    onRoulette = true;
         //    rouletteImage.gameObject.SetActive(true);
         //}
-        Debug.Log("어택킨다");
-        FightManager.Instance.onAttack = true;
-        if (onSkill)
+        if (myturn)
         {
-            SkillImage.gameObject.SetActive(false);
-            onSkill = false;
-        }
-        if (onItem)
-        {
-            ItemImage.gameObject.SetActive(false);
-            onItem = false;
+            Debug.Log("어택킨다");
+            FightManager.Instance.onAttack = true;
+            if (onSkill)
+            {
+                SkillImage.gameObject.SetActive(false);
+                onSkill = false;
+            }
+            if (onItem)
+            {
+                ItemImage.gameObject.SetActive(false);
+                onItem = false;
+            }
         }
 
     }
 
     public void ShowItemInfo()
     {
-        if (!onItem)
+        if (myturn)
         {
-            if (onSkill)
+            if (!onItem)
             {
-                SkillImage.gameObject.SetActive(false);
-                onSkill = false;
+                if (onSkill)
+                {
+                    SkillImage.gameObject.SetActive(false);
+                    onSkill = false;
+                }
+                ItemImage.gameObject.SetActive(true);
+                onItem = true;
             }
-            ItemImage.gameObject.SetActive(true);
-            onItem = true;
-        }
-        else
-        {
-            ItemImage.gameObject.SetActive(false);
-            onItem = false;
-        }
-        
-    }
-
-    public void ShowSkillInfo()
-    {
-        if (!onSkill)
-        {
-            if (onItem)
+            else
             {
                 ItemImage.gameObject.SetActive(false);
                 onItem = false;
             }
-            SkillImage.gameObject.SetActive(true);
-            onSkill = true;
         }
-        else
+    }
+
+    public void ShowSkillInfo()
+    {
+        if (myturn)
         {
-            SkillImage.gameObject.SetActive(false);
-            onSkill = false;
+            if (!onSkill)
+            {
+                if (onItem)
+                {
+                    ItemImage.gameObject.SetActive(false);
+                    onItem = false;
+                }
+                SkillImage.gameObject.SetActive(true);
+                onSkill = true;
+            }
+            else
+            {
+                SkillImage.gameObject.SetActive(false);
+                onSkill = false;
+            }
         }
     }
 

@@ -135,9 +135,12 @@ public class Roulette : MonoBehaviour
         {
             isAttackSuccessful = false;
             Debug.Log("공격 실패!");
+            FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
             //Invoke("HideSkillInfo", 1);
         }
+        FightManager.Instance.TrunOut();
+        FightManager.Instance.TurnDraw();
     }
 
     public void SkillJudgment()

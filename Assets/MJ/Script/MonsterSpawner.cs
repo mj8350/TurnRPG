@@ -10,7 +10,7 @@ public class MonsterSpawner : MonoBehaviour
     public Transform[] MonsterPos;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         MonsterSp();
     }
