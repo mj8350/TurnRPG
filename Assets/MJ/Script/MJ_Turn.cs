@@ -6,7 +6,7 @@ public class MJ_Turn : MonoBehaviour
 {
     [SerializeField]
     public Dictionary<int, int> turnDic = new Dictionary<int, int>();
-    private List<KeyValuePair<int, int>> turnList = new List<KeyValuePair<int, int>>();
+    public List<KeyValuePair<int, int>> turnList = new List<KeyValuePair<int, int>>();
 
     private PHM_CharStat[] playerStat = new PHM_CharStat[3];
     private PHM_MonsterStat[] monsterStat = new PHM_MonsterStat[3];
@@ -54,6 +54,14 @@ public class MJ_Turn : MonoBehaviour
             return sort;
         });
 
+        NewTurn();
+
+
+
+    }
+
+    public void NewTurn()
+    {
         for (int i = 0; i < turnList.Count; i++)
         {
             FightManager.Instance.TurnQueue.Enqueue(turnList[i].Key);
@@ -61,9 +69,6 @@ public class MJ_Turn : MonoBehaviour
             FindCharName(turnList[i].Key);
             FightUi.TurnUIChange(i, name);
         }
-
-
-
     }
 
     public void FindCharName(int num)

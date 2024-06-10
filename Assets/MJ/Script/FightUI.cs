@@ -33,6 +33,11 @@ public class FightUI : MonoBehaviour
             {
                 Debug.Log("몬스터 공격턴");
             }
+
+            if(FightManager.Instance.TurnQueue.Count == 0 )
+            {
+                FightManager.Instance.NewTurn();
+            }
         }
         
     }
