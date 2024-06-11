@@ -32,12 +32,12 @@ public class ClickEvent : MonoBehaviour
 
     private void Start()
     {
-        //// 공격 버튼에 클릭 이벤트 핸들러 지정
-        //attackButton.onClick.AddListener(() => ClickedButton(Roulette.ButtonType.Attack));
-        //// 스킬1 버튼에 클릭 이벤트 핸들러 지정
-        //skill1Button.onClick.AddListener(() => ClickedButton(Roulette.ButtonType.Skill1));
-        //// 스킬2 버튼에 클릭 이벤트 핸들러 지정
-        //skill2Button.onClick.AddListener(() => ClickedButton(Roulette.ButtonType.Skill2));
+        // 공격 버튼에 클릭 이벤트 핸들러 지정
+        attackButton.onClick.AddListener(() => ClickedButton(Roulette.ButtonType.Attack));
+        // 스킬1 버튼에 클릭 이벤트 핸들러 지정
+        skill1Button.onClick.AddListener(() => ClickedButton(Roulette.ButtonType.Skill1));
+        // 스킬2 버튼에 클릭 이벤트 핸들러 지정
+        skill2Button.onClick.AddListener(() => ClickedButton(Roulette.ButtonType.Skill2));
     }
 
     // 버튼이 클릭되었을 때 호출되는 함수
@@ -178,7 +178,26 @@ public class ClickEvent : MonoBehaviour
                 onItem = false;
             }
         }
+    }
 
+    public void ActiveWideSkill()
+    {
+        Debug.Log("어택킨다");
+        FightManager.Instance.onAttack = true;
+        if (onSkill)
+        {
+            SkillImage.gameObject.SetActive(false);
+            onSkill = false;
+        }
+        if (onItem)
+        {
+            ItemImage.gameObject.SetActive(false);
+            onItem = false;
+        }
+
+        onRoulette = true;
+        if (!rouletteImage.gameObject.activeSelf)
+            rouletteImage.gameObject.SetActive(true);
     }
 
 

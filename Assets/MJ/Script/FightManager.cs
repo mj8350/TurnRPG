@@ -22,6 +22,7 @@ public class FightManager : MonoBehaviour
     private FightUI fightUI;
 
     public Queue<int> TurnQueue = new Queue<int>();
+    private Dictionary<int, CharSkillManager> playerSkillManagers = new Dictionary<int, CharSkillManager>();
 
     public CharSkillManager skillManager;
 
@@ -47,7 +48,12 @@ public class FightManager : MonoBehaviour
         monsterAi = GameObject.FindFirstObjectByType<MonsterAi>();
         turn = GameObject.FindFirstObjectByType<MJ_Turn>();
         fightUI = GameObject.FindFirstObjectByType<FightUI>();
-        skillManager = GameManager.FindFirstObjectByType<CharSkillManager>();
+    }
+
+    private void Start()
+    {
+        
+
     }
 
     private void Update()
@@ -61,6 +67,7 @@ public class FightManager : MonoBehaviour
     public void NewTurn()
     {
         turn.NewTurn();
+        
     }
 
     public void TurnDraw()
@@ -75,6 +82,8 @@ public class FightManager : MonoBehaviour
     {
         targetMonster = monster;
     }
+
+    
 
     //public void ApplyDamageToSelectedMonster(int damage)
     //{
@@ -124,13 +133,47 @@ public class FightManager : MonoBehaviour
         GameManager.Instance.Damage(obj, 5);
     }
 
-    public void PlayerTurnSkill(int who)
+    public void SetPlayerSkillManager(int playerIndex, CharSkillManager skillManager)
+    {
+        if (!playerSkillManagers.ContainsKey(playerIndex))
+        {
+            playerSkillManagers.Add(playerIndex, skillManager);
+        }
+        else
+        {
+            playerSkillManagers[playerIndex] = skillManager;
+        }
+    }
+
+    public void PlayerTurnSkill_1(int who)
+    {
+        //PlayerPos[who].transform.GetChild(0).TryGetComponent<AttackingExample>(out AttackingExample);
+        //AttackingExample.PlayerStartAttack();
+
+        if (playerSkillManagers.ContainsKey(who))
+        {
+            playerSkillManagers[who].ActivatePrimarySkill();
+        }
+        else
+        {
+            Debug.LogError("Player's SkillManager is null!");
+        }
+    }
+
+    public void PlayerTurnSkill_2(int who)
     {
         PlayerPos[who].transform.GetChild(0).TryGetComponent<AttackingExample>(out AttackingExample);
         AttackingExample.PlayerStartAttack();
 
-        skillManager.ActivatePrimarySkill();
+        if (playerSkillManagers.ContainsKey(who))
+        {
+            playerSkillManagers[who].ActivateSecondarySkill();
+        }
+        else
+        {
+            Debug.LogError("Player's SkillManager is null!");
+        }
     }
 
-    
+
 }

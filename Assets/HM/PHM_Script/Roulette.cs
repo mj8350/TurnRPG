@@ -83,21 +83,21 @@ public class Roulette : MonoBehaviour
             isRouletteRunning = false;
             Debug.Log($"Random number: {randomNumber}");
 
-            AttackJudgment();
+            //AttackJudgment();
 
-            //// 클릭된 버튼의 상태에 따라 적절한 저지먼트를 발동
-            //switch (clickEvent.GetClickedButton())
-            //{
-            //    case ButtonType.Attack:
-            //        AttackJudgment();
-            //        break;
-            //    case ButtonType.Skill1:
-            //        SkillJudgment_1();
-            //        break;
-            //    case ButtonType.Skill2:
-            //        SkillJudgment_2();
-            //        break;
-            //}
+            // 클릭된 버튼의 상태에 따라 적절한 저지먼트를 발동
+            switch (clickEvent.GetClickedButton())
+            {
+                case ButtonType.Attack:
+                    AttackJudgment();
+                    break;
+                case ButtonType.Skill1:
+                    SkillJudgment_1();
+                    break;
+                case ButtonType.Skill2:
+                    SkillJudgment_2();
+                    break;
+            }
 
         }
 
@@ -174,7 +174,7 @@ public class Roulette : MonoBehaviour
             Debug.Log("공격 성공!");
             if (FightManager.Instance != null)
             {
-                FightManager.Instance.PlayerTurnSkill(FightManager.Instance.TurnQueue.Dequeue());
+                FightManager.Instance.PlayerTurnSkill_1(FightManager.Instance.TurnQueue.Dequeue());
                 Invoke("InitRoulette", 1);
             }
             else
@@ -189,6 +189,8 @@ public class Roulette : MonoBehaviour
             FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
         }
+        FightManager.Instance.TrunOut();
+        FightManager.Instance.TurnDraw();
     }
 
     public void SkillJudgment_2()
@@ -200,8 +202,7 @@ public class Roulette : MonoBehaviour
             Debug.Log("공격 성공!");
             if (FightManager.Instance != null)
             {
-                skillsManager.ActivateSecondarySkill();
-                FightManager.Instance.TurnQueue.Dequeue();
+                FightManager.Instance.PlayerTurnSkill_2(FightManager.Instance.TurnQueue.Dequeue());
                 Invoke("InitRoulette", 1);
             }
             else
@@ -216,5 +217,7 @@ public class Roulette : MonoBehaviour
             FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
         }
+        FightManager.Instance.TrunOut();
+        FightManager.Instance.TurnDraw();
     }
 }
