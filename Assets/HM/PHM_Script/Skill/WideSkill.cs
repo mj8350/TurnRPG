@@ -1,3 +1,4 @@
+using Assets.HeroEditor.Common.Scripts.ExampleScripts;
 using Assets.HeroEditor.FantasyHeroes.TestRoom.Scripts;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,15 +6,22 @@ using UnityEngine;
 
 public class WideSkill : BaseSkill
 {
+    
+
     public override void Skill_Active()
     {
         Debug.Log("광역스킬 발동");
+        gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
+        motion.PlayerStartAttack();
+        ApplyWideDamage();
+    }
 
-        // 맵에 있는 모든 몬스터들을 찾아서 데미지를 적용
-        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster"); // 리스트에 몬스터 태그를 가진 오브젝트를 찾아 넣는다.
+    private void ApplyWideDamage()
+    {
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster"); // 맵에 있는 모든 몬스터들을 찾음
         foreach (GameObject monster in monsters)
         {
-            ApplyDamage(monster);
+            ApplyDamage(monster); // 각 몬스터에게 데미지를 적용
         }
     }
 

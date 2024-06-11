@@ -99,7 +99,6 @@ public class GameManager : Singleton<GameManager>
         if(obj.TryGetComponent<IDamage>(out IDamage idam))
             idam.TakeDamage(damage);
     }
-
     
 
 }

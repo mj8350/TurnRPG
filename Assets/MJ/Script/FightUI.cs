@@ -42,6 +42,8 @@ public class FightUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.N))
         {
             FightManager.Instance.TurnQueue.Dequeue();
+            FightManager.Instance.TurnDraw();
+            FightManager.Instance.TrunOut();
             Debug.Log("턴넘기기");
         }
 

@@ -1,3 +1,4 @@
+using Assets.HeroEditor.Common.Scripts.ExampleScripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class ResurrectionSkill : BaseSkill
 {
     private ClickEvent click;
     private GameObject targetObject;
+    
 
     private void Awake()
     {
@@ -15,7 +17,8 @@ public class ResurrectionSkill : BaseSkill
     public override void Skill_Active()
     {
         Debug.Log("부활 스킬 발동");
-
+        gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
+        motion.Victory();
         targetObject = click.selectedObj;
 
         if (targetObject != null)
