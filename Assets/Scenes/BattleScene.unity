@@ -3350,6 +3350,7 @@ MonoBehaviour:
   targetMonster: {fileID: 0}
   targetPlayer: {fileID: 0}
   tauntTarget: {fileID: 0}
+  skillManager: {fileID: 0}
   onAttack: 0
   onTaunt: 0
   onStun: 0
@@ -12794,6 +12795,9 @@ MonoBehaviour:
   rouletteImage: {fileID: 450346258}
   ItemImage: {fileID: 1277404308}
   SkillImage: {fileID: 1574492633}
+  attackButton: {fileID: 1200113034}
+  skill1Button: {fileID: 14100274}
+  skill2Button: {fileID: 1939854234}
 --- !u!4 &2118181999
 Transform:
   m_ObjectHideFlags: 0
@@ -13247,6 +13251,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 11977aea6822125428ae63f3202e1b16, type: 3}
   PrimarySkill: {fileID: 5538187}
   SecondarySkill: {fileID: 823142836}
+  monsterAi: {fileID: 0}
+  count: -1
 --- !u!1 &2146477062
 GameObject:
   m_ObjectHideFlags: 0

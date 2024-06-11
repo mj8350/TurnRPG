@@ -100,5 +100,6 @@ public class GameManager : Singleton<GameManager>
             idam.TakeDamage(damage);
     }
 
+    
 
 }

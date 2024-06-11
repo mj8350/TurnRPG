@@ -18,6 +18,28 @@ public class MJ_Turn : MonoBehaviour
     {
         FightUi = FindFirstObjectByType<FightUI>();
 
+        //// 여기서 각 플레이어의 캐릭터 스킬 매니저를 FightManager에게 전달
+        //for (int i = 0; i < 3; i++)
+        //{
+        //    if (FightManager.Instance.PlayerPos[i].childCount > 0)
+        //    {
+        //        Transform playerTransform = FightManager.Instance.PlayerPos[i].GetChild(0);
+        //        if (playerTransform.TryGetComponent<PHM_CharStat>(out playerStat[i]))
+        //        {
+        //            CharSkillManager skillManager = playerTransform.GetComponentInChildren<CharSkillManager>();
+        //            if (skillManager != null)
+        //            {
+        //                FightManager.Instance.SetPlayerSkillManager(i, skillManager); // FightManager에게 인덱스와 스킬 매니저 전달
+        //            }
+        //            else
+        //            {
+        //                Debug.LogWarning("CharSkillManager component not found on the player character.");
+        //            }
+        //        }
+        //    }
+        //}
+
+
         //Invoke("DicAdd", 0.01f);
         DicAdd();
 
