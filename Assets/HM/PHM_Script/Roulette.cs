@@ -189,6 +189,8 @@ public class Roulette : MonoBehaviour
             FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
         }
+        FightManager.Instance.TrunOut();
+        FightManager.Instance.TurnDraw();
     }
 
     public void SkillJudgment_2()
@@ -215,5 +217,7 @@ public class Roulette : MonoBehaviour
             FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
         }
+        FightManager.Instance.TrunOut();
+        FightManager.Instance.TurnDraw();
     }
 }

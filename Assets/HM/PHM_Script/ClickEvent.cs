@@ -171,7 +171,26 @@ public class ClickEvent : MonoBehaviour
                 onItem = false;
             }
         }
+    }
 
+    public void ActiveWideSkill()
+    {
+        Debug.Log("어택킨다");
+        FightManager.Instance.onAttack = true;
+        if (onSkill)
+        {
+            SkillImage.gameObject.SetActive(false);
+            onSkill = false;
+        }
+        if (onItem)
+        {
+            ItemImage.gameObject.SetActive(false);
+            onItem = false;
+        }
+
+        onRoulette = true;
+        if (!rouletteImage.gameObject.activeSelf)
+            rouletteImage.gameObject.SetActive(true);
     }
 
 
