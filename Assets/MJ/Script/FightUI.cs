@@ -35,7 +35,7 @@ public class FightUI : MonoBehaviour
             else
             {
                 Debug.Log("몬스터 공격턴");
-                monsterAi.MonsterStart(pos);
+                monsterAi.MonsterStart(pos-3);
             }
 
         }
@@ -100,7 +100,8 @@ public class FightUI : MonoBehaviour
         else
         {
             Debug.Log("몬스터 공격턴");
-            monsterAi.MonsterStart(pos-3);
+            //monsterAi.MonsterStart(pos-3);
+            FightManager.Instance.MonsterTurn(pos-3);
         }
         count++;
         

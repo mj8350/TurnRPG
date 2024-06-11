@@ -161,6 +161,11 @@ public class Roulette : MonoBehaviour
             FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
         }
+        Invoke("Turnoff", 1);
+    }
+
+    public void Turnoff()
+    {
         FightManager.Instance.TrunOut();
         FightManager.Instance.TurnDraw();
     }

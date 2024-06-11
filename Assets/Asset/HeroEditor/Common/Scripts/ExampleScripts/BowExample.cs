@@ -65,7 +65,7 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
 
             //if (ChargeButtonUp)
             //{
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(0.5f);
             var charged = Time.time - _chargeTime > ClipCharge.length;
 
             Character.Animator.SetInteger("Charge", charged ? 2 : 3);
