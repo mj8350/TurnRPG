@@ -162,8 +162,8 @@ public class FightManager : MonoBehaviour
 
     public void PlayerTurnSkill_2(int who)
     {
-        PlayerPos[who].transform.GetChild(0).TryGetComponent<AttackingExample>(out AttackingExample);
-        AttackingExample.PlayerStartAttack();
+        //PlayerPos[who].transform.GetChild(0).TryGetComponent<AttackingExample>(out AttackingExample);
+        //AttackingExample.PlayerStartAttack();
 
         if (playerSkillManagers.ContainsKey(who))
         {

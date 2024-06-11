@@ -20,6 +20,7 @@ public class Roulette : MonoBehaviour
     public Button stopButton;
 
     private int randomNumber;
+    public int successProbability = 60;
     private bool isRoulette = false;
 
     private bool isRouletteRunning = false;
@@ -139,8 +140,9 @@ public class Roulette : MonoBehaviour
 
     public void AttackJudgment()
     {
+        Debug.Log("성공확률" + successProbability);
         // 랜덤 숫자에 따라 공격 성공 또는 실패 판정
-        if (randomNumber <= 100)
+        if (randomNumber <= successProbability)
         {
             isAttackSuccessful = true;
             Debug.Log("공격 성공!");
@@ -167,8 +169,9 @@ public class Roulette : MonoBehaviour
 
     public void SkillJudgment_1()
     {
+        Debug.Log("성공확률" + successProbability);
         // 랜덤 숫자에 따라 공격 성공 또는 실패 판정
-        if (randomNumber <= 100)
+        if (randomNumber <= successProbability)
         {
             isAttackSuccessful = true;
             Debug.Log("공격 성공!");
@@ -195,6 +198,7 @@ public class Roulette : MonoBehaviour
 
     public void SkillJudgment_2()
     {
+        Debug.Log("성공확률" + successProbability);
         // 랜덤 숫자에 따라 공격 성공 또는 실패 판정
         if (randomNumber <= 100)
         {

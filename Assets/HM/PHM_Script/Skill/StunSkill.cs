@@ -1,3 +1,4 @@
+using Assets.HeroEditor.Common.Scripts.ExampleScripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class StunSkill : BaseSkill
     public override void Skill_Active()
     {
         Debug.Log("스턴스킬 발동");
+        gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
+        motion.PlayerStartAttack();
         targetObject = click.selectedObj;
         if (targetObject != null)
         {
