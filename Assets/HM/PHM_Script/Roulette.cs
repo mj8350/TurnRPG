@@ -93,7 +93,7 @@ public class Roulette : MonoBehaviour
                     AttackJudgment();
                     break;
                 case ButtonType.Skill1:
-                    SkillJudgment_1();
+                    SkillJudgment_1(successProbability);
                     break;
                 case ButtonType.Skill2:
                     SkillJudgment_2();
@@ -172,7 +172,7 @@ public class Roulette : MonoBehaviour
         FightManager.Instance.TurnDraw();
     }
 
-    public void SkillJudgment_1()
+    public void SkillJudgment_1(int successProbability)
     {
         Debug.Log("성공확률" + successProbability);
         // 랜덤 숫자에 따라 공격 성공 또는 실패 판정

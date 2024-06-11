@@ -7,7 +7,7 @@ public class TargetSkill : BaseSkill
 {
     private ClickEvent click;
     private GameObject targetObject;
-
+    private const int skillSuccessProbability = 100;
 
     private void Awake()
     {
@@ -17,6 +17,8 @@ public class TargetSkill : BaseSkill
     public override void Skill_Active()
     {
         Debug.Log("타겟스킬 발동");
+        int successProbability = skillSuccessProbability;
+        FindObjectOfType<Roulette>().SkillJudgment_1(successProbability);
         gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
         motion.PlayerStartAttack();
         targetObject = click.selectedObj;
