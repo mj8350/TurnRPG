@@ -17,8 +17,8 @@ public class PlayerSpawner : MonoBehaviour
 
     public void PlayerSp()
     {
-        //for (int i = 0; i < PlayerPos.Length; i++)
-            for (int i = 0; i < 2; i++)
+        for (int i = 0; i < PlayerPos.Length; i++)
+            //for (int i = 0; i < 2; i++)
         {
             int ran = Random.Range(0, GameManager.Instance.Prefeb.Length);
             GameObject obj = Instantiate(GameManager.Instance.Prefeb[ran], PlayerPos[i]);

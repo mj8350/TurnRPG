@@ -82,6 +82,16 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
             }
         }
 
+        public void Victory()
+        {
+            Character.Victory();
+        }
+
+        public void Hit()
+        {
+            Character.Hit();
+        }
+
         private IEnumerator Relex_()
         {
             yield return new WaitForSeconds(0.5f);
@@ -106,8 +116,8 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
             switch (Character.WeaponType)
             {
                 case WeaponType.Bow:
-                    //arm = ArmL;
-                    arm = GameObject.FindWithTag("ArcherArmL").transform;
+                    arm = ArmL;
+                    //arm = GameObject.FindWithTag("ArcherArmL").transform;
                     weapon = Character.BowRenderers[3].transform;
                     break;
                 case WeaponType.Firearm1H:

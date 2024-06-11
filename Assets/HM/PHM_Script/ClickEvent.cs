@@ -74,7 +74,7 @@ public class ClickEvent : MonoBehaviour
 
                 BoolOnonSelected();
             }
-            //if (onSelected)
+            if (onSelected)
             {
                 onRoulette = true;
                 if (!rouletteImage.gameObject.activeSelf)
@@ -147,6 +147,13 @@ public class ClickEvent : MonoBehaviour
     public void DestroySelectRing()
     {
         Destroy(GameObject.FindGameObjectWithTag("SelectRing"));
+
+        
+
+        selectedObj = null;
+        HideSkillInfo();
+        ItemImage.gameObject.SetActive(false);
+        onItem = false;
     }
 
     public void Attacking()

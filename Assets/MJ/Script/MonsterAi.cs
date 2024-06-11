@@ -21,7 +21,7 @@ public class MonsterAi : MonoBehaviour
 
     private IEnumerator monsterAt(int pos)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         Anim.ChangeAnimation(MonsterPos[pos].GetChild(0).gameObject, "Attack");
         yield return new WaitForSeconds(1);
         Anim.ChangeAnimation(MonsterPos[pos].GetChild(0).gameObject, "Idle");

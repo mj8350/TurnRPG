@@ -70,5 +70,15 @@ namespace Assets.HeroEditor.Common.Scripts.CharacterScripts
 
             Animator.SetInteger("Charge", 0);
         }
+
+        public void Victory()
+        {
+            Animator.SetTrigger("victory");
+        }
+
+        public void Hit()
+        {
+            Animator.SetTrigger("Hit");
+        }
     }
 }
