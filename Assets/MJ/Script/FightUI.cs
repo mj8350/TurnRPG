@@ -35,13 +35,15 @@ public class FightUI : MonoBehaviour
             else
             {
                 Debug.Log("몬스터 공격턴");
-                monsterAi.MonsterStart(pos);
+                monsterAi.MonsterStart(pos-3);
             }
 
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
             FightManager.Instance.TurnQueue.Dequeue();
+            FightManager.Instance.TurnDraw();
+            FightManager.Instance.TrunOut();
             Debug.Log("턴넘기기");
         }
 
@@ -100,7 +102,8 @@ public class FightUI : MonoBehaviour
         else
         {
             Debug.Log("몬스터 공격턴");
-            monsterAi.MonsterStart(pos-3);
+            //monsterAi.MonsterStart(pos-3);
+            FightManager.Instance.MonsterTurn(pos-3);
         }
         count++;
         

@@ -1,3 +1,4 @@
+using Assets.HeroEditor.Common.Scripts.ExampleScripts;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
@@ -38,11 +39,24 @@ public class PHM_CharStat : MonoBehaviour, IDamage
     {
         //HPDelegate += ModifyHP; // 델리게이트 이벤트 구독
         //HPDelegate(30);
+
+        if (!TryGetComponent<AttackingExample>(out attacking))
+            Debug.Log("참조 오류");
+
     }
+
+    private AttackingExample attacking;
 
     public void TakeDamage(int damage)
     {
         Debug.Log($"{CharName}이(가) {damage}의 데미지를 입었습니다.");
+        StartCoroutine("Hit");
+    }
+
+    IEnumerator Hit()
+    {
+        yield return new WaitForSeconds(1.7f);
+        attacking.Hit();
     }
 
 

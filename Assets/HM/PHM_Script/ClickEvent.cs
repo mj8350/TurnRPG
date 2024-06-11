@@ -74,7 +74,7 @@ public class ClickEvent : MonoBehaviour
 
                 BoolOnonSelected();
             }
-            //if (onSelected)
+            if (onSelected)
             {
                 onRoulette = true;
                 if (!rouletteImage.gameObject.activeSelf)
@@ -147,6 +147,13 @@ public class ClickEvent : MonoBehaviour
     public void DestroySelectRing()
     {
         Destroy(GameObject.FindGameObjectWithTag("SelectRing"));
+
+        
+
+        selectedObj = null;
+        HideSkillInfo();
+        ItemImage.gameObject.SetActive(false);
+        onItem = false;
     }
 
     public void Attacking()
@@ -171,7 +178,26 @@ public class ClickEvent : MonoBehaviour
                 onItem = false;
             }
         }
+    }
 
+    public void ActiveWideSkill()
+    {
+        Debug.Log("어택킨다");
+        FightManager.Instance.onAttack = true;
+        if (onSkill)
+        {
+            SkillImage.gameObject.SetActive(false);
+            onSkill = false;
+        }
+        if (onItem)
+        {
+            ItemImage.gameObject.SetActive(false);
+            onItem = false;
+        }
+
+        onRoulette = true;
+        if (!rouletteImage.gameObject.activeSelf)
+            rouletteImage.gameObject.SetActive(true);
     }
 
 

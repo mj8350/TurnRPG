@@ -30,6 +30,9 @@ public class FightManager : MonoBehaviour
     public bool onTaunt;
     public bool onStun;
 
+    private Vector3 turnPos;
+    public GameObject turnLight;
+
     private void Awake()
     {
         if (Instance == null)
@@ -59,9 +62,11 @@ public class FightManager : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
-            MonsterTurn(0);
+            //MonsterTurn(0);
         if(Input.GetKeyDown(KeyCode.S))
             PlayerTurnAttack(0);
+
+        
     }
 
     public void NewTurn()
@@ -73,6 +78,17 @@ public class FightManager : MonoBehaviour
     public void TurnDraw()
     {
         fightUI.DrawTurn();
+        if (TurnQueue.Peek() < 3)
+        {
+            turnPos = PlayerPos[TurnQueue.Peek()].transform.position;
+        }
+        else
+        {
+            turnPos = MonsterPos[TurnQueue.Peek()-3].transform.position;
+        }
+        turnPos.y += 0.5f;
+        turnLight.transform.position = turnPos;
+
     }
     public void TrunOut()
     {
@@ -103,14 +119,14 @@ public class FightManager : MonoBehaviour
         if(onTaunt && !onStun) // 도발상태라면 도발타겟 공격
         {
             targetPlayer = tauntTarget;
-            monsterAi.MonsterStart(0);
+            monsterAi.MonsterStart(pos);
             GameManager.Instance.Damage(tauntTarget, 5);
             onTaunt = false;
         }
         else if(!onTaunt && !onStun)
         {
             targetPlayer = PlayerPos[Random.Range(0, PlayerPos.Length)].GetChild(0).gameObject;
-            monsterAi.MonsterStart(0);
+            monsterAi.MonsterStart(pos);
             GameManager.Instance.Damage(targetPlayer, 5);
         }
         else if(onStun)
@@ -147,8 +163,8 @@ public class FightManager : MonoBehaviour
 
     public void PlayerTurnSkill_1(int who)
     {
-        PlayerPos[who].transform.GetChild(0).TryGetComponent<AttackingExample>(out AttackingExample);
-        AttackingExample.PlayerStartAttack();
+        //PlayerPos[who].transform.GetChild(0).TryGetComponent<AttackingExample>(out AttackingExample);
+        //AttackingExample.PlayerStartAttack();
 
         if (playerSkillManagers.ContainsKey(who))
         {
@@ -162,8 +178,8 @@ public class FightManager : MonoBehaviour
 
     public void PlayerTurnSkill_2(int who)
     {
-        PlayerPos[who].transform.GetChild(0).TryGetComponent<AttackingExample>(out AttackingExample);
-        AttackingExample.PlayerStartAttack();
+        //PlayerPos[who].transform.GetChild(0).TryGetComponent<AttackingExample>(out AttackingExample);
+        //AttackingExample.PlayerStartAttack();
 
         if (playerSkillManagers.ContainsKey(who))
         {

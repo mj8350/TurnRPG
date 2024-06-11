@@ -20,6 +20,7 @@ public class Roulette : MonoBehaviour
     public Button stopButton;
 
     private int randomNumber;
+    public int successProbability = 60;
     private bool isRoulette = false;
 
     private bool isRouletteRunning = false;
@@ -92,7 +93,7 @@ public class Roulette : MonoBehaviour
                     AttackJudgment();
                     break;
                 case ButtonType.Skill1:
-                    SkillJudgment_1();
+                    SkillJudgment_1(successProbability);
                     break;
                 case ButtonType.Skill2:
                     SkillJudgment_2();
@@ -139,8 +140,9 @@ public class Roulette : MonoBehaviour
 
     public void AttackJudgment()
     {
+        Debug.Log("성공확률" + successProbability);
         // 랜덤 숫자에 따라 공격 성공 또는 실패 판정
-        if (randomNumber <= 100)
+        if (randomNumber <= successProbability)
         {
             isAttackSuccessful = true;
             Debug.Log("공격 성공!");
@@ -161,14 +163,20 @@ public class Roulette : MonoBehaviour
             FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
         }
+        Invoke("Turnoff", 1);
+    }
+
+    public void Turnoff()
+    {
         FightManager.Instance.TrunOut();
         FightManager.Instance.TurnDraw();
     }
 
-    public void SkillJudgment_1()
+    public void SkillJudgment_1(int successProbability)
     {
+        Debug.Log("성공확률" + successProbability);
         // 랜덤 숫자에 따라 공격 성공 또는 실패 판정
-        if (randomNumber <= 100)
+        if (randomNumber <= successProbability)
         {
             isAttackSuccessful = true;
             Debug.Log("공격 성공!");
@@ -189,10 +197,13 @@ public class Roulette : MonoBehaviour
             FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
         }
+        FightManager.Instance.TrunOut();
+        FightManager.Instance.TurnDraw();
     }
 
     public void SkillJudgment_2()
     {
+        Debug.Log("성공확률" + successProbability);
         // 랜덤 숫자에 따라 공격 성공 또는 실패 판정
         if (randomNumber <= 100)
         {
@@ -215,5 +226,7 @@ public class Roulette : MonoBehaviour
             FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
         }
+        FightManager.Instance.TrunOut();
+        FightManager.Instance.TurnDraw();
     }
 }
