@@ -6,28 +6,42 @@ using UnityEngine;
 public class ResurrectionSkill : BaseSkill
 {
     private ClickEvent click;
+    public Roulette roulette;
     private GameObject targetObject;
-    
+    private int successProbability = 20;
+
 
     private void Awake()
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
+        roulette = GameObject.FindFirstObjectByType<Roulette>();
     }
 
     public override void Skill_Active()
     {
-        Debug.Log("부활 스킬 발동");
-        gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
-        motion.Victory();
-        targetObject = click.selectedObj;
-
-        if (targetObject != null)
+        if (roulette.randomNumber < successProbability)
         {
-            ResurrectTarget();
+            Debug.Log("부활 스킬 발동");
+            roulette.isAttackSuccessful = true;
+            roulette.InvokeInitRoulette();
+            gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
+            motion.Victory();
+            targetObject = click.selectedObj;
+
+            if (targetObject != null)
+            {
+                ResurrectTarget();
+            }
+            else
+            {
+                Debug.LogError("부활 대상을 찾을 수 없습니다.");
+            }
         }
         else
         {
-            Debug.LogError("부활 대상을 찾을 수 없습니다.");
+            roulette.isAttackSuccessful = false;
+            Debug.Log("공격 실패!");
+            roulette.InvokeInitRoulette();
         }
     }
 

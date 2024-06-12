@@ -11,7 +11,7 @@ public class ClickEvent : MonoBehaviour
 {
     private RaycastHit2D hit;
     public Vector2 targetPosition;
-    private bool onRoulette;
+    public bool onRoulette;
     private bool onSelected;
     public GameObject selectedObj;
     [SerializeField]
@@ -79,8 +79,9 @@ public class ClickEvent : MonoBehaviour
             if (onSelected)
             {
                 onRoulette = true;
-                if (!rouletteImage.gameObject.activeSelf)
-                    rouletteImage.gameObject.SetActive(true);
+                if (onRoulette)
+                    /*rouletteImage.gameObject.SetActive(true)*/
+                    rouletteImage.gameObject.transform.localScale = Vector3.one;
             }
 
         }
@@ -256,7 +257,7 @@ public class ClickEvent : MonoBehaviour
 
     public void HideRoulette()
     {
-        rouletteImage.gameObject.SetActive(false);
+        rouletteImage.gameObject.transform.localScale = Vector3.zero;
         onRoulette = false;
     }    
 

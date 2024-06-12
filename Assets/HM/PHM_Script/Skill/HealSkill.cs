@@ -7,31 +7,47 @@ public class HealSkill : BaseSkill
 {
     private ClickEvent click;
     private GameObject targetObject;
+    public Roulette roulette;
     private float wideHealProbability = 0.1f; // 광역 힐 발동 확률
+    private int successProbability = 60;
 
     private void Awake()
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
+        roulette = GameObject.FindFirstObjectByType<Roulette>();
     }
 
     public override void Skill_Active()
     {
-        Debug.Log("힐 스킬 발동");
-
-        // 확률에 따라 광역 힐을 적용할지 결정
-        if (Random.value < wideHealProbability)
+        if (roulette.randomNumber < successProbability)
         {
-            Debug.Log("광역 힐 발동");
-            gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
-            motion.Victory();
-            ApplyWideHeal();
+            Debug.Log("힐 스킬 발동");
+
+            // 확률에 따라 광역 힐을 적용할지 결정
+            if (Random.value < wideHealProbability)
+            {
+                Debug.Log("광역 힐 발동");
+                roulette.isAttackSuccessful = true;
+                roulette.InvokeInitRoulette();
+                gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
+                motion.Victory();
+                ApplyWideHeal();
+            }
+            else
+            {
+                Debug.Log("단일 힐 발동");
+                roulette.isAttackSuccessful = true;
+                roulette.InvokeInitRoulette();
+                gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
+                motion.Victory();
+                ApplySingleHeal();
+            }
         }
         else
         {
-            Debug.Log("단일 힐 발동");
-            gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
-            motion.Victory();
-            ApplySingleHeal();
+            roulette.isAttackSuccessful = false;
+            Debug.Log("공격 실패!");
+            roulette.InvokeInitRoulette();
         }
     }
 

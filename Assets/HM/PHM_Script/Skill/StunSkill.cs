@@ -7,25 +7,39 @@ public class StunSkill : BaseSkill
 {
     private ClickEvent click;
     private GameObject targetObject;
+    public Roulette roulette;
+    private int successProbability = 60;
 
     private void Awake()
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
+        roulette = GameObject.FindFirstObjectByType<Roulette>();
     }
 
     public override void Skill_Active()
     {
-        Debug.Log("스턴스킬 발동");
-        gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
-        motion.PlayerStartAttack();
-        targetObject = click.selectedObj;
-        if (targetObject != null)
+        if (roulette.randomNumber < successProbability)
         {
-            FightManager.Instance.onStun = true;
+            Debug.Log("스턴스킬 발동");
+            roulette.isAttackSuccessful = true;
+            roulette.InvokeInitRoulette();
+            gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
+            motion.PlayerStartAttack();
+            targetObject = click.selectedObj;
+            if (targetObject != null)
+            {
+                FightManager.Instance.onStun = true;
+            }
+            else
+            {
+                Debug.LogError("타겟 오브젝트가 없습니다.");
+            }
         }
         else
         {
-            Debug.LogError("타겟 오브젝트가 없습니다.");
+            roulette.isAttackSuccessful = false;
+            Debug.Log("공격 실패!");
+            roulette.InvokeInitRoulette();
         }
     }
 }

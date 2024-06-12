@@ -7,26 +7,41 @@ public class TauntSkill : BaseSkill
 {
     private ClickEvent click;
     private GameObject targetObject;
+    public Roulette roulette;
+    private int successProbability = 60;
 
     private void Awake()
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
+        roulette = GameObject.FindFirstObjectByType<Roulette>();
     }
 
     public override void Skill_Active()
     {
-        Debug.Log("도발스킬 발동");
-        gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
-        motion.PlayerStartAttack();
-        targetObject = click.selectedObj;
-        if (targetObject != null)
+        if (roulette.randomNumber < successProbability)
         {
-            FightManager.Instance.onTaunt = true;
-            FightManager.Instance.tauntTarget = this.gameObject; // 몬스터의 타겟을 자기 자신으로 변경
+            Debug.Log("도발스킬 발동");
+            roulette.isAttackSuccessful = true;
+            roulette.InvokeInitRoulette();
+            gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
+            motion.PlayerStartAttack();
+            targetObject = click.selectedObj;
+            if (targetObject != null)
+            {
+                FightManager.Instance.onTaunt = true;
+                FightManager.Instance.tauntTarget = this.gameObject; // 몬스터의 타겟을 자기 자신으로 변경
+            }
+            else
+            {
+                Debug.LogError("타겟 오브젝트가 없습니다.");
+            }
         }
         else
         {
-            Debug.LogError("타겟 오브젝트가 없습니다.");
+            roulette.isAttackSuccessful = false;
+            Debug.Log("공격 실패!");
+            roulette.InvokeInitRoulette();
         }
+
     }
 }

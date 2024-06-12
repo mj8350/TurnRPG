@@ -8,34 +8,48 @@ public class DotDamageSkill : BaseSkill
     private ClickEvent click;
     private GameObject targetObject;
     private int dotDamage = 5; // 도트 데미지
+    public Roulette roulette;
+    private int successProbability = 60;
 
     private void Awake()
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
+        roulette = GameObject.FindFirstObjectByType<Roulette>();
     }
 
     public override void Skill_Active()
     {
-        Debug.Log("도트데미지 스킬 발동");
-        gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
-        motion.PlayerStartAttack();
-        targetObject = click.selectedObj;
-        if (targetObject != null)
+        if(roulette.randomNumber < successProbability)
         {
-            // 몬스터에게 스킬을 사용한 경우에만 도트 데미지 상태 설정
-            if (targetObject.CompareTag("Monster"))
+            Debug.Log("도트데미지 스킬 발동");
+            roulette.isAttackSuccessful = true;
+            roulette.InvokeInitRoulette();
+            gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
+            motion.PlayerStartAttack();
+            targetObject = click.selectedObj;
+            if (targetObject != null)
             {
-                // 몬스터에게 도트 데미지 상태 설정
-                ApplyDotDamageState(targetObject);
+                // 몬스터에게 스킬을 사용한 경우에만 도트 데미지 상태 설정
+                if (targetObject.CompareTag("Monster"))
+                {
+                    // 몬스터에게 도트 데미지 상태 설정
+                    ApplyDotDamageState(targetObject);
+                }
+                else
+                {
+                    GameManager.Instance.Damage(targetObject, dotDamage);
+                }
             }
             else
             {
-                GameManager.Instance.Damage(targetObject, dotDamage);
+                Debug.LogError("타겟 오브젝트가 없습니다.");
             }
         }
         else
         {
-            Debug.LogError("타겟 오브젝트가 없습니다.");
+            roulette.isAttackSuccessful = false;
+            Debug.Log("공격 실패!");
+            roulette.InvokeInitRoulette();
         }
     }
 
