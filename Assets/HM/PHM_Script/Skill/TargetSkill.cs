@@ -7,36 +7,50 @@ public class TargetSkill : BaseSkill
 {
     private ClickEvent click;
     private GameObject targetObject;
-    private const int skillSuccessProbability = 100;
+    public Roulette roulette;
+    private int successProbability = 60;
 
     private void Awake()
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
+        roulette = GameObject.FindFirstObjectByType<Roulette>();
     }
+
 
     public override void Skill_Active()
     {
-        Debug.Log("타겟스킬 발동");
-        int successProbability = skillSuccessProbability;
-        FindObjectOfType<Roulette>().SkillJudgment_1(successProbability);
-        gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
-        motion.PlayerStartAttack();
-        targetObject = click.selectedObj;
-        if (targetObject != null)
+        if (roulette.randomNumber < successProbability)
         {
-            PHM_CharStat stat = GetComponent<PHM_CharStat>();
-            PHM_MonsterStat monStat = GetComponent<PHM_MonsterStat>();
-            if (stat != null)
+            Debug.Log("타겟스킬 발동");
+            roulette.isAttackSuccessful = true;
+            roulette.InvokeInitRoulette();
+            gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
+            motion.PlayerStartAttack();
+            targetObject = click.selectedObj;
+            if (targetObject != null)
             {
-                // 캐릭터의 공격력을 기반으로 데미지 계산
-                int damage = stat.Strength;
-                GameManager.Instance.Damage(targetObject, damage);
+                PHM_CharStat stat = GetComponent<PHM_CharStat>();
+                PHM_MonsterStat monStat = GetComponent<PHM_MonsterStat>();
+                if (stat != null)
+                {
+                    // 캐릭터의 공격력을 기반으로 데미지 계산
+                    int damage = stat.Strength;
+                    GameManager.Instance.Damage(targetObject, damage);
+                }
+
+            }
+            else
+            {
+                Debug.LogError("타겟 오브젝트가 없습니다.");
             }
             
         }
         else
         {
-            Debug.LogError("타겟 오브젝트가 없습니다.");
+            roulette.isAttackSuccessful = false;
+            Debug.Log("공격 실패!");
+            roulette.InvokeInitRoulette();
         }
+
     }
 }

@@ -6,15 +6,36 @@ using UnityEngine;
 
 public class WideSkill : BaseSkill
 {
-    
+    private ClickEvent click;
+    public Roulette roulette;
+    private int successProbability = 60;
+
+    private void Awake()
+    {
+        click = GameObject.FindFirstObjectByType<ClickEvent>();
+        roulette = GameObject.FindFirstObjectByType<Roulette>();
+    }
 
     public override void Skill_Active()
     {
-        Debug.Log("광역스킬 발동");
-        gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
-        motion.PlayerStartAttack();
-        ApplyWideDamage();
+        
+        if (roulette.randomNumber < successProbability)
+        {
+            Debug.Log("광역스킬 발동");
+            roulette.isAttackSuccessful = true;
+            roulette.InvokeInitRoulette();
+            gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
+            motion.PlayerStartAttack();
+            ApplyWideDamage();
+        }
+        else
+        {
+            roulette.isAttackSuccessful = false;
+            Debug.Log("공격 실패!");
+            roulette.InvokeInitRoulette();
+        }
     }
+    
 
     private void ApplyWideDamage()
     {
