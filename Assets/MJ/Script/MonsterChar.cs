@@ -7,6 +7,10 @@ public class MonsterChar : MonoBehaviour, IDamage
 
     public void TakeDamage(int damage)
     {
+        if(TryGetComponent<PHM_MonsterStat>(out PHM_MonsterStat monster))
+        {
+            monster.curHP -= damage;
+        }
         Debug.Log($"{gameObject.name}이(가) {damage}의 데미지를 입었습니다.");
         StartCoroutine("Hit");
     }
