@@ -7,13 +7,15 @@ public class TauntSkill : BaseSkill
 {
     private ClickEvent click;
     private GameObject targetObject;
+    private List<GameObject> tauntTargets;
     public Roulette roulette;
-    private int successProbability = 60;
+    private int successProbability = 100;
 
     private void Awake()
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
+        tauntTargets = new List<GameObject>();
     }
 
     public override void Skill_Active()
@@ -28,12 +30,16 @@ public class TauntSkill : BaseSkill
             targetObject = click.selectedObj;
             if (targetObject != null)
             {
-                FightManager.Instance.onTaunt = true;
-                FightManager.Instance.tauntTarget = this.gameObject; // 몬스터의 타겟을 자기 자신으로 변경
-            }
-            else
-            {
-                Debug.LogError("타겟 오브젝트가 없습니다.");
+                var tauntTargetScript = targetObject.GetComponent<MonsterAttack>();
+                if (tauntTargetScript != null)
+                {
+                    tauntTargets.Add(targetObject); // 도발된 몬스터 목록에 추가
+                    tauntTargetScript.SetTauntTarget(this.gameObject); // 도발된 몬스터의 타겟 설정
+                }
+                else
+                {
+                    Debug.LogError("도발 대상이 올바른 스크립트를 가지고 있지 않습니다.");
+                }
             }
         }
         else

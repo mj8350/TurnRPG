@@ -8,7 +8,7 @@ public class StunSkill : BaseSkill
     private ClickEvent click;
     private GameObject targetObject;
     public Roulette roulette;
-    private int successProbability = 60;
+    private int successProbability = 100;
 
     private void Awake()
     {
