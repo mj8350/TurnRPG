@@ -91,6 +91,7 @@ public class FightUI : MonoBehaviour
             FightManager.Instance.NewTurn();
             NewTurn();
             count = -1;
+            Debug.Log("라운드 리셋");
         }
 
         int pos = FightManager.Instance.TurnQueue.Peek();
@@ -106,7 +107,7 @@ public class FightUI : MonoBehaviour
             FightManager.Instance.MonsterTurn(pos-3);
         }
         count++;
-        
+        Debug.Log("턴 드로우");
     }
 
     public void NewTurn()

@@ -56,10 +56,12 @@ public class ClickEvent : MonoBehaviour
     {
         if (FightManager.Instance.onAttack)
             MouseClickDown();
-
-        if(FightManager.Instance.TurnQueue.Peek() < 3)
-            myturn = true;
-        else myturn = false;
+        if (FightManager.Instance.TurnQueue.Count > 0)
+        {
+            if (FightManager.Instance.TurnQueue.Peek() < 3)
+                myturn = true;
+            else myturn = false;
+        }
 
     }
 
@@ -154,6 +156,7 @@ public class ClickEvent : MonoBehaviour
         HideSkillInfo();
         ItemImage.gameObject.SetActive(false);
         onItem = false;
+        onSelected = false;
     }
 
     public void Attacking()

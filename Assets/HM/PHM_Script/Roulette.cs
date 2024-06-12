@@ -75,10 +75,11 @@ public class Roulette : MonoBehaviour
 
     void StopRoulette()
     {
-        FightManager.Instance.onAttack = false;
-        StopCoroutine("RoulettOver");
         if (isRouletteRunning)
         {
+            FightManager.Instance.onAttack = false;
+            StopCoroutine("RoulettOver");
+
             // æ÷¥œ∏ﬁ¿Ãº« ∏ÿ√„
             StopCoroutine(rouletteCoroutine);
             isRouletteRunning = false;
@@ -100,8 +101,8 @@ public class Roulette : MonoBehaviour
                     break;
             }
 
+            Invoke("Turnoff", 1);
         }
-
     }
 
     IEnumerator RouletteNumbers()
@@ -163,7 +164,7 @@ public class Roulette : MonoBehaviour
             FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
         }
-        Invoke("Turnoff", 1);
+        
     }
 
     public void Turnoff()
@@ -197,8 +198,8 @@ public class Roulette : MonoBehaviour
             FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
         }
-        FightManager.Instance.TrunOut();
-        FightManager.Instance.TurnDraw();
+        //FightManager.Instance.TrunOut();
+        //FightManager.Instance.TurnDraw();
     }
 
     public void SkillJudgment_2()
@@ -226,7 +227,7 @@ public class Roulette : MonoBehaviour
             FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
         }
-        FightManager.Instance.TrunOut();
-        FightManager.Instance.TurnDraw();
+        //FightManager.Instance.TrunOut();
+        //FightManager.Instance.TurnDraw();
     }
 }

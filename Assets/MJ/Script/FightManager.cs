@@ -132,6 +132,8 @@ public class FightManager : MonoBehaviour
         else if(onStun)
         {
             TurnQueue.Dequeue(); // 턴넘기기
+            TrunOut();
+            TurnDraw();
             onStun = false;
         }
         
