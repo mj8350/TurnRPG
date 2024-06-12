@@ -15,7 +15,7 @@ public class FightManager : MonoBehaviour
     public GameObject targetPlayer;
     public GameObject tauntTarget;
 
-    private MonsterAi monsterAi;
+    public MonsterAi monsterAi;
     //private BowExample BowExample;
     private AttackingExample AttackingExample;
     private MJ_Turn turn;
@@ -115,27 +115,31 @@ public class FightManager : MonoBehaviour
 
     public void MonsterTurn(int pos)
     {
-        
-        if(onTaunt && !onStun) // 도발상태라면 도발타겟 공격
+        if (onTaunt && !onStun) // 도발상태라면 도발타겟 공격
+
         {
             targetPlayer = tauntTarget;
             monsterAi.MonsterStart(pos);
             GameManager.Instance.Damage(tauntTarget, 5);
             onTaunt = false;
         }
-        else if(!onTaunt && !onStun)
+        else if (!onTaunt && !onStun)
         {
             targetPlayer = PlayerPos[Random.Range(0, PlayerPos.Length)].GetChild(0).gameObject;
             monsterAi.MonsterStart(pos);
             GameManager.Instance.Damage(targetPlayer, 5);
         }
-        else if(onStun)
+        else if (onStun)
         {
             TurnQueue.Dequeue(); // 턴넘기기
+            TrunOut();
+            TurnDraw();
             onStun = false;
         }
-        
+
     }
+
+       
 
     public void PlayerTurnAttack(int who/*int pos*/)
     {

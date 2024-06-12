@@ -15,39 +15,28 @@ public class FightUI : MonoBehaviour
     public TextMeshProUGUI PrimarySkill;
     public TextMeshProUGUI SecondarySkill;
 
-    public MonsterAi monsterAi;
+    public Slider[] HPSlider;
+    public Slider[] EXPSlider;
 
-    private void Awake()
+    public TextMeshProUGUI[] HPText;
+    public TextMeshProUGUI[] EXPText;
+
+    public GameObject[] MonsterUI;
+    public Slider[] M_HPSlider;
+    public TextMeshProUGUI[] M_HPText;
+    public TextMeshProUGUI[] M_Level;
+    public TextMeshProUGUI[] M_PD;
+    public TextMeshProUGUI[] M_MD;
+
+
+    private void Start()
     {
-        monsterAi = GameObject.FindFirstObjectByType<MonsterAi>();
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
+        for (int i = 0; i < MonsterUI.Length; i++)
         {
-            int pos = FightManager.Instance.TurnQueue.Peek();
-            if (pos < 3)
-            {
-                Debug.Log(FightManager.Instance.PlayerPos[pos].GetChild(0).gameObject.name); // 큐에서 빼기 전에 이름 확인
-                SkillTextInfo(pos); // 큐에서 빼온 숫자를 인자로 넘겨줌
-            }
-            else
-            {
-                Debug.Log("몬스터 공격턴");
-                monsterAi.MonsterStart(pos-3);
-            }
-
+            //MonsterUI[i].SetActive(false);
         }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            FightManager.Instance.TurnQueue.Dequeue();
-            FightManager.Instance.TurnDraw();
-            FightManager.Instance.TrunOut();
-            Debug.Log("턴넘기기");
-        }
-
-
+        EXPChange();
+        MonsterUISetting();
     }
 
     public void ProfileUIChange(int num, string name, string PlayerName)
@@ -57,7 +46,7 @@ public class FightUI : MonoBehaviour
         {
             if (TurnSp[i].name == name)
             {
-                
+
                 caractor[num].sprite = TurnSp[i];
                 plyName[num].text = PlayerName;
                 break;
@@ -68,7 +57,7 @@ public class FightUI : MonoBehaviour
 
     public void TurnUIChange(int imgnum, string spname)
     {
-        for(int i = 0; i < TurnSp.Length; i++)
+        for (int i = 0; i < TurnSp.Length; i++)
         {
             if (TurnSp[i].name == spname)
             {
@@ -78,7 +67,7 @@ public class FightUI : MonoBehaviour
             }
         }
     }
-    public int count=-1;
+    public int count = -1;
     public void TurnOut()
     {
         TurnImg[count].gameObject.SetActive(false);
@@ -91,6 +80,7 @@ public class FightUI : MonoBehaviour
             FightManager.Instance.NewTurn();
             NewTurn();
             count = -1;
+            Debug.Log("라운드 리셋");
         }
 
         int pos = FightManager.Instance.TurnQueue.Peek();
@@ -103,15 +93,16 @@ public class FightUI : MonoBehaviour
         {
             Debug.Log("몬스터 공격턴");
             //monsterAi.MonsterStart(pos-3);
-            FightManager.Instance.MonsterTurn(pos-3);
+            FightManager.Instance.MonsterTurn(pos - 3);
         }
         count++;
-        
+        Debug.Log("턴 드로우");
+        HPChange();
     }
 
     public void NewTurn()
     {
-        for( int i = 0;i < FightManager.Instance.TurnQueue.Count;i++)
+        for (int i = 0; i < FightManager.Instance.TurnQueue.Count; i++)
             TurnImg[i].gameObject.SetActive(true);
     }
 
@@ -137,6 +128,45 @@ public class FightUI : MonoBehaviour
         {
             PrimarySkill.text = "몬스터 턴";
             SecondarySkill.text = "몬스터 턴";
+        }
+    }
+
+
+    public void HPChange()
+    {
+        int Maxhp, Curhp;
+        for (int i = 0; i < 3; i++)
+        {
+            Maxhp = GameManager.Instance.player[i].MaxHP;
+            Curhp = GameManager.Instance.player[i].CurHP;
+            HPSlider[i].value = Curhp/Maxhp;
+            HPText[i].text = $"{Curhp}/{Maxhp}";
+        }
+        for(int i = 0;i < 3;i++)
+        {
+            GameObject obj = FightManager.Instance.MonsterPos[i].GetChild(0).gameObject;
+            if(obj.TryGetComponent<PHM_MonsterStat>(out PHM_MonsterStat monsterStat))
+            {
+                Maxhp = monsterStat.maxHP;
+                Curhp = monsterStat.curHP;
+                M_HPSlider[i].value = (Curhp/Maxhp) ;
+                M_HPText[i].text = $"{Curhp}/{Maxhp}";
+            }
+        }
+    }
+
+    public void EXPChange()
+    {
+
+    }
+
+    public void MonsterUISetting()
+    {
+
+        for(int i = 0;i<3 ; i++)
+        {
+            MonsterUI[i].SetActive(true);
+
         }
     }
 }

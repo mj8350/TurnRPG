@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Player
 {
-    //public int id;
+    public int id;
     public string CharName; // 캐릭터 이름
     public string CharJob; // 캐릭터 직업
     public int Accuracy; // 명중률
@@ -60,6 +60,13 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         base.Awake();
+
+        for (int i = 0; i < 3; i++)
+        {
+            int ran = Random.Range(0, Prefeb.Length);
+            CreateUserData(i, ran);
+        }
+
     }
 
     public void CreateUserData(int id, int charactor)
@@ -69,6 +76,7 @@ public class GameManager : Singleton<GameManager>
 
         Prefeb[charactor].TryGetComponent<PHM_CharStat>(out charStat);
 
+        player[id].id = charactor;
         player[id].CharName = charStat.CharName;
         player[id].CharJob = charStat.CharJob;
         player[id].Accuracy = charStat.Accuracy;
@@ -84,7 +92,13 @@ public class GameManager : Singleton<GameManager>
         player[id].Skill01 = charStat.Skill01;
         player[id].Skill02 = charStat.Skill02;
 
-    }
+        player[id].MaxHP = 10 + (player[id].Helth*2);
+        player[id].CurHP = player[id].MaxHP;
+
+        player[id].Level = 1;
+        player[id].EXP = 0;
+
+}
 
     public void Player_Select(int pos, int charactor)
     {

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PHM_MonsterStat : MonoBehaviour
 {
-    private int maxHP;
-    private int curHP;
+    public int maxHP;
+    public int curHP;
 
     public string MonsterName; // 캐릭터 이름
     public int Accuracy; // 명중률
@@ -16,4 +16,10 @@ public class PHM_MonsterStat : MonoBehaviour
     public int Critical; // 치명타 
     public int Speed; // 속도
     public int Helth; // 체력
+
+    private void Awake()
+    {
+        maxHP = 10 + (Helth * 2);
+        curHP = maxHP;
+    }
 }
