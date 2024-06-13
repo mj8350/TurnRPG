@@ -216,7 +216,7 @@ public class FightManager : MonoBehaviour
                 {
                     Debug.Log("찾았다");
                     charStat.TakeDamage(damage);
-                    StartCoroutine(getDamage(i, damage,obj));
+                    StartCoroutine(getDamage(i, damage));
                     StartCoroutine(DamageT(obj, damage, 2.3f));
                 }
             }
@@ -224,7 +224,7 @@ public class FightManager : MonoBehaviour
         
     }
 
-    private IEnumerator getDamage(int i, int damage, GameObject obj)
+    private IEnumerator getDamage(int i, int damage)
     {
         yield return new WaitForSeconds(1f);
         GameManager.Instance.player[i].CurHP -= damage;
@@ -249,4 +249,18 @@ public class FightManager : MonoBehaviour
         DamageCanvas.SetActive(false);
     }
 
+    public void Heal(GameObject obj, int heal)
+    {
+        if (obj.TryGetComponent<PHM_CharStat>(out PHM_CharStat charStat))
+        {
+            for (int i = 0; i < PlayerPos.Length; i++)
+            {
+                if (obj.transform.parent.name == PlayerPos[i].name)
+                {
+                    Debug.Log("찾았다");
+                    StartCoroutine(getDamage(i, -1 * heal));
+                }
+            }
+        }
+    }
 }
