@@ -1,6 +1,7 @@
 using Assets.HeroEditor.Common.Scripts.ExampleScripts;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -33,6 +34,10 @@ public class FightManager : MonoBehaviour
     private Vector3 turnPos;
     public GameObject turnLight;
 
+    public GameObject DamageCanvas;
+    public TextMeshProUGUI DamageText;
+    public GameObject Critical;
+
     private void Awake()
     {
         if (Instance == null)
@@ -51,6 +56,7 @@ public class FightManager : MonoBehaviour
         monsterAi = GameObject.FindFirstObjectByType<MonsterAi>();
         turn = GameObject.FindFirstObjectByType<MJ_Turn>();
         fightUI = GameObject.FindFirstObjectByType<FightUI>();
+        DamageCanvas.SetActive(false);
     }
 
     private void Start()
@@ -139,8 +145,6 @@ public class FightManager : MonoBehaviour
 
     }
 
-       
-
     public void PlayerTurnAttack(int who/*int pos*/)
     {
         //PlayerPos[who].TryGetComponent<BowExample>(out BowExample);
@@ -195,11 +199,14 @@ public class FightManager : MonoBehaviour
         }
     }
 
-
+    Vector3 damagePos;
     public void Damage(GameObject obj, int damage)
     {
         if (obj.TryGetComponent<IDamage>(out IDamage idam))
+        {
             idam.TakeDamage(damage);
+            StartCoroutine(DamageT(obj, damage,1));
+        }
 
         if (obj.TryGetComponent<PHM_CharStat>(out PHM_CharStat charStat))
         {
@@ -208,16 +215,38 @@ public class FightManager : MonoBehaviour
                 if (obj.transform.parent.name == PlayerPos[i].name)
                 {
                     Debug.Log("Ã£¾Ò´Ù");
-                    StartCoroutine(getDamage(i, damage));
+                    charStat.TakeDamage(damage);
+                    StartCoroutine(getDamage(i, damage,obj));
+                    StartCoroutine(DamageT(obj, damage, 2.3f));
                 }
             }
         }
+        
     }
 
-    private IEnumerator getDamage(int i, int damage)
+    private IEnumerator getDamage(int i, int damage, GameObject obj)
     {
         yield return new WaitForSeconds(1f);
         GameManager.Instance.player[i].CurHP -= damage;
+        
+    }
+
+    private IEnumerator DamageT(GameObject obj, int damage, float time)
+    {
+        yield return new WaitForSeconds(time);
+        
+        damagePos = obj.transform.position;
+        damagePos.y += 1;
+        DamageCanvas.transform.position = damagePos;
+        DamageCanvas.SetActive(true);
+
+        DamageText.text = damage.ToString();
+        for(int i = 0; i < 50;i++)
+        {
+            DamageCanvas.transform.position += Vector3.up * Time.deltaTime * 5;
+            yield return new WaitForSeconds(0.01f);
+        }
+        DamageCanvas.SetActive(false);
     }
 
 }

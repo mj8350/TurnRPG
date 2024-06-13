@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
-public class PHM_CharStat : MonoBehaviour, IDamage
+public class PHM_CharStat : MonoBehaviour//, IDamage
 {
     private int maxHP;
     private int curHP;

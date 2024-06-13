@@ -25,4 +25,11 @@ public class PHM_MonsterStat : MonoBehaviour
         curHP = maxHP;
         Level = 1;
     }
+    private void Update()
+    {
+        if (curHP<=0)
+        {
+            curHP = 0;
+        }
+    }
 }
