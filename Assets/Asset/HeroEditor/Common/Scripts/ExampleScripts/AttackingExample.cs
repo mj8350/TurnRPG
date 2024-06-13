@@ -40,8 +40,8 @@ namespace Assets.HeroEditor.Common.Scripts.ExampleScripts
             if (Character.Animator.GetInteger("State") >= (int)CharacterState.DeathB) return;
 
 
-            if (Input.GetKeyDown(FireButton))
-                PlayerStartAttack();
+            //if (Input.GetKeyDown(FireButton))
+            //    PlayerStartAttack();
         }
 
         public void PlayerStartAttack()

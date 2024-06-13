@@ -139,7 +139,7 @@ public class FightUI : MonoBehaviour
         {
             Maxhp = GameManager.Instance.player[i].MaxHP;
             Curhp = GameManager.Instance.player[i].CurHP;
-            HPSlider[i].value = Curhp/Maxhp;
+            HPSlider[i].value = ((float)Curhp/Maxhp);
             HPText[i].text = $"{Curhp}/{Maxhp}";
         }
         for(int i = 0;i < 3;i++)
@@ -149,7 +149,7 @@ public class FightUI : MonoBehaviour
             {
                 Maxhp = monsterStat.maxHP;
                 Curhp = monsterStat.curHP;
-                M_HPSlider[i].value = (Curhp/Maxhp) ;
+                M_HPSlider[i].value = ((float)Curhp/Maxhp) ;
                 M_HPText[i].text = $"{Curhp}/{Maxhp}";
             }
         }

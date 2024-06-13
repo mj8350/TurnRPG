@@ -49,7 +49,7 @@ public class MonsterAttack : MonoBehaviour
         targetPlayer = tauntTarget;
         Debug.Log(targetPlayer);
         FightManager.Instance.monsterAi.MonsterStart(FightManager.Instance.TurnQueue.Dequeue());
-        GameManager.Instance.Damage(targetPlayer, 5);
+        FightManager.Instance.Damage(targetPlayer, 5);
     }
 
     private void AttackNormalTarget()

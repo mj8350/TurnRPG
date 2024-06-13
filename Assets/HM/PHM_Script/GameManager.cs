@@ -92,13 +92,13 @@ public class GameManager : Singleton<GameManager>
         player[id].Skill01 = charStat.Skill01;
         player[id].Skill02 = charStat.Skill02;
 
-        player[id].MaxHP = 10 + (player[id].Helth*2);
+        player[id].MaxHP = 10 + (player[id].Helth * 2);
         player[id].CurHP = player[id].MaxHP;
 
         player[id].Level = 1;
         player[id].EXP = 0;
 
-}
+    }
 
     public void Player_Select(int pos, int charactor)
     {
@@ -108,11 +108,23 @@ public class GameManager : Singleton<GameManager>
         obj.transform.SetParent(transforms[pos]);
     }
 
-    public void Damage(GameObject obj, int damage)
+    /*public void Damage(GameObject obj, int damage)
     {
-        if(obj.TryGetComponent<IDamage>(out IDamage idam))
+        if (obj.TryGetComponent<IDamage>(out IDamage idam))
             idam.TakeDamage(damage);
-    }
-    
+
+        if (obj.TryGetComponent<PHM_CharStat>(out PHM_CharStat charStat))
+        {
+            for (int i = 0; i < transforms.Length; i++)
+            {
+                if (obj.transform.parent.name == transforms[i].name)
+                {
+                    Debug.Log("Ã£¾Ò´Ù");
+                    player[i].CurHP -= damage;
+                }
+            }
+        }
+    }*/
+
 
 }

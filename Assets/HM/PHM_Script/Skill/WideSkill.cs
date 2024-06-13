@@ -56,7 +56,7 @@ public class WideSkill : BaseSkill
             {
                 // 캐릭터의 공격력을 기반으로 데미지 계산 // 추후 데미지 계산식 적용
                 int damage = stat.Strength;
-                GameManager.Instance.Damage(monster, damage);
+                FightManager.Instance.Damage(monster, damage);
             }
             else
             {

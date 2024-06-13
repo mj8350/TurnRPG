@@ -37,7 +37,7 @@ public class DotDamageSkill : BaseSkill
                 }
                 else
                 {
-                    GameManager.Instance.Damage(targetObject, dotDamage);
+                    FightManager.Instance.Damage(targetObject, dotDamage);
                 }
             }
             else

@@ -120,14 +120,14 @@ public class FightManager : MonoBehaviour
         {
             targetPlayer = tauntTarget;
             monsterAi.MonsterStart(pos);
-            GameManager.Instance.Damage(tauntTarget, 5);
+            Damage(tauntTarget, 5);
             onTaunt = false;
         }
         else if (!onTaunt && !onStun)
         {
             targetPlayer = PlayerPos[Random.Range(0, PlayerPos.Length)].GetChild(0).gameObject;
             monsterAi.MonsterStart(pos);
-            GameManager.Instance.Damage(targetPlayer, 5);
+            Damage(targetPlayer, 5);
         }
         else if (onStun)
         {
@@ -150,7 +150,7 @@ public class FightManager : MonoBehaviour
 
         //GameObject obj = MonsterPos[pos].GetChild(0).gameObject;
         GameObject obj = targetMonster;
-        GameManager.Instance.Damage(obj, 5);
+        Damage(obj, 5);
     }
 
     public void SetPlayerSkillManager(int playerIndex, CharSkillManager skillManager)
@@ -195,5 +195,23 @@ public class FightManager : MonoBehaviour
         }
     }
 
+
+    public void Damage(GameObject obj, int damage)
+    {
+        if (obj.TryGetComponent<IDamage>(out IDamage idam))
+            idam.TakeDamage(damage);
+
+        if (obj.TryGetComponent<PHM_CharStat>(out PHM_CharStat charStat))
+        {
+            for (int i = 0; i < PlayerPos.Length; i++)
+            {
+                if (obj.transform.parent.name == PlayerPos[i].name)
+                {
+                    Debug.Log("Ã£¾Ò´Ù");
+                    GameManager.Instance.player[i].CurHP -= damage;
+                }
+            }
+        }
+    }
 
 }
