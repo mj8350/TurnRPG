@@ -157,7 +157,16 @@ public class FightUI : MonoBehaviour
 
     public void EXPChange()
     {
-
+        int MaxEXP, CurEXP;
+        for(int i = 0;i<3 ; i++)
+        {
+            if (GameManager.Instance.player[i].Level < 10) {
+                MaxEXP = GameManager.Instance.MaxEXP[GameManager.Instance.player[i].Level-1];
+                CurEXP = GameManager.Instance.player[i].EXP;
+                EXPSlider[i].value = ((float)CurEXP/MaxEXP);
+                EXPText[i].text = $"{CurEXP}/{MaxEXP}";
+            }
+        }
     }
 
     public void MonsterUISetting()
@@ -166,7 +175,13 @@ public class FightUI : MonoBehaviour
         for(int i = 0;i<3 ; i++)
         {
             MonsterUI[i].SetActive(true);
-
+            GameObject obj = FightManager.Instance.MonsterPos[i].GetChild(0).gameObject;
+            if (obj.TryGetComponent<PHM_MonsterStat>(out PHM_MonsterStat monsterStat))
+            {
+                M_Level[i].text = monsterStat.Level.ToString();
+                M_PD[i].text = monsterStat.P_Defense.ToString();
+                M_MD[i].text = monsterStat.M_Defense.ToString();
+            }
         }
     }
 }

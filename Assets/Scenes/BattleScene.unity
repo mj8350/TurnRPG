@@ -2028,17 +2028,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234455183}
   m_CullTransparentMesh: 0
---- !u!114 &234743283 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7006765802958499364, guid: 715d2534968ee28478e16e7c87978580, type: 3}
-  m_PrefabInstance: {fileID: 339103895}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &251786496
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,6 +2422,7 @@ MonoBehaviour:
   - {fileID: 8751584375282102596, guid: 0af6b2f1449dd1c44bd4a3ff877a57c9, type: 3}
   - {fileID: 8638968109146237064, guid: e2ef385d7619b3a42abca1c8d79aad87, type: 3}
   - {fileID: 1119582640003751012, guid: ef4fdcc67e1451c46bd56d1cbfe8fdae, type: 3}
+  MaxEXP: 0a000000140000001e00000028000000320000003c00000046000000500000005a000000
 --- !u!4 &289529605
 Transform:
   m_ObjectHideFlags: 0
@@ -2792,34 +2782,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roulette
       objectReference: {fileID: 0}
-    - target: {fileID: 1212228542102029432, guid: 715d2534968ee28478e16e7c87978580, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1588079511015733002, guid: 715d2534968ee28478e16e7c87978580, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 1588079511015733002, guid: 715d2534968ee28478e16e7c87978580, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 2602908975662156262, guid: 715d2534968ee28478e16e7c87978580, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -89
-      objectReference: {fileID: 0}
-    - target: {fileID: 3871109868005555292, guid: 715d2534968ee28478e16e7c87978580, type: 3}
-      propertyPath: m_text
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6033102055173713005, guid: 715d2534968ee28478e16e7c87978580, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -42.30005
-      objectReference: {fileID: 0}
-    - target: {fileID: 6033102055173713005, guid: 715d2534968ee28478e16e7c87978580, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -89
-      objectReference: {fileID: 0}
     - target: {fileID: 7823805121046737721, guid: 715d2534968ee28478e16e7c87978580, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2903,10 +2865,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1212228542102029432, guid: 715d2534968ee28478e16e7c87978580, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 450346257}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 715d2534968ee28478e16e7c87978580, type: 3}
 --- !u!114 &378743221 stripped
 MonoBehaviour:
@@ -3666,42 +3625,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &450346255 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1212228542102029432, guid: 715d2534968ee28478e16e7c87978580, type: 3}
-  m_PrefabInstance: {fileID: 339103895}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &450346256 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7823805121046737721, guid: 715d2534968ee28478e16e7c87978580, type: 3}
   m_PrefabInstance: {fileID: 339103895}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &450346257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450346255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7209fc11d7aacb4b952fee886c816e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showText: {fileID: 515927376}
-  startButton: {fileID: 234743283}
-  stopButton: {fileID: 1424063968}
-  randomNumber: 0
-  successProbability: 60
-  isAttackSuccessful: 0
-  skillsManager: {fileID: 0}
-  skillBtn: {fileID: 0}
 --- !u!114 &450346258 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4845011790203323752, guid: 715d2534968ee28478e16e7c87978580, type: 3}
   m_PrefabInstance: {fileID: 339103895}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450346255}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -3908,17 +3842,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483388134}
   m_CullTransparentMesh: 1
---- !u!114 &515927376 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3871109868005555292, guid: 715d2534968ee28478e16e7c87978580, type: 3}
-  m_PrefabInstance: {fileID: 339103895}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &519006017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9133,17 +9056,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418819183}
   m_CullTransparentMesh: 1
---- !u!114 &1424063968 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9205791603637452160, guid: 715d2534968ee28478e16e7c87978580, type: 3}
-  m_PrefabInstance: {fileID: 339103895}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1431422819
 GameObject:
   m_ObjectHideFlags: 0

@@ -208,10 +208,16 @@ public class FightManager : MonoBehaviour
                 if (obj.transform.parent.name == PlayerPos[i].name)
                 {
                     Debug.Log("Ã£¾Ò´Ù");
-                    GameManager.Instance.player[i].CurHP -= damage;
+                    StartCoroutine(getDamage(i, damage));
                 }
             }
         }
+    }
+
+    private IEnumerator getDamage(int i, int damage)
+    {
+        yield return new WaitForSeconds(1f);
+        GameManager.Instance.player[i].CurHP -= damage;
     }
 
 }

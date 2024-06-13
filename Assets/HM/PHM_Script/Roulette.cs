@@ -22,7 +22,8 @@ public class Roulette : MonoBehaviour
 
     public TextMeshProUGUI showText;
     public Button startButton;
-    public Button stopButton;
+    public TextMeshProUGUI startText;
+    //public Button stopButton;
 
     public int randomNumber;
     public int successProbability = 60;
@@ -41,9 +42,9 @@ public class Roulette : MonoBehaviour
     {
         // 시작 버튼에 클릭 이벤트 추가
         startButton.onClick.AddListener(StartRoulette);
-
+        startText.text = "시작";
         // 스탑 버튼에 클릭 이벤트 추가
-        stopButton.onClick.AddListener(StopRoulette);
+        //stopButton.onClick.AddListener(StopRoulette);
 
         clickEvent = GameObject.FindFirstObjectByType<ClickEvent>();
         skillsManager = GameObject.FindFirstObjectByType<CharSkillManager>();
@@ -74,14 +75,17 @@ public class Roulette : MonoBehaviour
             rouletteCoroutine = StartCoroutine("RouletteNumbers");
             isRouletteRunning = true;
             isAttackSuccessful = false; // 새로운 룰렛 시작 시 공격 판정 초기화
+            startButton.onClick.RemoveAllListeners();
+            startButton.onClick.AddListener(StopRoulette);
+            startText.text = "멈춤";
         }
-        else
-        {
-            // 룰렛을 재시작할 수 있도록
-            StopCoroutine(rouletteCoroutine);
-            rouletteCoroutine = StartCoroutine("RouletteNumbers");
-            isAttackSuccessful = false; // 새로운 룰렛 시작 시 공격 판정 초기화
-        }
+        //else
+        //{
+        //    // 룰렛을 재시작할 수 있도록
+        //    StopCoroutine(rouletteCoroutine);
+        //    rouletteCoroutine = StartCoroutine("RouletteNumbers");
+        //    isAttackSuccessful = false; // 새로운 룰렛 시작 시 공격 판정 초기화
+        //}
     }
 
     void StopRoulette()
@@ -113,6 +117,7 @@ public class Roulette : MonoBehaviour
             }
 
             Invoke("Turnoff", 1);
+            
         }
     }
 
@@ -189,6 +194,9 @@ public class Roulette : MonoBehaviour
     {
         FightManager.Instance.TrunOut();
         FightManager.Instance.TurnDraw();
+        startButton.onClick.RemoveAllListeners();
+        startButton.onClick.AddListener(StartRoulette);
+        startText.text = "시작";
     }
 
 
