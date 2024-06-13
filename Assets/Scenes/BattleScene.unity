@@ -1660,6 +1660,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8659491073976962822, guid: 11657c9f972e10d49adf3dbef66a7833, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2790,7 +2794,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1212228542102029432, guid: 715d2534968ee28478e16e7c87978580, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1588079511015733002, guid: 715d2534968ee28478e16e7c87978580, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3331,6 +3335,10 @@ PrefabInstance:
       propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8659491073976962822, guid: 11657c9f972e10d49adf3dbef66a7833, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3637,6 +3645,7 @@ MonoBehaviour:
   targetMonster: {fileID: 0}
   targetPlayer: {fileID: 0}
   tauntTarget: {fileID: 0}
+  monsterAi: {fileID: 0}
   skillManager: {fileID: 0}
   onAttack: 0
   onTaunt: 0
@@ -3682,7 +3691,9 @@ MonoBehaviour:
   showText: {fileID: 515927376}
   startButton: {fileID: 234743283}
   stopButton: {fileID: 1424063968}
+  randomNumber: 0
   successProbability: 60
+  isAttackSuccessful: 0
   skillsManager: {fileID: 0}
   skillBtn: {fileID: 0}
 --- !u!114 &450346258 stripped
@@ -10443,6 +10454,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8659491073976962822, guid: 11657c9f972e10d49adf3dbef66a7833, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13477,6 +13492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0}
+  onRoulette: 0
   selectedObj: {fileID: 0}
   selectedRingPrefabs: {fileID: 7541050645966124060, guid: 239d8b11bb8bb1f4094ed5f4d4c7870d, type: 3}
   rouletteImage: {fileID: 450346258}
