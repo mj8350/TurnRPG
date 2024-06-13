@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -4605657335745398534}
   - component: {fileID: 660672491317194116}
   - component: {fileID: 6619010851002610957}
+  - component: {fileID: -2764064657287443191}
   m_Layer: 0
   m_Name: Grassland_Glop Slime
   m_TagString: Monster
@@ -140,6 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1f9ac34c76d174ba97856bcf55ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 0
+  curHP: 0
   MonsterName: 
   Accuracy: 10
   P_Defense: 8
@@ -196,6 +199,23 @@ CircleCollider2D:
   m_Offset: {x: -0.07388258, y: 0.84801173}
   serializedVersion: 2
   m_Radius: 1.1353931
+--- !u!114 &-2764064657287443191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574078517600558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b18f7f9966f9649b376dec851f6f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAttack: 0
+  onTaunt: 0
+  onStun: 0
+  targetPlayer: {fileID: 0}
+  tauntTarget: {fileID: 0}
 --- !u!1001 &3110984077662623313
 PrefabInstance:
   m_ObjectHideFlags: 0

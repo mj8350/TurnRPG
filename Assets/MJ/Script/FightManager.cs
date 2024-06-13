@@ -24,6 +24,8 @@ public class FightManager : MonoBehaviour
 
     public Queue<int> TurnQueue = new Queue<int>();
     private Dictionary<int, CharSkillManager> playerSkillManagers = new Dictionary<int, CharSkillManager>();
+    public List<GameObject> provokedMonsters = new List<GameObject>(); // 도발당한 몬스터 리스트
+    public List<GameObject> stunedMonsters = new List<GameObject>(); // 스턴당한 몬스터 리스트
 
     public CharSkillManager skillManager;
 
@@ -121,28 +123,51 @@ public class FightManager : MonoBehaviour
 
     public void MonsterTurn(int pos)
     {
-        if (onTaunt && !onStun) // 도발상태라면 도발타겟 공격
 
-        {
-            targetPlayer = tauntTarget;
-            monsterAi.MonsterStart(pos);
-            Damage(tauntTarget, 5);
-            onTaunt = false;
-        }
-        else if (!onTaunt && !onStun)
-        {
-            targetPlayer = PlayerPos[Random.Range(0, PlayerPos.Length)].GetChild(0).gameObject;
-            monsterAi.MonsterStart(pos);
-            Damage(targetPlayer, 5);
-        }
-        else if (onStun)
-        {
-            TurnQueue.Dequeue(); // 턴넘기기
-            TrunOut();
-            TurnDraw();
-            onStun = false;
-        }
+        // 무작위 플레이어를 공격
+        targetPlayer = PlayerPos[Random.Range(0, PlayerPos.Length)].GetChild(0).gameObject;
+        monsterAi.MonsterStart(pos); // 몬스터의 공격 시작
+        Damage(targetPlayer, 5); // 몬스터의 공격력만큼 피해 입힘
 
+        //if (onTaunt && !onStun) // 도발상태라면 도발타겟 공격
+        //{
+        //    if (provokedMonsters.Count > 0)
+        //    {
+        //        GameObject provokedMonster = provokedMonsters[0]; // 도발된 몬스터 중 첫 번째 몬스터 선택
+        //        provokedMonsters.RemoveAt(0); // 도발된 몬스터 리스트에서 제거
+
+        //        // 도발된 몬스터를 공격하는 코드 추가
+        //        provokedMonster.GetComponent<MonsterAttack>().MonsterTurn(pos);
+        //    }
+        //    else
+        //    {
+        //        Debug.LogWarning("도발된 몬스터가 없습니다.");
+        //    }
+        //}
+        //else if (!onTaunt && !onStun) // 도발 상태가 아니고 스턴 상태도 아니라면
+        //{
+        //    // 무작위 플레이어를 공격
+        //    targetPlayer = PlayerPos[Random.Range(0, PlayerPos.Length)].GetChild(0).gameObject;
+        //    monsterAi.MonsterStart(pos); // 몬스터의 공격 시작
+        //    Damage(targetPlayer, 5); // 몬스터의 공격력만큼 피해 입힘
+        //}
+        //else if (onStun) // 스턴 상태라면
+        //{
+        //    //다음 턴으로 넘김
+        //    TurnQueue.Dequeue();
+        //    TrunOut();
+        //    TurnDraw();
+        //    onStun = false; // 스턴 상태 비활성화
+
+        //}
+
+    }
+
+    public void TauntMonsterTurn(int pos, GameObject target)
+    {
+        targetPlayer = target;
+        monsterAi.MonsterStart(pos); // 몬스터의 공격 시작
+        Damage(targetPlayer, 5); // 몬스터의 공격력만큼 피해 입힘
     }
 
     public void PlayerTurnAttack(int who/*int pos*/)

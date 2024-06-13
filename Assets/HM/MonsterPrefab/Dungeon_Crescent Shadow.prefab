@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -6798122130150298278}
   - component: {fileID: 9221209778310366197}
   - component: {fileID: 7965672938763410420}
+  - component: {fileID: -3017690365590128009}
   m_Layer: 0
   m_Name: Dungeon_Crescent Shadow
   m_TagString: Monster
@@ -140,6 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1f9ac34c76d174ba97856bcf55ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 0
+  curHP: 0
   MonsterName: 
   Accuracy: 8
   P_Defense: 4
@@ -196,6 +199,23 @@ CircleCollider2D:
   m_Offset: {x: -0.47896028, y: 2.2783575}
   serializedVersion: 2
   m_Radius: 3.1450663
+--- !u!114 &-3017690365590128009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402651372332534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b18f7f9966f9649b376dec851f6f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAttack: 0
+  onTaunt: 0
+  onStun: 0
+  targetPlayer: {fileID: 0}
+  tauntTarget: {fileID: 0}
 --- !u!1001 &3022294663726862987
 PrefabInstance:
   m_ObjectHideFlags: 0

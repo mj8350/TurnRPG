@@ -9,7 +9,7 @@ public class HealSkill : BaseSkill
     private GameObject targetObject;
     public Roulette roulette;
     private float wideHealProbability = 0.1f; // 광역 힐 발동 확률
-    private int successProbability = 60;
+    private int successProbability = 100;
 
     private void Awake()
     {
@@ -46,7 +46,7 @@ public class HealSkill : BaseSkill
         else
         {
             roulette.isAttackSuccessful = false;
-            Debug.Log("공격 실패!");
+            Debug.Log("힐 스킬 사용 실패!");
             roulette.InvokeInitRoulette();
         }
     }
@@ -61,7 +61,7 @@ public class HealSkill : BaseSkill
         {
             if (collider.CompareTag("Player"))
             {
-                ApplyHeal(collider.gameObject);
+                FightManager.Instance.Heal(collider.gameObject, 5);
             }
         }
     }
@@ -72,7 +72,7 @@ public class HealSkill : BaseSkill
         targetObject = click.selectedObj;
         if (targetObject != null && targetObject.CompareTag("Player"))
         {
-            ApplyHeal(targetObject);
+            FightManager.Instance.Heal(targetObject, 5);
         }
         else
         {
@@ -81,21 +81,21 @@ public class HealSkill : BaseSkill
     }
 
     // 힐을 적용하는 함수
-    private void ApplyHeal(GameObject target)
-    {
-        // 선택한 대상에게서 체력 컴포넌트를 찾습니다.
-        PHM_CharStat healthComponent = target.GetComponent<PHM_CharStat>();
-        if (healthComponent != null)
-        {
-            // 체력을 회복
-            int healingAmount = 5; // 회복량 (예시로 5 설정)
-            healthComponent.Helth += healingAmount;
-            Debug.Log("대상의 체력을 회복합니다.");
-            Debug.Log(healthComponent.Helth);
-        }
-        else
-        {
-            Debug.LogError("대상에게 체력을 회복시킬 수 없습니다. 대상에게 체력 컴포넌트가 없습니다.");
-        }
-    }
+    //private void ApplyHeal(GameObject target)
+    //{
+    //    // 선택한 대상에게서 체력 컴포넌트를 찾습니다.
+    //    PHM_CharStat healthComponent = target.GetComponent<PHM_CharStat>();
+    //    if (healthComponent != null)
+    //    {
+    //        // 체력을 회복
+    //        int healingAmount = 5; // 회복량 (예시로 5 설정)
+    //        healthComponent.Helth += healingAmount;
+    //        Debug.Log("대상의 체력을 회복합니다.");
+    //        Debug.Log(healthComponent.Helth);
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("대상에게 체력을 회복시킬 수 없습니다. 대상에게 체력 컴포넌트가 없습니다.");
+    //    }
+    //}
 }

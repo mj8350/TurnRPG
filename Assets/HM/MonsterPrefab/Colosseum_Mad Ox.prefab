@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -2321191945304657708}
   - component: {fileID: -3642026169074756407}
   - component: {fileID: -7361930226928802441}
+  - component: {fileID: -2167862179918749391}
   m_Layer: 0
   m_Name: Colosseum_Mad Ox
   m_TagString: Monster
@@ -140,6 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1f9ac34c76d174ba97856bcf55ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 0
+  curHP: 0
   MonsterName: 
   Accuracy: 7
   P_Defense: 10
@@ -196,6 +199,23 @@ CircleCollider2D:
   m_Offset: {x: 0.4460671, y: 1.5367723}
   serializedVersion: 2
   m_Radius: 2.5166106
+--- !u!114 &-2167862179918749391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8462639753691669572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b18f7f9966f9649b376dec851f6f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAttack: 0
+  onTaunt: 0
+  onStun: 0
+  targetPlayer: {fileID: 0}
+  tauntTarget: {fileID: 0}
 --- !u!1001 &5174584578364402782
 PrefabInstance:
   m_ObjectHideFlags: 0

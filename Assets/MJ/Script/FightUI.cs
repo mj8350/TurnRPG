@@ -28,6 +28,16 @@ public class FightUI : MonoBehaviour
     public TextMeshProUGUI[] M_PD;
     public TextMeshProUGUI[] M_MD;
 
+    public MonsterAttack[] monsterAttacks;
+
+
+    private void Awake()
+    {
+        monsterAttacks = FindObjectsOfType<MonsterAttack>();
+        MonsterAttack temp = monsterAttacks[0];
+        monsterAttacks[0] = monsterAttacks[2];
+        monsterAttacks[2] = temp;
+    }
 
     private void Start()
     {
@@ -93,7 +103,13 @@ public class FightUI : MonoBehaviour
         {
             Debug.Log("몬스터 공격턴");
             //monsterAi.MonsterStart(pos-3);
-            FightManager.Instance.MonsterTurn(pos - 3);
+            //FightManager.Instance.MonsterTurn(pos - 3);
+            monsterAttacks[pos-3].MonsterTurn(pos -3);
+            if (monsterAttacks[pos-3].onDotDamage)
+            {
+                FightManager.Instance.Damage(monsterAttacks[pos-3].gameObject, 3);
+            }
+
         }
         count++;
         Debug.Log("턴 드로우");

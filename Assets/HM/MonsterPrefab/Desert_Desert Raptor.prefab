@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -2796753016210434738}
   - component: {fileID: 4118103775606663701}
   - component: {fileID: -3387360369537478108}
+  - component: {fileID: 1700404348638846629}
   m_Layer: 0
   m_Name: Desert_Desert Raptor
   m_TagString: Monster
@@ -140,6 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1f9ac34c76d174ba97856bcf55ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 0
+  curHP: 0
   MonsterName: 
   Accuracy: 12
   P_Defense: 9
@@ -196,6 +199,23 @@ CircleCollider2D:
   m_Offset: {x: 0.41538715, y: 1.5088965}
   serializedVersion: 2
   m_Radius: 2.4268885
+--- !u!114 &1700404348638846629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4332521382870458387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b18f7f9966f9649b376dec851f6f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAttack: 0
+  onTaunt: 0
+  onStun: 0
+  targetPlayer: {fileID: 0}
+  tauntTarget: {fileID: 0}
 --- !u!1001 &2741136713590492876
 PrefabInstance:
   m_ObjectHideFlags: 0

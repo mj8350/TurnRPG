@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2802349702382000104}
   - component: {fileID: -8074155031285755447}
   - component: {fileID: 8221236000249016323}
+  - component: {fileID: -841004564703735522}
   m_Layer: 0
   m_Name: Desert_Armored Salamander
   m_TagString: Monster
@@ -140,6 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1f9ac34c76d174ba97856bcf55ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 0
+  curHP: 0
   MonsterName: 
   Accuracy: 10
   P_Defense: 8
@@ -196,6 +199,23 @@ CircleCollider2D:
   m_Offset: {x: -0.12966657, y: 1.162768}
   serializedVersion: 2
   m_Radius: 1.3659286
+--- !u!114 &-841004564703735522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323216486124236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b18f7f9966f9649b376dec851f6f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAttack: 0
+  onTaunt: 0
+  onStun: 0
+  targetPlayer: {fileID: 0}
+  tauntTarget: {fileID: 0}
 --- !u!1001 &8875038071360531039
 PrefabInstance:
   m_ObjectHideFlags: 0

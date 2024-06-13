@@ -8,6 +8,7 @@ public class MonsterAttack : MonoBehaviour
     public bool onAttack;
     public bool onTaunt;
     public bool onStun;
+    public bool onDotDamage;
 
     public GameObject targetPlayer;
     public GameObject tauntTarget;
@@ -19,21 +20,20 @@ public class MonsterAttack : MonoBehaviour
         onStun = false;
     }
 
-    public void MonsterTurn()
+    public void MonsterTurn(int pos)
     {
         if (onTaunt && !onStun) // 도발상태라면 도발타겟 공격
         {
-            AttackProvokedTarget();
+            AttackProvokedTarget(pos);
         }
         else if (!onTaunt && !onStun)
         {
-            AttackNormalTarget();
+            AttackNormalTarget(pos);
         }
         else if (onStun)
         {
-            FightManager.Instance.TurnQueue.Dequeue(); // 턴넘기기
-            FightManager.Instance.TrunOut();
-            FightManager.Instance.TurnDraw();
+
+            Invoke("Stunning", 1f);
             onStun = false;
         }
     }
@@ -44,19 +44,36 @@ public class MonsterAttack : MonoBehaviour
         tauntTarget = target;
     }
 
-    private void AttackProvokedTarget()
+    public void SetStunTarget() 
     {
-        targetPlayer = tauntTarget;
-        Debug.Log(targetPlayer);
-        FightManager.Instance.monsterAi.MonsterStart(FightManager.Instance.TurnQueue.Dequeue());
-        FightManager.Instance.Damage(targetPlayer, 5);
+        onStun = true;
     }
 
-    private void AttackNormalTarget()
+    public void SetDotDamage()
+    {
+        onDotDamage = true;
+    }
+
+    private void AttackProvokedTarget(int pos)
     {
         Debug.Log(targetPlayer);
-        FightManager.Instance.MonsterTurn(FightManager.Instance.TurnQueue.Dequeue());
-        
+        //FightManager.Instance.monsterAi.MonsterStart(pos);
+        //FightManager.Instance.Damage(targetPlayer, 5);
+        FightManager.Instance.TauntMonsterTurn(pos, tauntTarget);
+        onTaunt = false;
+    }
+
+    private void AttackNormalTarget(int pos)
+    {
+        Debug.Log(targetPlayer);
+        FightManager.Instance.MonsterTurn(pos);
+    }
+
+    private void Stunning()
+    {
+        FightManager.Instance.TurnQueue.Dequeue(); // 턴넘기기
+        FightManager.Instance.TrunOut();
+        FightManager.Instance.TurnDraw();
     }
 }
 

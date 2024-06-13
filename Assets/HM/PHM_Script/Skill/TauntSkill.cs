@@ -30,10 +30,9 @@ public class TauntSkill : BaseSkill
             targetObject = click.selectedObj;
             if (targetObject != null)
             {
-                var tauntTargetScript = targetObject.GetComponent<MonsterAttack>();
+                targetObject.TryGetComponent<MonsterAttack>(out MonsterAttack tauntTargetScript);
                 if (tauntTargetScript != null)
                 {
-                    tauntTargets.Add(targetObject); // 도발된 몬스터 목록에 추가
                     tauntTargetScript.SetTauntTarget(this.gameObject); // 도발된 몬스터의 타겟 설정
                 }
                 else

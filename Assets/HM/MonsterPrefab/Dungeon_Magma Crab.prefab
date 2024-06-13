@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5976132448019470034}
   - component: {fileID: 6882084764479444030}
   - component: {fileID: -317331099951764791}
+  - component: {fileID: -2639444508951103389}
   m_Layer: 0
   m_Name: Dungeon_Magma Crab
   m_TagString: Monster
@@ -140,6 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1f9ac34c76d174ba97856bcf55ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 0
+  curHP: 0
   MonsterName: 
   Accuracy: 12
   P_Defense: 9
@@ -196,6 +199,23 @@ CircleCollider2D:
   m_Offset: {x: 0.6686199, y: 1.9745338}
   serializedVersion: 2
   m_Radius: 2.5589912
+--- !u!114 &-2639444508951103389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018407660699382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b18f7f9966f9649b376dec851f6f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAttack: 0
+  onTaunt: 0
+  onStun: 0
+  targetPlayer: {fileID: 0}
+  tauntTarget: {fileID: 0}
 --- !u!1001 &4322444839350619792
 PrefabInstance:
   m_ObjectHideFlags: 0

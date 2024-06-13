@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -3385391972404428836}
   - component: {fileID: -2463125992502778627}
   - component: {fileID: -8818469840566915662}
+  - component: {fileID: -8795091720241366682}
   m_Layer: 0
   m_Name: Jungle_Jungle Lizard
   m_TagString: Monster
@@ -140,6 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1f9ac34c76d174ba97856bcf55ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 0
+  curHP: 0
   MonsterName: 
   Accuracy: 8
   P_Defense: 4
@@ -196,6 +199,23 @@ CircleCollider2D:
   m_Offset: {x: -0.2071712, y: 0.67043734}
   serializedVersion: 2
   m_Radius: 2.1873682
+--- !u!114 &-8795091720241366682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5893283217648903366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b18f7f9966f9649b376dec851f6f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAttack: 0
+  onTaunt: 0
+  onStun: 0
+  targetPlayer: {fileID: 0}
+  tauntTarget: {fileID: 0}
 --- !u!1001 &2320451995293480704
 PrefabInstance:
   m_ObjectHideFlags: 0

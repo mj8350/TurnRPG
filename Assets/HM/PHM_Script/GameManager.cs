@@ -61,12 +61,15 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
-        for (int i = 0; i < 3; i++)
-        {
-            int ran = Random.Range(0, Prefeb.Length);
-            CreateUserData(i, ran);
-        }
+        //for (int i = 0; i < 3; i++)
+        //{
+        //    int ran = Random.Range(0, Prefeb.Length);
+        //    CreateUserData(i, ran);
+        //}
 
+        CreateUserData(0, 0);
+        CreateUserData(1, 1);
+        CreateUserData(2, 2);
     }
 
     public void CreateUserData(int id, int charactor)
