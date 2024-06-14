@@ -1,14 +1,13 @@
 using Assets.HeroEditor.Common.Scripts.ExampleScripts;
-using Assets.HeroEditor.FantasyHeroes.TestRoom.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WideSkill : BaseSkill
+public class ArcherWideSkill : BaseSkill
 {
     private ClickEvent click;
     public Roulette roulette;
-    private int successProbability = 60;
+    private int successProbability = 100;
 
     private void Awake()
     {
@@ -18,10 +17,10 @@ public class WideSkill : BaseSkill
 
     public override void Skill_Active()
     {
-        
+
         if (roulette.randomNumber < successProbability)
         {
-            Debug.Log("광역스킬 발동");
+            Debug.Log("화살비 발동");
             roulette.isAttackSuccessful = true;
             roulette.InvokeInitRoulette();
             gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
@@ -35,7 +34,7 @@ public class WideSkill : BaseSkill
             roulette.InvokeInitRoulette();
         }
     }
-    
+
 
     private void ApplyWideDamage()
     {
@@ -52,10 +51,13 @@ public class WideSkill : BaseSkill
         {
             // 몬스터에게 데미지 적용
             PHM_CharStat stat = GetComponent<PHM_CharStat>();
+            monster.TryGetComponent<PHM_MonsterStat>(out PHM_MonsterStat monStat);
             if (stat != null)
             {
                 // 캐릭터의 공격력을 기반으로 데미지 계산 // 추후 데미지 계산식 적용
-                int damage = stat.Strength;
+                //int damage = stat.Magic - monStat.M_Defense;
+                int number = FightManager.Instance.GMChar(gameObject);
+                int damage = FightManager.Instance.DamageSum(GameManager.Instance.player[number].Strength, GameManager.Instance.player[number].Critical, monStat.P_Defense, out onCri);
                 FightManager.Instance.Damage(monster, damage, onCri);
             }
             else

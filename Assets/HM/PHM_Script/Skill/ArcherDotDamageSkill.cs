@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DotDamageSkill : BaseSkill
+public class ArcherDotDamageSkill : BaseSkill
 {
     private ClickEvent click;
     private GameObject targetObject;
@@ -40,7 +40,7 @@ public class DotDamageSkill : BaseSkill
                 targetObject.TryGetComponent<MonsterAttack>(out MonsterAttack dotDamgeTarget);
                 if (dotDamgeTarget != null)
                 {
-                    dotDamgeTarget.SetDotDamage(); // 스턴된 몬스터의 타겟 설정
+                    dotDamgeTarget.SetDotDamage_2();
                 }
                 else
                 {

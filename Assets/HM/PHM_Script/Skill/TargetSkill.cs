@@ -35,7 +35,7 @@ public class TargetSkill : BaseSkill
                 {
                     // 캐릭터의 공격력을 기반으로 데미지 계산
                     int damage = stat.Strength;
-                    FightManager.Instance.Damage(targetObject, damage);
+                    FightManager.Instance.Damage(targetObject, damage, onCri);
                 }
 
             }
