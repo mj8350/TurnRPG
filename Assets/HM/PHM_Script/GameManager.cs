@@ -111,23 +111,4 @@ public class GameManager : Singleton<GameManager>
         obj.transform.SetParent(transforms[pos]);
     }
 
-    /*public void Damage(GameObject obj, int damage)
-    {
-        if (obj.TryGetComponent<IDamage>(out IDamage idam))
-            idam.TakeDamage(damage);
-
-        if (obj.TryGetComponent<PHM_CharStat>(out PHM_CharStat charStat))
-        {
-            for (int i = 0; i < transforms.Length; i++)
-            {
-                if (obj.transform.parent.name == transforms[i].name)
-                {
-                    Debug.Log("Ã£¾Ò´Ù");
-                    player[i].CurHP -= damage;
-                }
-            }
-        }
-    }*/
-
-
 }

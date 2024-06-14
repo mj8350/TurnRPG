@@ -239,7 +239,6 @@ public class FightManager : MonoBehaviour
             {
                 if (obj.transform.parent.name == PlayerPos[i].name)
                 {
-                    Debug.Log("찾았다");
                     charStat.TakeDamage(damage);
                     StartCoroutine(getDamage(i, damage));
                     StartCoroutine(DamageT(obj, damage, 2.3f));
@@ -282,10 +281,32 @@ public class FightManager : MonoBehaviour
             {
                 if (obj.transform.parent.name == PlayerPos[i].name)
                 {
-                    Debug.Log("찾았다");
                     StartCoroutine(getDamage(i, -1 * heal));
                 }
             }
         }
+    }
+
+    public int DamageSum(int dftDamage, int critical, int def)
+    {
+        int finalDmg = dftDamage - (def / 2);
+
+        if (critical <= Random.Range(1, 101))
+            finalDmg *= 2;
+
+        return finalDmg;
+    }
+
+    public int GMChar(GameObject obj)
+    {
+        for (int i = 0; i < PlayerPos.Length; i++)
+        {
+            if (obj.transform.parent == PlayerPos[i])
+            {
+                return i;
+            }
+        }
+        return -1;
+
     }
 }
