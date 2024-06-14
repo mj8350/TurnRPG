@@ -69,7 +69,7 @@ public class GameManager : Singleton<GameManager>
 
         CreateUserData(0, 0);
         CreateUserData(1, 1);
-        CreateUserData(2, 2);
+        CreateUserData(2, 3);
     }
 
     public void CreateUserData(int id, int charactor)
@@ -110,24 +110,5 @@ public class GameManager : Singleton<GameManager>
         GameObject obj = Instantiate(Prefeb[charactor], transforms[pos]);
         obj.transform.SetParent(transforms[pos]);
     }
-
-    /*public void Damage(GameObject obj, int damage)
-    {
-        if (obj.TryGetComponent<IDamage>(out IDamage idam))
-            idam.TakeDamage(damage);
-
-        if (obj.TryGetComponent<PHM_CharStat>(out PHM_CharStat charStat))
-        {
-            for (int i = 0; i < transforms.Length; i++)
-            {
-                if (obj.transform.parent.name == transforms[i].name)
-                {
-                    Debug.Log("Ã£¾Ò´Ù");
-                    player[i].CurHP -= damage;
-                }
-            }
-        }
-    }*/
-
 
 }

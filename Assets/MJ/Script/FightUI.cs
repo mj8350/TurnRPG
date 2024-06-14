@@ -195,8 +195,8 @@ public class FightUI : MonoBehaviour
             if (obj.TryGetComponent<PHM_MonsterStat>(out PHM_MonsterStat monsterStat))
             {
                 M_Level[i].text = monsterStat.Level.ToString();
-                M_PD[i].text = monsterStat.P_Defense.ToString();
-                M_MD[i].text = monsterStat.M_Defense.ToString();
+                M_PD[i].text = (monsterStat.P_Defense/2).ToString();
+                M_MD[i].text = (monsterStat.M_Defense/2).ToString();
             }
         }
     }
