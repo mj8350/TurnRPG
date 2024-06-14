@@ -291,7 +291,9 @@ public class FightManager : MonoBehaviour
     {
         int finalDmg = dftDamage - (def / 2);
 
-        if (critical <= Random.Range(1, 101))
+        int ran = Random.Range(1, 101);
+        Debug.Log(ran);
+        if (10+(critical*2) <= ran)
             finalDmg *= 2;
 
         return finalDmg;
