@@ -1,10 +1,8 @@
 using Assets.HeroEditor.Common.Scripts.ExampleScripts;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.VFX;
 
 public class FightManager : MonoBehaviour
 {
@@ -36,9 +34,9 @@ public class FightManager : MonoBehaviour
     private Vector3 turnPos;
     public GameObject turnLight;
 
-    public GameObject DamageCanvas;
-    public TextMeshProUGUI DamageText;
-    public GameObject Critical;
+    //public GameObject DamageCanvas;
+    //public TextMeshProUGUI DamageText;
+    //public GameObject Critical;
 
     private void Awake()
     {
@@ -58,7 +56,7 @@ public class FightManager : MonoBehaviour
         monsterAi = GameObject.FindFirstObjectByType<MonsterAi>();
         turn = GameObject.FindFirstObjectByType<MJ_Turn>();
         fightUI = GameObject.FindFirstObjectByType<FightUI>();
-        DamageCanvas.SetActive(false);
+        //DamageCanvas.SetActive(false);
     }
 
     private void Start()
@@ -123,11 +121,19 @@ public class FightManager : MonoBehaviour
 
     public void MonsterTurn(int pos)
     {
-
+        int plyDef;
         // 무작위 플레이어를 공격
         targetPlayer = PlayerPos[Random.Range(0, PlayerPos.Length)].GetChild(0).gameObject;
         monsterAi.MonsterStart(pos); // 몬스터의 공격 시작
-        Damage(targetPlayer, 5); // 몬스터의 공격력만큼 피해 입힘
+        
+        MonsterPos[pos].GetChild(0).TryGetComponent<PHM_MonsterStat>(out var monsterStat);
+        int dftDmg = big(monsterStat.Strength, monsterStat.Magic);
+        if (dftDmg == monsterStat.Strength)
+            plyDef = GameManager.Instance.player[GMChar(targetPlayer)].P_Defense;
+        else
+            plyDef = GameManager.Instance.player[GMChar(targetPlayer)].Magic;
+
+        Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef)); // 몬스터의 공격력만큼 피해 입힘
 
         //if (onTaunt && !onStun) // 도발상태라면 도발타겟 공격
         //{
@@ -165,13 +171,23 @@ public class FightManager : MonoBehaviour
 
     public void TauntMonsterTurn(int pos, GameObject target)
     {
+        int plyDef;
         targetPlayer = target;
         monsterAi.MonsterStart(pos); // 몬스터의 공격 시작
-        Damage(targetPlayer, 5); // 몬스터의 공격력만큼 피해 입힘
+
+        MonsterPos[pos].GetChild(0).TryGetComponent<PHM_MonsterStat>(out var monsterStat);
+        int dftDmg = big(monsterStat.Strength, monsterStat.Magic);
+        if (dftDmg == monsterStat.Strength)
+            plyDef = GameManager.Instance.player[GMChar(targetPlayer)].P_Defense;
+        else
+            plyDef = GameManager.Instance.player[GMChar(targetPlayer)].Magic;
+
+        Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef));
     }
 
     public void PlayerTurnAttack(int who/*int pos*/)
     {
+        int monDef;
         //PlayerPos[who].TryGetComponent<BowExample>(out BowExample);
         //PlayerPos[who].TryGetComponent<AttackingExample>(out AttackingExample);
         PlayerPos[who].transform.GetChild(0).TryGetComponent<AttackingExample>(out AttackingExample);
@@ -179,7 +195,17 @@ public class FightManager : MonoBehaviour
 
         //GameObject obj = MonsterPos[pos].GetChild(0).gameObject;
         GameObject obj = targetMonster;
-        Damage(obj, 5);
+        obj.TryGetComponent<PHM_MonsterStat>(out var monsterStat);
+        int dftDmg = big(GameManager.Instance.player[who].Strength, GameManager.Instance.player[who].Magic);
+        if( dftDmg == GameManager.Instance.player[who].Strength)
+            monDef = monsterStat.P_Defense;
+        else
+            monDef = monsterStat.M_Defense;
+        Damage(obj, DamageSum(dftDmg, GameManager.Instance.player[who].Critical,monDef));
+    }
+    int big(int a, int b)
+    {
+        return a > b ? a : b;
     }
 
     public void SetPlayerSkillManager(int playerIndex, CharSkillManager skillManager)
@@ -255,22 +281,36 @@ public class FightManager : MonoBehaviour
         
     }
 
+    //private IEnumerator DamageT(GameObject obj, int damage, float time, bool onCri)
     private IEnumerator DamageT(GameObject obj, int damage, float time)
     {
         yield return new WaitForSeconds(time);
-        
+        GameObject DT;
         damagePos = obj.transform.position;
         damagePos.y += 1;
-        DamageCanvas.transform.position = damagePos;
-        DamageCanvas.SetActive(true);
+        //if (onCri)
+        if(true)
+            DT = PoolManager.Inst.pools[1].Pop();
+        else
+            DT = PoolManager.Inst.pools[0].Pop();
 
-        DamageText.text = damage.ToString();
-        for(int i = 0; i < 50;i++)
+        if(DT.TryGetComponent<DamageText>(out DamageText dt))
         {
-            DamageCanvas.transform.position += Vector3.up * Time.deltaTime * 5;
-            yield return new WaitForSeconds(0.01f);
+            DT.transform.position = damagePos;
+            dt.TextChange(damage);
+            dt.StartUp();
         }
-        DamageCanvas.SetActive(false);
+
+        //DamageCanvas.transform.position = damagePos;
+        //DamageCanvas.SetActive(true);
+
+        //DamageText.text = damage.ToString();
+        //for(int i = 0; i < 50;i++)
+        //{
+        //    DamageCanvas.transform.position += Vector3.up * Time.deltaTime * 5;
+        //    yield return new WaitForSeconds(0.01f);
+        //}
+        //DamageCanvas.SetActive(false);
     }
 
     public void Heal(GameObject obj, int heal)
@@ -281,22 +321,55 @@ public class FightManager : MonoBehaviour
             {
                 if (obj.transform.parent.name == PlayerPos[i].name)
                 {
-                    StartCoroutine(getDamage(i, -1 * heal));
+                    StartCoroutine(getHeal(i,heal));
+                    StartCoroutine(HealText(obj, heal));
                 }
             }
         }
     }
+    private IEnumerator getHeal(int i, int heal)
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (GameManager.Instance.player[i].MaxHP < GameManager.Instance.player[i].CurHP + heal)
+            GameManager.Instance.player[i].CurHP = GameManager.Instance.player[i].MaxHP;
+        else
+            GameManager.Instance.player[i].CurHP += heal;
+    }
+    private IEnumerator HealText(GameObject obj, int heal)
+    {
+        yield return new WaitForSeconds(1f);
+        GameObject DT;
+        damagePos = obj.transform.position;
+        damagePos.y += 1;
+        DT = PoolManager.Inst.pools[2].Pop();
 
+        if (DT.TryGetComponent<DamageText>(out DamageText dt))
+        {
+            DT.transform.position = damagePos;
+            dt.TextChange(heal);
+            dt.StartUp();
+        }
+    }
+
+    //bool onCri = false;
+    //public int DamageSum(int dftDamage, int critical, int def, out bool onCri)
     public int DamageSum(int dftDamage, int critical, int def)
     {
         int finalDmg = dftDamage - (def / 2);
 
         int ran = Random.Range(1, 101);
         Debug.Log(ran);
-        if (10+(critical*2) >= ran)
+        if (10 + (critical * 2) >= ran)
+        {
             finalDmg *= 2;
+            //onCri = true;
+        }//else
+            //onCri = false;
 
-        return finalDmg;
+        if (finalDmg <= 0)
+            return 0;
+        else
+            return finalDmg;
     }
 
     public int GMChar(GameObject obj)
