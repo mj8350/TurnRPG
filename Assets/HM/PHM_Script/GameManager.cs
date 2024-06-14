@@ -69,7 +69,7 @@ public class GameManager : Singleton<GameManager>
 
         CreateUserData(0, 0);
         CreateUserData(1, 1);
-        CreateUserData(2, 2);
+        CreateUserData(2, 3);
     }
 
     public void CreateUserData(int id, int charactor)

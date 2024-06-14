@@ -13,25 +13,12 @@ public class Wizard : MonoBehaviour
         skillsManager = gameObject.AddComponent<CharSkillManager>();
 
         // 마법사의 스킬 설정
-        skillsManager.primarySkill = gameObject.AddComponent<WideSkill>();
-        skillsManager.secondarySkill = gameObject.AddComponent<TargetSkill>();
+        skillsManager.primarySkill = gameObject.AddComponent<WizardWideSkill>();
+        skillsManager.secondarySkill = gameObject.AddComponent<WizardTargetSkill>();
 
         //// 필요한 경우 스킬 활성화
         //skillsManager.ActivatePrimarySkill();
         //skillsManager.ActivateSecondarySkill();
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.A)) 
-        {
-            skillsManager.ActivatePrimarySkill();
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            skillsManager.ActivateSecondarySkill();
-        }
     }
 
     public void ActivePrimary()
