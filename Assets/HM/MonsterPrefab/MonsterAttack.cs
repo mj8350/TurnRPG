@@ -9,9 +9,11 @@ public class MonsterAttack : MonoBehaviour
     public bool onTaunt;
     public bool onStun;
     public bool onDotDamage;
+    public bool onDotDamage_2;
 
     public GameObject targetPlayer;
     public GameObject tauntTarget;
+    public bool onCri;
 
     private void Awake()
     {
@@ -54,19 +56,23 @@ public class MonsterAttack : MonoBehaviour
         onDotDamage = true;
     }
 
+    public void SetDotDamage_2()
+    {
+        onDotDamage_2 = true;
+    }
+
     private void AttackProvokedTarget(int pos)
     {
         Debug.Log(targetPlayer);
         //FightManager.Instance.monsterAi.MonsterStart(pos);
         //FightManager.Instance.Damage(targetPlayer, 5);
-        FightManager.Instance.TauntMonsterTurn(pos, tauntTarget);
+        FightManager.Instance.TauntMonsterTurn(pos, tauntTarget, onCri);
         onTaunt = false;
     }
 
     private void AttackNormalTarget(int pos)
     {
-        Debug.Log(targetPlayer);
-        FightManager.Instance.MonsterTurn(pos);
+        FightManager.Instance.MonsterTurn(pos, onCri);
     }
 
     private void Stunning()

@@ -59,21 +59,7 @@ public class FightManager : MonoBehaviour
         //DamageCanvas.SetActive(false);
     }
 
-    private void Start()
-    {
-        
-
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-            //MonsterTurn(0);
-        if(Input.GetKeyDown(KeyCode.S))
-            PlayerTurnAttack(0);
-
-        
-    }
+   
 
     public void NewTurn()
     {
@@ -119,7 +105,7 @@ public class FightManager : MonoBehaviour
     //    }
     //}
 
-    public void MonsterTurn(int pos)
+    public void MonsterTurn(int pos, bool onCri)
     {
         int plyDef;
         // 무작위 플레이어를 공격
@@ -131,45 +117,14 @@ public class FightManager : MonoBehaviour
         if (dftDmg == monsterStat.Strength)
             plyDef = GameManager.Instance.player[GMChar(targetPlayer)].P_Defense;
         else
-            plyDef = GameManager.Instance.player[GMChar(targetPlayer)].Magic;
+            plyDef = GameManager.Instance.player[GMChar(targetPlayer)].M_Defense;
 
-        Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef)); // 몬스터의 공격력만큼 피해 입힘
-
-        //if (onTaunt && !onStun) // 도발상태라면 도발타겟 공격
-        //{
-        //    if (provokedMonsters.Count > 0)
-        //    {
-        //        GameObject provokedMonster = provokedMonsters[0]; // 도발된 몬스터 중 첫 번째 몬스터 선택
-        //        provokedMonsters.RemoveAt(0); // 도발된 몬스터 리스트에서 제거
-
-        //        // 도발된 몬스터를 공격하는 코드 추가
-        //        provokedMonster.GetComponent<MonsterAttack>().MonsterTurn(pos);
-        //    }
-        //    else
-        //    {
-        //        Debug.LogWarning("도발된 몬스터가 없습니다.");
-        //    }
-        //}
-        //else if (!onTaunt && !onStun) // 도발 상태가 아니고 스턴 상태도 아니라면
-        //{
-        //    // 무작위 플레이어를 공격
-        //    targetPlayer = PlayerPos[Random.Range(0, PlayerPos.Length)].GetChild(0).gameObject;
-        //    monsterAi.MonsterStart(pos); // 몬스터의 공격 시작
-        //    Damage(targetPlayer, 5); // 몬스터의 공격력만큼 피해 입힘
-        //}
-        //else if (onStun) // 스턴 상태라면
-        //{
-        //    //다음 턴으로 넘김
-        //    TurnQueue.Dequeue();
-        //    TrunOut();
-        //    TurnDraw();
-        //    onStun = false; // 스턴 상태 비활성화
-
-        //}
+        Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri); // 몬스터의 공격력만큼 피해 입힘
+        
 
     }
 
-    public void TauntMonsterTurn(int pos, GameObject target)
+    public void TauntMonsterTurn(int pos, GameObject target, bool onCri)
     {
         int plyDef;
         targetPlayer = target;
@@ -182,10 +137,10 @@ public class FightManager : MonoBehaviour
         else
             plyDef = GameManager.Instance.player[GMChar(targetPlayer)].Magic;
 
-        Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef));
+        Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri);
     }
 
-    public void PlayerTurnAttack(int who/*int pos*/)
+    public void PlayerTurnAttack(int who, bool onCri)
     {
         int monDef;
         //PlayerPos[who].TryGetComponent<BowExample>(out BowExample);
@@ -201,7 +156,7 @@ public class FightManager : MonoBehaviour
             monDef = monsterStat.P_Defense;
         else
             monDef = monsterStat.M_Defense;
-        Damage(obj, DamageSum(dftDmg, GameManager.Instance.player[who].Critical,monDef));
+        Damage(obj, DamageSum(dftDmg, GameManager.Instance.player[who].Critical,monDef , out onCri), onCri);
     }
     int big(int a, int b)
     {
@@ -251,12 +206,12 @@ public class FightManager : MonoBehaviour
     }
 
     Vector3 damagePos;
-    public void Damage(GameObject obj, int damage)
+    public void Damage(GameObject obj, int damage, bool onCri)
     {
         if (obj.TryGetComponent<IDamage>(out IDamage idam))
         {
             idam.TakeDamage(damage);
-            StartCoroutine(DamageT(obj, damage,1));
+            StartCoroutine(DamageT(obj, damage,1, onCri));
         }
 
         if (obj.TryGetComponent<PHM_CharStat>(out PHM_CharStat charStat))
@@ -267,12 +222,13 @@ public class FightManager : MonoBehaviour
                 {
                     charStat.TakeDamage(damage);
                     StartCoroutine(getDamage(i, damage));
-                    StartCoroutine(DamageT(obj, damage, 2.3f));
+                    StartCoroutine(DamageT(obj, damage, 2.3f, onCri));
                 }
             }
         }
         
     }
+
 
     private IEnumerator getDamage(int i, int damage)
     {
@@ -281,15 +237,14 @@ public class FightManager : MonoBehaviour
         
     }
 
-    //private IEnumerator DamageT(GameObject obj, int damage, float time, bool onCri)
-    private IEnumerator DamageT(GameObject obj, int damage, float time)
+    private IEnumerator DamageT(GameObject obj, int damage, float time, bool onCri)
+    //private IEnumerator DamageT(GameObject obj, int damage, float time)
     {
         yield return new WaitForSeconds(time);
         GameObject DT;
         damagePos = obj.transform.position;
         damagePos.y += 1;
-        //if (onCri)
-        if(true)
+        if (onCri)
             DT = PoolManager.Inst.pools[1].Pop();
         else
             DT = PoolManager.Inst.pools[0].Pop();
@@ -352,8 +307,8 @@ public class FightManager : MonoBehaviour
     }
 
     //bool onCri = false;
-    //public int DamageSum(int dftDamage, int critical, int def, out bool onCri)
-    public int DamageSum(int dftDamage, int critical, int def)
+    public int DamageSum(int dftDamage, int critical, int def, out bool onCri)
+    //public int DamageSum(int dftDamage, int critical, int def)
     {
         int finalDmg = dftDamage - (def / 2);
 
@@ -362,9 +317,10 @@ public class FightManager : MonoBehaviour
         if (10 + (critical * 2) >= ran)
         {
             finalDmg *= 2;
-            //onCri = true;
-        }//else
-            //onCri = false;
+            onCri = true;
+        }
+        else
+            onCri = false;
 
         if (finalDmg <= 0)
             return 0;
@@ -384,4 +340,5 @@ public class FightManager : MonoBehaviour
         return -1;
 
     }
+
 }

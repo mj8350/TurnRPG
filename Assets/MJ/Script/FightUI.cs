@@ -1,7 +1,9 @@
+using Assets.HeroEditor.FantasyHeroes.TestRoom.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,6 +31,7 @@ public class FightUI : MonoBehaviour
     public TextMeshProUGUI[] M_MD;
 
     public MonsterAttack[] monsterAttacks;
+    public DotDamageSkill dotDamage;
 
 
     private void Awake()
@@ -38,7 +41,6 @@ public class FightUI : MonoBehaviour
         monsterAttacks[0] = monsterAttacks[2];
         monsterAttacks[2] = temp;
     }
-
     private void Start()
     {
         for (int i = 0; i < MonsterUI.Length; i++)
@@ -83,14 +85,18 @@ public class FightUI : MonoBehaviour
         TurnImg[count].gameObject.SetActive(false);
     }
 
+    private int[] dotCount = {0, 0, 0};
+    private int[] dotCount_2 = { 0, 0, 0 };
     public void DrawTurn()
     {
+        
         if (FightManager.Instance.TurnQueue.Count == 0)
         {
             FightManager.Instance.NewTurn();
             NewTurn();
             count = -1;
             Debug.Log("라운드 리셋");
+            
         }
 
         int pos = FightManager.Instance.TurnQueue.Peek();
@@ -105,10 +111,12 @@ public class FightUI : MonoBehaviour
             //monsterAi.MonsterStart(pos-3);
             //FightManager.Instance.MonsterTurn(pos - 3);
             monsterAttacks[pos-3].MonsterTurn(pos -3);
-            if (monsterAttacks[pos-3].onDotDamage)
-            {
-                FightManager.Instance.Damage(monsterAttacks[pos-3].gameObject, 3);
-            }
+
+            StartCoroutine("Dot", pos);
+
+
+
+
 
         }
         count++;
@@ -116,10 +124,26 @@ public class FightUI : MonoBehaviour
         HPChange();
     }
 
+    IEnumerator Dot(int pos)
+    {
+        if (monsterAttacks[pos - 3].onDotDamage)
+        {
+            dotCount[pos - 3] += 1;
+            FightManager.Instance.Damage(monsterAttacks[pos - 3].gameObject, 3 * dotCount[pos - 3], false);
+        }
+        yield return new WaitForSeconds(0.2f);
+        if (monsterAttacks[pos - 3].onDotDamage_2)
+        {
+            dotCount_2[pos - 3] += 1;
+            FightManager.Instance.Damage(monsterAttacks[pos - 3].gameObject, 5, false);
+        }
+    }
+
     public void NewTurn()
     {
         for (int i = 0; i < FightManager.Instance.TurnQueue.Count; i++)
             TurnImg[i].gameObject.SetActive(true);
+
     }
 
     public void SkillTextInfo(int pos)

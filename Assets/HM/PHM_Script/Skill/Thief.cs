@@ -13,23 +13,10 @@ public class Thief : MonoBehaviour
 
         // 스킬 설정
         skillsManager.primarySkill = gameObject.AddComponent<DotDamageSkill>();
-        skillsManager.secondarySkill = gameObject.AddComponent<TargetSkill>();
+        skillsManager.secondarySkill = gameObject.AddComponent<ThiefTargetSkill>();
 
         //// 필요한 경우 스킬 활성화
         //skillsManager.ActivatePrimarySkill();
         //skillsManager.ActivateSecondarySkill();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            skillsManager.ActivatePrimarySkill();
-        }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            skillsManager.ActivateSecondarySkill();
-        }
     }
 }

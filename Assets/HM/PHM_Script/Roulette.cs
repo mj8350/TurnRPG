@@ -37,6 +37,8 @@ public class Roulette : MonoBehaviour
     public CharSkillManager skillsManager;
     public SkillButton skillBtn;
 
+    public bool onCri;
+
 
     private void Awake()
     {
@@ -172,7 +174,7 @@ public class Roulette : MonoBehaviour
             Debug.Log("공격 성공!");
             if (FightManager.Instance != null)
             {
-                FightManager.Instance.PlayerTurnAttack(FightManager.Instance.TurnQueue.Dequeue());
+                FightManager.Instance.PlayerTurnAttack(FightManager.Instance.TurnQueue.Dequeue(), onCri);
                 Invoke("InitRoulette", 1);
             }
             else
