@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using static Unity.Collections.AllocatorManager;
 
 public class ClickEvent : MonoBehaviour
 {
@@ -106,6 +107,7 @@ public class ClickEvent : MonoBehaviour
             InstantiateSelectRing();
             Debug.Log(selectedObj.transform);
         }
+        
         else
         {
             onSelected = false;
@@ -169,8 +171,11 @@ public class ClickEvent : MonoBehaviour
         //}
         if (myturn)
         {
+            
             Debug.Log("어택킨다");
+
             FightManager.Instance.onAttack = true;
+            
             if (onSkill)
             {
                 SkillImage.gameObject.SetActive(false);
@@ -181,28 +186,31 @@ public class ClickEvent : MonoBehaviour
                 ItemImage.gameObject.SetActive(false);
                 onItem = false;
             }
+            
+            
+
         }
     }
 
-    public void ActiveWideSkill()
-    {
-        Debug.Log("어택킨다");
-        FightManager.Instance.onAttack = true;
-        if (onSkill)
-        {
-            SkillImage.gameObject.SetActive(false);
-            onSkill = false;
-        }
-        if (onItem)
-        {
-            ItemImage.gameObject.SetActive(false);
-            onItem = false;
-        }
+    //public void ActiveWideSkill()
+    //{
+    //    Debug.Log("어택킨다");
+    //    FightManager.Instance.onAttack = true;
+    //    if (onSkill)
+    //    {
+    //        SkillImage.gameObject.SetActive(false);
+    //        onSkill = false;
+    //    }
+    //    if (onItem)
+    //    {
+    //        ItemImage.gameObject.SetActive(false);
+    //        onItem = false;
+    //    }
 
-        onRoulette = true;
-        if (!rouletteImage.gameObject.activeSelf)
-            rouletteImage.gameObject.SetActive(true);
-    }
+    //    onRoulette = true;
+    //    if (!rouletteImage.gameObject.activeSelf)
+    //        rouletteImage.gameObject.SetActive(true);
+    //}
 
 
     public void ShowItemInfo()

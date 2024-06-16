@@ -36,10 +36,14 @@ public class StunSkill : BaseSkill
             targetObject = click.selectedObj;
             if (targetObject != null)
             {
+                PHM_CharStat stat = GetComponent<PHM_CharStat>();
                 targetObject.TryGetComponent<MonsterAttack>(out MonsterAttack stunTargetScript);
                 if (stunTargetScript != null)
-                {
+                { 
+                    int damage = stat.Strength / 2;
+                    FightManager.Instance.Damage(targetObject, damage, onCri);
                     stunTargetScript.SetStunTarget(); // 스턴된 몬스터의 타겟 설정
+                    
                 }
                 else
                 {

@@ -25,6 +25,8 @@ public class Player
 
     public int Level;
     public int EXP;
+
+    public bool onPlayerDead;
 }
 
 [System.Serializable]
@@ -44,6 +46,8 @@ public class Monsters
     public int CurHP;
 
     public int Give_EXP;
+
+    public bool onMonsterDead;
 }
 
 public class GameManager : Singleton<GameManager>
@@ -52,6 +56,7 @@ public class GameManager : Singleton<GameManager>
     public PHM_CharStat charStat;
     public Transform[] transforms;
 
+    private Dictionary<GameObject, int> playerObjectToId = new Dictionary<GameObject, int>();
 
     public GameObject[] Prefeb;
 
@@ -68,7 +73,7 @@ public class GameManager : Singleton<GameManager>
         //}
 
         CreateUserData(0, 0);
-        CreateUserData(1, 4);
+        CreateUserData(1, 1);
         CreateUserData(2, 2);
     }
 
@@ -101,6 +106,9 @@ public class GameManager : Singleton<GameManager>
         player[id].Level = 1;
         player[id].EXP = 0;
 
+        player[id].onPlayerDead = charStat.onPlayerDead = false;
+
+        playerObjectToId.Add(Prefeb[charactor], id);
     }
 
     public void Player_Select(int pos, int charactor)
@@ -109,6 +117,40 @@ public class GameManager : Singleton<GameManager>
             Destroy(transforms[pos].GetChild(0).gameObject);
         GameObject obj = Instantiate(Prefeb[charactor], transforms[pos]);
         obj.transform.SetParent(transforms[pos]);
+    }
+
+    //public void RegisterPlayerGameObject(GameObject playerObject, int playerId)
+    //{
+    //    if (!playerObjectToId.ContainsKey(playerObject))
+    //    {
+    //        playerObjectToId.Add(playerObject, playerId);
+    //    }
+    //    else
+    //    {
+    //        playerObjectToId[playerObject] = playerId;
+    //    }
+    //}
+
+    public int GetPlayerIdByGameObject(GameObject playerObject)
+    {
+        if (playerObjectToId.TryGetValue(playerObject, out int playerId))
+        {
+            return playerId;
+        }
+        else
+        {
+            Debug.LogError("Player ID not found for GameObject: " + playerObject.name);
+            return -1; // 예외 처리 또는 기본 값 설정
+        }
+    }
+
+
+    public void ResurrectPlayer(int playerId)
+    {
+        // 특정 playerId에 해당하는 플레이어를 부활시키는 로직을 구현
+        // 예를 들어:
+        player[playerId].onPlayerDead = false;
+        player[playerId].CurHP = player[playerId].MaxHP; // 체력 회복 등의 처리 추가 가능
     }
 
 }

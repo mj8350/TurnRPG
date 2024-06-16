@@ -51,7 +51,8 @@ public class DotDamageSkill : BaseSkill
                 click.selectedObj.TryGetComponent<PHM_MonsterStat>(out PHM_MonsterStat monStat);
                 if (stat != null)
                 {
-                    FightManager.Instance.Damage(targetObject, 1, onCri); // todo: 애니메이션 재생 필요
+                    int damage = stat.Strength / 2;
+                    FightManager.Instance.Damage(targetObject, damage, onCri); // todo: 애니메이션 재생 필요
                 }
             }
         }

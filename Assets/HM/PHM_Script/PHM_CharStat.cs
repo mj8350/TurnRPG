@@ -23,6 +23,7 @@ public class PHM_CharStat : MonoBehaviour//, IDamage
     public string Skill01;
     public string Skill02;
 
+    public bool onPlayerDead;
 
     // 전사 : 높은 방어력, 높은 공격력 위주.
     // 마법사 : 높은 마법력, 광역 딜 담당.

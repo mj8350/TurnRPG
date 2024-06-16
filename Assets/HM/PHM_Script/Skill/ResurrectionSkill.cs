@@ -8,7 +8,7 @@ public class ResurrectionSkill : BaseSkill
     private ClickEvent click;
     public Roulette roulette;
     private GameObject targetObject;
-    private int successProbability = 20;
+    private int successProbability = 100;
 
 
     private void Awake()
@@ -19,44 +19,43 @@ public class ResurrectionSkill : BaseSkill
 
     public override void Skill_Active()
     {
-        if (roulette.randomNumber < successProbability)
+        targetObject = click.selectedObj;
+        if (FightManager.Instance.IsResurrectionTarget(targetObject))
         {
-            Debug.Log("부활 스킬 발동");
-            roulette.isAttackSuccessful = true;
-            roulette.InvokeInitRoulette();
-            gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
-            motion.Victory();
-            targetObject = click.selectedObj;
-
-            if (targetObject != null)
+            if (roulette.randomNumber < successProbability)
             {
-                ResurrectTarget();
+                Debug.Log("부활 스킬 발동");
+                roulette.isAttackSuccessful = true;
+                roulette.InvokeInitRoulette();
+                gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
+                motion.Victory();
+                ApplyResurrection();
+
             }
             else
             {
-                Debug.LogError("부활 대상을 찾을 수 없습니다.");
+                roulette.isAttackSuccessful = false;
+                Debug.Log("부활 실패!");
+                roulette.InvokeInitRoulette();
             }
         }
         else
         {
-            roulette.isAttackSuccessful = false;
-            Debug.Log("공격 실패!");
-            roulette.InvokeInitRoulette();
+            Debug.Log("부활 대상이 아닙니다.");
         }
+    
     }
 
-    private void ResurrectTarget()
-    {
-        PHM_CharStat healthComponent = targetObject.GetComponent<PHM_CharStat>();
-        if (healthComponent != null)
+    private void ApplyResurrection()
+    {        
+        if (targetObject != null && targetObject.CompareTag("Player"))
         {
-            int resurrectionAmount = 50; // 예시로 50% 회복량 설정
-            healthComponent.Helth += resurrectionAmount;
-            Debug.Log("부활시킵니다.");
+            FightManager.Instance.Resurrection(targetObject);
         }
         else
         {
-            Debug.LogError("부활 시킬 수 없습니다.");
+            Debug.LogError("부활 대상이 아닙니다.");
         }
     }
+    
 }

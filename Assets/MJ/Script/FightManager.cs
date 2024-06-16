@@ -234,6 +234,13 @@ public class FightManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         GameManager.Instance.player[i].CurHP -= damage;
+
+        if (GameManager.Instance.player[i].CurHP <= 0)
+        {
+            GameManager.Instance.player[i].onPlayerDead = true;
+            // 죽음 애니메이션 표시
+            // 캐릭터의 턴은 넘기도록.
+        }
         
     }
 
@@ -282,6 +289,38 @@ public class FightManager : MonoBehaviour
             }
         }
     }
+
+    public void Resurrection(GameObject obj)
+    {
+        if (obj.TryGetComponent<PHM_CharStat>(out PHM_CharStat charStat))
+        {
+            for (int i = 0; i < PlayerPos.Length; i++)
+            {
+                if (obj.transform.parent.name == PlayerPos[i].name)
+                {
+                    StartCoroutine(getResurrection(i));
+                }
+            }
+        }
+    }
+
+    public bool IsResurrectionTarget(GameObject obj)
+    {
+        // 전달받은 GameObject가 플레이어인지 확인하고, 플레이어이며 onPlayerDead가 true이면 부활 대상으로 판단합니다.
+        if (obj != null && obj.CompareTag("Player"))
+        {
+            int playerId = GMChar(obj);
+            if (playerId != -1 && GameManager.Instance.player[playerId].onPlayerDead)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+
     private IEnumerator getHeal(int i, int heal)
     {
         yield return new WaitForSeconds(0.5f);
@@ -290,6 +329,21 @@ public class FightManager : MonoBehaviour
         else
             GameManager.Instance.player[i].CurHP += heal;
     }
+    private IEnumerator getResurrection(int i)
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (GameManager.Instance.player[i].onPlayerDead)
+        {
+            GameManager.Instance.player[i].CurHP = GameManager.Instance.player[i].MaxHP / 2;
+            GameManager.Instance.player[i].onPlayerDead = false;
+        }
+        else
+            Debug.Log("부활대상이 아닙니다.");
+    }
+
+    
+
+
     private IEnumerator HealText(GameObject obj, int heal)
     {
         yield return new WaitForSeconds(1f);
