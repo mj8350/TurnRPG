@@ -9,12 +9,17 @@ public class MonsterChar : MonoBehaviour, IDamage
     public GameObject Fire;
     public GameObject Stun;
 
+    public PHM_MonsterStat monStat;
+
     private void Awake()
     {
+        TryGetComponent<PHM_MonsterStat>(out monStat);
         Angry.SetActive(false);
         Poison.SetActive(false);
         Fire.SetActive(false);
         Stun.SetActive(false);
+
+        dftVect = transform.position;
     }
 
     public void AngryInit(bool on)
@@ -48,7 +53,7 @@ public class MonsterChar : MonoBehaviour, IDamage
         Debug.Log($"{gameObject.name}이(가) {damage}의 데미지를 입었습니다.");
         StartCoroutine("Hit");
     }
-
+    Vector3 dftVect;
     IEnumerator Hit()
     {
         yield return new WaitForSeconds(0.5f);
@@ -61,6 +66,19 @@ public class MonsterChar : MonoBehaviour, IDamage
         {
             transform.position += Vector3.left * Time.deltaTime * 20f;
             yield return new WaitForSeconds(0.02f);
+        }
+        transform.position = dftVect;
+    }
+
+    public bool ImDie()
+    {
+        if (monStat.curHP <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

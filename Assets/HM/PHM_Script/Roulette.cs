@@ -195,6 +195,7 @@ public class Roulette : MonoBehaviour
         {
             isAttackSuccessful = false;
             Debug.Log("공격 실패!");
+            StartCoroutine(DamageT(FightManager.Instance.PlayerPos[FightManager.Instance.TurnQueue.Peek()].gameObject));
             FightManager.Instance.TurnQueue.Dequeue();
             Invoke("InitRoulette", 1);
         }
@@ -269,5 +270,22 @@ public class Roulette : MonoBehaviour
         //}
         //Invoke("Turnoff", 1);
 
+    }
+
+    Vector3 damagePos;
+    private IEnumerator DamageT(GameObject obj)
+    {
+        yield return new WaitForSeconds(1);
+        GameObject DT;
+        damagePos = obj.transform.position;
+        damagePos.y += 1;
+        DT = PoolManager.Inst.pools[3].Pop();
+
+        if (DT.TryGetComponent<DamageText>(out DamageText dt))
+        {
+            DT.transform.position = damagePos;
+            dt.TextChange("실패");
+            dt.StartUp();
+        }
     }
 }

@@ -40,6 +40,7 @@ public class FightUI : MonoBehaviour
         MonsterAttack temp = monsterAttacks[0];
         monsterAttacks[0] = monsterAttacks[2];
         monsterAttacks[2] = temp;
+        dead = false;
     }
     private void Start()
     {
@@ -87,6 +88,8 @@ public class FightUI : MonoBehaviour
 
     private int[] dotCount = {0, 0, 0};
     private int[] dotCount_2 = { 0, 0, 0 };
+
+    private bool dead;
     public void DrawTurn()
     {
         
@@ -102,26 +105,59 @@ public class FightUI : MonoBehaviour
         int pos = FightManager.Instance.TurnQueue.Peek();
         if (pos < 3)
         {
-            Debug.Log(FightManager.Instance.PlayerPos[pos].GetChild(0).gameObject.name); // 큐에서 빼기 전에 이름 확인
-            SkillTextInfo(pos); // 큐에서 빼온 숫자를 인자로 넘겨줌
+            if (FightManager.Instance.DeadList.Count > 0)
+            {
+                for (int i = 0; i < FightManager.Instance.DeadList.Count; i++)
+                {
+                    if (pos == FightManager.Instance.DeadList[i])
+                        dead = true;
+                }
+
+            }
+            if (!dead)
+            {
+                Debug.Log(FightManager.Instance.PlayerPos[pos].GetChild(0).gameObject.name); // 큐에서 빼기 전에 이름 확인
+                SkillTextInfo(pos); // 큐에서 빼온 숫자를 인자로 넘겨줌
+            }
+            count++;
+            Debug.Log("턴 드로우");
+            HPChange(); 
+            if (dead)
+            {
+                FightManager.Instance.TurnQueue.Dequeue();
+                dead = false;
+                FightManager.Instance.TurnDraw();
+            }
         }
         else
         {
             Debug.Log("몬스터 공격턴");
             //monsterAi.MonsterStart(pos-3);
             //FightManager.Instance.MonsterTurn(pos - 3);
-            monsterAttacks[pos-3].MonsterTurn(pos -3);
 
+            //if (!dead)
             StartCoroutine("Dot", pos);
 
+            //if (FightManager.Instance.DeadList.Count > 0)
+            //{
+            //    for(int i = 0; i<FightManager.Instance.DeadList.Count; i++)
+            //    {
+            //        if (pos == FightManager.Instance.DeadList[i])
+            //            dead = true;
+            //    }
+            //}
 
-
-
-
+            //if (!dead)
+            //StartCoroutine("monTurn", pos);
+            HPChange();
         }
-        count++;
-        Debug.Log("턴 드로우");
-        HPChange();
+        
+        //if (dead)
+        //{
+        //    FightManager.Instance.TurnQueue.Dequeue();
+        //    dead = false;
+        //    FightManager.Instance.TurnDraw();
+        //}
     }
 
     IEnumerator Dot(int pos)
@@ -137,6 +173,32 @@ public class FightUI : MonoBehaviour
             dotCount_2[pos - 3] += 1;
             FightManager.Instance.Damage(monsterAttacks[pos - 3].gameObject, 5, false);
         }
+
+        if (FightManager.Instance.DeadList.Count > 0)
+        {
+            for (int i = 0; i < FightManager.Instance.DeadList.Count; i++)
+            {
+                if (pos == FightManager.Instance.DeadList[i])
+                    dead = true;
+            }
+        }
+        if (!dead)
+            monsterAttacks[pos - 3].MonsterTurn(pos - 3);
+        yield return new WaitForSeconds(0.5f);
+        count++;
+        HPChange();
+        if (dead)
+        {
+            FightManager.Instance.TurnQueue.Dequeue();
+            dead = false;
+            FightManager.Instance.TurnDraw();
+        }
+    }
+
+    IEnumerator monTurn(int pos)
+    {
+        yield return new WaitForSeconds(1);
+        monsterAttacks[pos - 3].MonsterTurn(pos - 3);
     }
 
     public void NewTurn()

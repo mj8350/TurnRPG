@@ -18,14 +18,8 @@ public class MJ_Turn : MonoBehaviour
     {
         FightUi = FindFirstObjectByType<FightUI>();
 
-        
-
-
         //Invoke("DicAdd", 0.01f);
         DicAdd();
-
-
-
     }
 
     public void DicAdd()
@@ -34,8 +28,10 @@ public class MJ_Turn : MonoBehaviour
         {
             if (FightManager.Instance.PlayerPos[i].childCount > 0)
             {
-                if (FightManager.Instance.PlayerPos[i].GetChild(0).TryGetComponent<PHM_CharStat>(out playerStat[i]))
-                    turnDic.Add(i, playerStat[i].Speed);
+                //if (FightManager.Instance.PlayerPos[i].GetChild(0).TryGetComponent<PHM_CharStat>(out playerStat[i]))
+                //    turnDic.Add(i, playerStat[i].Speed);
+
+                turnDic.Add(i, GameManager.Instance.player[i].Speed);
 
                 // FightManager에게 플레이어가진 스킬 정보 전달
                 Transform playerTransform = FightManager.Instance.PlayerPos[i].GetChild(0);
@@ -61,14 +57,13 @@ public class MJ_Turn : MonoBehaviour
         {
             turnList.Add(dic);
         }
-        turnList.Sort((y, x) =>
-        {
-            int sort = x.Value.CompareTo(y.Value);
-            if (sort == 0)
-                sort = Random.Range(-1, 1);
-            return sort;
-        });
-        
+        //turnList.Sort((y, x) =>
+        //{
+        //    int sort = x.Value.CompareTo(y.Value);
+        //    if (sort == 0)
+        //        sort = Random.Range(-1, 1);
+        //    return sort;
+        //});
 
         NewTurn();
         FightManager.Instance.TurnDraw();
@@ -76,28 +71,75 @@ public class MJ_Turn : MonoBehaviour
 
     }
 
+    public void ListSort()
+    {
+        turnList.Sort((y, x) =>
+        {
+            int sort = x.Value.CompareTo(y.Value);
+            if (sort == 0)
+                sort = Random.Range(-1, 1);
+            return sort;
+        });
+    }
+
     public void NewTurn()
     {
+        ListSort();
         for (int i = 0; i < turnList.Count; i++)
         {
             FightManager.Instance.TurnQueue.Enqueue(turnList[i].Key);
-
+            //if (playerStat[i] == null)
+            //{
+            //    FightManager.Instance.PlayerPos[i].GetChild(0).TryGetComponent<PHM_CharStat>(out playerStat[i]);
+            //}
             FindCharName(turnList[i].Key);
             FightUi.TurnUIChange(i, name);
         }
     }
 
+    public void FindKeyAndDelete(int key)
+    {
+        for(int i = 0; i<turnList.Count; i++)
+        {
+            if (turnList[i].Key == key)
+            {
+                FightUi.TurnImg[i].gameObject.SetActive(false);
+                turnList.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
+    public void FindKeyAndAdd(int key)
+    {
+        foreach(KeyValuePair<int, int> dic in turnDic)
+        {
+            if(dic.Key == key)
+            {
+                turnList.Add(dic);
+                break;
+            }
+        }
+    }
+
     public void FindCharName(int num)
     {
+        
         switch (num)
         {
             case 0:
+                if(playerStat[0]==null)
+                    FightManager.Instance.PlayerPos[0].GetChild(0).TryGetComponent<PHM_CharStat>(out playerStat[0]);
                 name = playerStat[0].name;
                 break;
             case 1:
+                if (playerStat[1] == null)
+                    FightManager.Instance.PlayerPos[1].GetChild(0).TryGetComponent<PHM_CharStat>(out playerStat[1]);
                 name = playerStat[1].name;
                 break;
             case 2:
+                if (playerStat[2] == null)
+                    FightManager.Instance.PlayerPos[2].GetChild(0).TryGetComponent<PHM_CharStat>(out playerStat[2]);
                 name = playerStat[2].name;
                 break;
             case 3:

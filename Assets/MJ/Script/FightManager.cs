@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Linq;
 
 public class FightManager : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class FightManager : MonoBehaviour
     private Dictionary<int, CharSkillManager> playerSkillManagers = new Dictionary<int, CharSkillManager>();
     public List<GameObject> provokedMonsters = new List<GameObject>(); // 도발당한 몬스터 리스트
     public List<GameObject> stunedMonsters = new List<GameObject>(); // 스턴당한 몬스터 리스트
+    public List<int> DeadList = new List<int>();// 데드리스트
 
     public CharSkillManager skillManager;
 
@@ -37,6 +39,8 @@ public class FightManager : MonoBehaviour
     //public GameObject DamageCanvas;
     //public TextMeshProUGUI DamageText;
     //public GameObject Critical;
+
+    private PlayerManager playerManager;
 
     private void Awake()
     {
@@ -57,9 +61,20 @@ public class FightManager : MonoBehaviour
         turn = GameObject.FindFirstObjectByType<MJ_Turn>();
         fightUI = GameObject.FindFirstObjectByType<FightUI>();
         //DamageCanvas.SetActive(false);
+        playerManager = GameObject.FindFirstObjectByType<PlayerManager>();
     }
 
-   
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            playerManager.PlayerDeath(0, 6);
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            playerManager.PlayerDeath(0, 0);
+        }
+    }
 
     public void NewTurn()
     {
@@ -91,7 +106,7 @@ public class FightManager : MonoBehaviour
         targetMonster = monster;
     }
 
-    
+
 
     //public void ApplyDamageToSelectedMonster(int damage)
     //{
@@ -104,12 +119,31 @@ public class FightManager : MonoBehaviour
     //        Debug.Log("No monster selected.");
     //    }
     //}
-
+    
     public void MonsterTurn(int pos, bool onCri)
     {
         int plyDef;
         // 무작위 플레이어를 공격
-        targetPlayer = PlayerPos[Random.Range(0, PlayerPos.Length)].GetChild(0).gameObject;
+        int random;
+        random = Random.Range(0, PlayerPos.Length);
+        if (DeadList.Count>0)
+        {
+            while (true)
+            {
+                random = Random.Range(0, PlayerPos.Length);
+                int con = 0;
+                for (int i = 0; i < DeadList.Count; i++)
+                {
+                    if (random == DeadList[i])
+                    {
+                        con++;
+                    }
+                }
+                if (con == 0)
+                    break;
+            }
+        }
+        targetPlayer = PlayerPos[random].GetChild(0).gameObject;
         monsterAi.MonsterStart(pos); // 몬스터의 공격 시작
         
         MonsterPos[pos].GetChild(0).TryGetComponent<PHM_MonsterStat>(out var monsterStat);
@@ -128,7 +162,7 @@ public class FightManager : MonoBehaviour
                 Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri);
         }
         else
-            Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri); // 몬스터의 공격력만큼 피해 입힘
+            Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri);// 몬스터의 공격력만큼 피해 입힘
     }
 
     public void TauntMonsterTurn(int pos, GameObject target, bool onCri)
@@ -144,7 +178,17 @@ public class FightManager : MonoBehaviour
         else
             plyDef = GameManager.Instance.player[GMChar(targetPlayer)].Magic;
 
-        Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri);
+        if (targetPlayer.TryGetComponent<Warrior>(out Warrior warrior))
+        {
+            int ran = Random.Range(1, 101);
+            if (ran <= 30)
+                Damage(targetPlayer, 0, false);
+            else
+                Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri);
+        }
+        else
+            Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri); // 몬스터의 공격력만큼 피해 입힘
+        //Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri);
     }
 
     public void PlayerTurnAttack(int who, bool onCri)
@@ -219,10 +263,23 @@ public class FightManager : MonoBehaviour
         if (onCri)
             damage *= 2;
 
-        if (obj.TryGetComponent<IDamage>(out IDamage idam))
+        //if (obj.TryGetComponent<IDamage>(out IDamage idam))
+        //{
+        //    idam.TakeDamage(damage);
+        //    StartCoroutine(DamageT(obj, damage,1, onCri));
+        //}
+        if (obj.TryGetComponent<MonsterChar>(out MonsterChar monChar))
         {
-            idam.TakeDamage(damage);
-            StartCoroutine(DamageT(obj, damage,1, onCri));
+            monChar.TakeDamage(damage);
+            if (monChar.ImDie())
+            {
+                //monsterAi.monsterDie(obj);
+                //DeadList.Add(MTChar(obj));
+                //turn.FindKeyAndDelete(MTChar(obj));
+                MonsterDead(obj);
+            }
+
+            StartCoroutine(DamageT(obj, damage, 1, onCri));
         }
 
         if (obj.TryGetComponent<PHM_CharStat>(out PHM_CharStat charStat))
@@ -237,6 +294,15 @@ public class FightManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void MonsterDead(GameObject obj)
+    {
+        monsterAi.monsterDie(obj);
+        DeadList.Add(MTChar(obj));
+        DeadList = DeadList.Distinct().ToList();
+        turn.FindKeyAndDelete(MTChar(obj));
+        Destroy(obj.GetComponent<Collider2D>());
     }
 
     //public bool ThiefAB(bool onCri, int damage)
@@ -256,9 +322,11 @@ public class FightManager : MonoBehaviour
 
         if (GameManager.Instance.player[i].CurHP <= 0)
         {
+            GameManager.Instance.player[i].CurHP = 0;
             GameManager.Instance.player[i].onPlayerDead = true;
-            // 죽음 애니메이션 표시
-            // 캐릭터의 턴은 넘기도록.
+            playerManager.PlayerDeath(i, 6); // 죽음 애니메이션 표시
+            DeadList.Add(i);// 캐릭터의 턴은 넘기도록.
+            turn.FindKeyAndDelete(i);
         }
         
     }
@@ -409,6 +477,18 @@ public class FightManager : MonoBehaviour
         }
         return -1;
 
+    }
+
+    public int MTChar(GameObject obj)
+    {
+        for(int i = 0; i<MonsterPos.Length; i++)
+        {
+            if(obj.transform.parent == MonsterPos[i])
+            {
+                return i + 3;
+            }
+        }
+        return -1;
     }
 
 

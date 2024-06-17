@@ -33,5 +33,9 @@ public class MonsterAi : MonoBehaviour
 
     }
 
+    public void  monsterDie(GameObject obj)
+    {
+        Anim.ChangeAnimation(obj, "Dead");
+    }
     
 }
