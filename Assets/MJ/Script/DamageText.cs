@@ -13,6 +13,11 @@ public class DamageText : PoolLabel
         DamageValue.text = dmg.ToString();
     }
 
+    public void TextChange(string tex)
+    {
+        DamageValue.text = tex;
+    }
+
     public void StartUp()
     {
         StartCoroutine("Up");
