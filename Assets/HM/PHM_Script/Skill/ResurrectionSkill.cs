@@ -41,7 +41,9 @@ public class ResurrectionSkill : BaseSkill
         }
         else
         {
+            roulette.isAttackSuccessful = false;
             Debug.Log("부활 대상이 아닙니다.");
+            roulette.InvokeInitRoulette();
         }
     
     }

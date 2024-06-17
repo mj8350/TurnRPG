@@ -119,9 +119,17 @@ public class FightManager : MonoBehaviour
         else
             plyDef = GameManager.Instance.player[GMChar(targetPlayer)].M_Defense;
 
-        Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri); // 몬스터의 공격력만큼 피해 입힘
-        
-
+        if(targetPlayer.TryGetComponent<Warrior>(out Warrior warrior))
+        {
+            int ran = Random.Range(1,101);
+            if (ran <= 30)
+                Damage(targetPlayer, 0, onCri);
+                // 방어 텍스트 표시, 데미지가 0이면 "막기" 텍스트로
+            else
+                Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri);
+        }
+        else
+            Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri); // 몬스터의 공격력만큼 피해 입힘
     }
 
     public void TauntMonsterTurn(int pos, GameObject target, bool onCri)
@@ -395,4 +403,9 @@ public class FightManager : MonoBehaviour
 
     }
 
+
+    public int AccuracyPercent(int AC)
+    {
+        return 15 + (AC * 4);
+    }
 }

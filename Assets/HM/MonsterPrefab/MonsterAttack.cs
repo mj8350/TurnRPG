@@ -2,6 +2,7 @@ using Assets.HeroEditor.FantasyHeroes.TestRoom.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class MonsterAttack : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class MonsterAttack : MonoBehaviour
     public bool onCri;
 
     private MonsterChar monsterChar;
+    private PHM_MonsterStat monStat;
 
     private void Awake()
     {
@@ -24,17 +26,30 @@ public class MonsterAttack : MonoBehaviour
         onStun = false;
         if (!TryGetComponent<MonsterChar>(out monsterChar))
             Debug.Log("MonsterAttack.cs - Awake() - monsterChar참조 오류");
+        if (!TryGetComponent<PHM_MonsterStat>(out monStat))
+            Debug.Log("MonsterAttack.cs - Awake() - monStat참조 오류");
     }
 
     public void MonsterTurn(int pos)
     {
+        int ran = Random.Range(1, 101);
         if (onTaunt && !onStun) // 도발상태라면 도발타겟 공격
         {
-            AttackProvokedTarget(pos);
+            if(ran <= FightManager.Instance.AccuracyPercent(monStat.Accuracy))
+                AttackProvokedTarget(pos);
+            else
+            {
+                // todo: 실패시 텍스트표시
+            }
         }
         else if (!onTaunt && !onStun)
         {
-            AttackNormalTarget(pos);
+            if (ran <= FightManager.Instance.AccuracyPercent(monStat.Accuracy))
+                AttackNormalTarget(pos);
+            else
+            {
+                // todo: 실패시 텍스트표시
+            }
         }
         else if (onStun)
         {

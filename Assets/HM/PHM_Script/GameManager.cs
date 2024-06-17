@@ -73,7 +73,7 @@ public class GameManager : Singleton<GameManager>
         //}
 
         CreateUserData(0, 0);
-        CreateUserData(1, 1);
+        CreateUserData(1, 4);
         CreateUserData(2, 2);
     }
 
