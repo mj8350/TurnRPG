@@ -14,6 +14,8 @@ public class WizardWideSkill : BaseSkill
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
+        TryGetComponent<PHM_CharStat>(out stat);
+        successProbability = 20 + (stat.Accuracy * 3);
     }
 
     public override void Skill_Active()

@@ -9,12 +9,16 @@ public class StunSkill : BaseSkill
     private GameObject targetObject;
     private List<GameObject> stunTargets;
     public Roulette roulette;
-    private int successProbability = 100;
+    private int successProbability;
 
     private void Awake()
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
+        TryGetComponent<PHM_CharStat>(out stat);
+        successProbability = 25 + (stat.Accuracy * 2);
+
+
         stunTargets = new List<GameObject>();
     }
 

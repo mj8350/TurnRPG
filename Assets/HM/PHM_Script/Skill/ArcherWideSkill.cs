@@ -7,18 +7,20 @@ public class ArcherWideSkill : BaseSkill
 {
     private ClickEvent click;
     public Roulette roulette;
-    private int successProbability = 100;
+    private int successProbability;
 
     private void Awake()
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
+        TryGetComponent<PHM_CharStat>(out stat);
+        successProbability = 10 + (stat.Accuracy * 3);
     }
 
     public override void Skill_Active()
     {
 
-        if (roulette.randomNumber < successProbability)
+        if (roulette.randomNumber <= successProbability || roulette.randomNumber_2 <= 40)
         {
             Debug.Log("화살비 발동");
             roulette.isAttackSuccessful = true;

@@ -119,9 +119,16 @@ public class FightManager : MonoBehaviour
         else
             plyDef = GameManager.Instance.player[GMChar(targetPlayer)].M_Defense;
 
-        Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri); // 몬스터의 공격력만큼 피해 입힘
-        
-
+        if(targetPlayer.TryGetComponent<Warrior>(out Warrior warrior))
+        {
+            int ran = Random.Range(1,101);
+            if (ran <= 30)
+                Damage(targetPlayer, 0, false);
+            else
+                Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri);
+        }
+        else
+            Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri); // 몬스터의 공격력만큼 피해 입힘
     }
 
     public void TauntMonsterTurn(int pos, GameObject target, bool onCri)
@@ -206,8 +213,12 @@ public class FightManager : MonoBehaviour
     }
 
     Vector3 damagePos;
+
     public void Damage(GameObject obj, int damage, bool onCri)
     {
+        if (onCri)
+            damage *= 2;
+
         if (obj.TryGetComponent<IDamage>(out IDamage idam))
         {
             idam.TakeDamage(damage);
@@ -226,8 +237,16 @@ public class FightManager : MonoBehaviour
                 }
             }
         }
-        
     }
+
+    //public bool ThiefAB(bool onCri, int damage)
+    //{
+    //    if (TurnQueue.Peek() < 3)
+    //    {
+            
+    //    }
+        
+    //}
 
 
     private IEnumerator getDamage(int i, int damage)
@@ -245,34 +264,31 @@ public class FightManager : MonoBehaviour
     }
 
     private IEnumerator DamageT(GameObject obj, int damage, float time, bool onCri)
-    //private IEnumerator DamageT(GameObject obj, int damage, float time)
     {
         yield return new WaitForSeconds(time);
         GameObject DT;
         damagePos = obj.transform.position;
         damagePos.y += 1;
-        if (onCri)
-            DT = PoolManager.Inst.pools[1].Pop();
+        if (damage > 0)
+        {
+            if (onCri)
+                DT = PoolManager.Inst.pools[1].Pop();
+            else
+                DT = PoolManager.Inst.pools[0].Pop();
+        }
         else
-            DT = PoolManager.Inst.pools[0].Pop();
+            DT = PoolManager.Inst.pools[3].Pop();
+
 
         if(DT.TryGetComponent<DamageText>(out DamageText dt))
         {
             DT.transform.position = damagePos;
-            dt.TextChange(damage);
+            if(damage > 0)
+                dt.TextChange(damage);
+            else
+                dt.TextChange("막기");
             dt.StartUp();
         }
-
-        //DamageCanvas.transform.position = damagePos;
-        //DamageCanvas.SetActive(true);
-
-        //DamageText.text = damage.ToString();
-        //for(int i = 0; i < 50;i++)
-        //{
-        //    DamageCanvas.transform.position += Vector3.up * Time.deltaTime * 5;
-        //    yield return new WaitForSeconds(0.01f);
-        //}
-        //DamageCanvas.SetActive(false);
     }
 
     public void Heal(GameObject obj, int heal)
@@ -370,7 +386,7 @@ public class FightManager : MonoBehaviour
         Debug.Log(ran);
         if (10 + (critical * 2) >= ran)
         {
-            finalDmg *= 2;
+            //finalDmg *= 2;
             onCri = true;
         }
         else
@@ -395,4 +411,9 @@ public class FightManager : MonoBehaviour
 
     }
 
+
+    public int AccuracyPercent(int AC)
+    {
+        return 15 + (AC * 4);
+    }
 }

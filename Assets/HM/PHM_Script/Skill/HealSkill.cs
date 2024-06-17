@@ -13,8 +13,10 @@ public class HealSkill : BaseSkill
 
     private void Awake()
     {
+        TryGetComponent<PHM_CharStat>(out stat);
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
+        successProbability = 10 + (stat.Accuracy * 4);
     }
 
     public override void Skill_Active()
@@ -56,12 +58,13 @@ public class HealSkill : BaseSkill
     {
         // 현재 위치에서 반경 내에 있는 모든 player 태그를 가진 오브젝트에게 힐을 적용
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 5f); // 반경 5의 영역 내의 모든 콜라이더 가져오기
-
+        PHM_CharStat stat = GetComponent<PHM_CharStat>();
+        int heal = stat.Magic / 2;
         foreach (Collider2D collider in colliders)
         {
             if (collider.CompareTag("Player"))
             {
-                FightManager.Instance.Heal(collider.gameObject, 5);
+                FightManager.Instance.Heal(collider.gameObject, heal);
             }
         }
     }
@@ -70,9 +73,11 @@ public class HealSkill : BaseSkill
     private void ApplySingleHeal()
     {
         targetObject = click.selectedObj;
+        PHM_CharStat stat = GetComponent<PHM_CharStat>();
         if (targetObject != null && targetObject.CompareTag("Player"))
         {
-            FightManager.Instance.Heal(targetObject, 5);
+            int heal = stat.Magic / 2;
+            FightManager.Instance.Heal(targetObject, heal);
         }
         else
         {

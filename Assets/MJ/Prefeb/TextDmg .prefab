@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4002385772057956858}
   - component: {fileID: 5030179527491577380}
   m_Layer: 5
-  m_Name: DftDmg
+  m_Name: 'TextDmg '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,10 +181,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 35
+  m_text: "\uB9C9\uAE30"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2cdc547c1c0a94fed8b8a07e15f70168, type: 2}
-  m_sharedMaterial: {fileID: -4171563015097924827, guid: 2cdc547c1c0a94fed8b8a07e15f70168, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 758b640321432b342a9360f72c09e45b, type: 2}
+  m_sharedMaterial: {fileID: -1478208397735517896, guid: 758b640321432b342a9360f72c09e45b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

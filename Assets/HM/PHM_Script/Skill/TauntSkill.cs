@@ -15,6 +15,8 @@ public class TauntSkill : BaseSkill
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
+        TryGetComponent<PHM_CharStat>(out stat);
+        successProbability = 34 + (stat.Accuracy * 4);
         tauntTargets = new List<GameObject>();
     }
 

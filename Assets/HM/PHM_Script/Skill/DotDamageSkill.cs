@@ -9,7 +9,7 @@ public class DotDamageSkill : BaseSkill
     private GameObject targetObject;
     private int dotDamage = 5; // 도트 데미지
     public Roulette roulette;
-    private int successProbability = 100;
+    private int successProbability;
 
     public int damage;
 
@@ -17,11 +17,13 @@ public class DotDamageSkill : BaseSkill
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
+        TryGetComponent<PHM_CharStat>(out stat);
+        successProbability = 10 + (stat.Accuracy * 2);
     }
 
     public override void Skill_Active()
     {
-        if (roulette.randomNumber < successProbability)
+        if (roulette.randomNumber <= successProbability)
         {
             Debug.Log("도트뎀 스킬 발동");
 
