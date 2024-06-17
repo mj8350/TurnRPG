@@ -123,8 +123,7 @@ public class FightManager : MonoBehaviour
         {
             int ran = Random.Range(1,101);
             if (ran <= 30)
-                Damage(targetPlayer, 0, onCri);
-                // 방어 텍스트 표시, 데미지가 0이면 "막기" 텍스트로
+                Damage(targetPlayer, 0, false);
             else
                 Damage(targetPlayer, DamageSum(dftDmg, monsterStat.Critical, plyDef, out onCri), onCri);
         }
@@ -253,34 +252,31 @@ public class FightManager : MonoBehaviour
     }
 
     private IEnumerator DamageT(GameObject obj, int damage, float time, bool onCri)
-    //private IEnumerator DamageT(GameObject obj, int damage, float time)
     {
         yield return new WaitForSeconds(time);
         GameObject DT;
         damagePos = obj.transform.position;
         damagePos.y += 1;
-        if (onCri)
-            DT = PoolManager.Inst.pools[1].Pop();
+        if (damage > 0)
+        {
+            if (onCri)
+                DT = PoolManager.Inst.pools[1].Pop();
+            else
+                DT = PoolManager.Inst.pools[0].Pop();
+        }
         else
-            DT = PoolManager.Inst.pools[0].Pop();
+            DT = PoolManager.Inst.pools[3].Pop();
+
 
         if(DT.TryGetComponent<DamageText>(out DamageText dt))
         {
             DT.transform.position = damagePos;
-            dt.TextChange(damage);
+            if(damage > 0)
+                dt.TextChange(damage);
+            else
+                dt.TextChange("막기");
             dt.StartUp();
         }
-
-        //DamageCanvas.transform.position = damagePos;
-        //DamageCanvas.SetActive(true);
-
-        //DamageText.text = damage.ToString();
-        //for(int i = 0; i < 50;i++)
-        //{
-        //    DamageCanvas.transform.position += Vector3.up * Time.deltaTime * 5;
-        //    yield return new WaitForSeconds(0.01f);
-        //}
-        //DamageCanvas.SetActive(false);
     }
 
     public void Heal(GameObject obj, int heal)

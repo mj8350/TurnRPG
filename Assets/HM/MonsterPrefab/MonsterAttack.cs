@@ -19,6 +19,8 @@ public class MonsterAttack : MonoBehaviour
     private MonsterChar monsterChar;
     private PHM_MonsterStat monStat;
 
+    private Vector3 damagePos;
+
     private void Awake()
     {
         onAttack = false;
@@ -40,6 +42,11 @@ public class MonsterAttack : MonoBehaviour
             else
             {
                 // todo: 실패시 텍스트표시
+                onTaunt = false;
+                monsterChar.AngryInit(onTaunt);
+                StartCoroutine(DamageT(gameObject, 1));
+                Invoke("Stunning", 1f);
+
             }
         }
         else if (!onTaunt && !onStun)
@@ -49,6 +56,8 @@ public class MonsterAttack : MonoBehaviour
             else
             {
                 // todo: 실패시 텍스트표시
+                StartCoroutine(DamageT(gameObject, 1));
+                Invoke("Stunning", 1f);
             }
         }
         else if (onStun)
@@ -57,6 +66,21 @@ public class MonsterAttack : MonoBehaviour
             Invoke("Stunning", 1f);
             onStun = false;
             monsterChar.StunInit(onStun);
+        }
+    }
+    private IEnumerator DamageT(GameObject obj, float time)
+    {
+        yield return new WaitForSeconds(time);
+        GameObject DT;
+        damagePos = obj.transform.position;
+        damagePos.y += 1;
+        DT = PoolManager.Inst.pools[3].Pop();
+
+        if (DT.TryGetComponent<DamageText>(out DamageText dt))
+        {
+            DT.transform.position = damagePos;
+            dt.TextChange("실패");
+            dt.StartUp();
         }
     }
 

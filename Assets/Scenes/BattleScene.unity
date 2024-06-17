@@ -1449,6 +1449,7 @@ MonoBehaviour:
   - {fileID: 34695143}
   - {fileID: 974679828}
   - {fileID: 1317964928}
+  - {fileID: 395561802}
 --- !u!4 &172296185
 Transform:
   m_ObjectHideFlags: 0
@@ -1465,6 +1466,7 @@ Transform:
   - {fileID: 34695142}
   - {fileID: 974679827}
   - {fileID: 1317964927}
+  - {fileID: 395561803}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &180105427
@@ -2472,6 +2474,7 @@ MonoBehaviour:
     CurHP: 0
     Level: 0
     EXP: 0
+    onPlayerDead: 0
   - id: 0
     CharName: 
     CharJob: 
@@ -2490,6 +2493,7 @@ MonoBehaviour:
     CurHP: 0
     Level: 0
     EXP: 0
+    onPlayerDead: 0
   - id: 0
     CharName: 
     CharJob: 
@@ -2508,6 +2512,7 @@ MonoBehaviour:
     CurHP: 0
     Level: 0
     EXP: 0
+    onPlayerDead: 0
   charStat: {fileID: 0}
   transforms:
   - {fileID: 0}
@@ -3050,6 +3055,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382086782}
   m_CullTransparentMesh: 1
+--- !u!1 &395561801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 395561803}
+  - component: {fileID: 395561802}
+  m_Layer: 0
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &395561802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395561801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 237906cf82f1e03409998467bf6ccf82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObj: {fileID: 3094902501860928639, guid: 3ca9a4bbcd9f8ea48b31a14acced83e2, type: 3}
+  allocateCount: 3
+--- !u!4 &395561803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395561801}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 172296185}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &405427097
 GameObject:
   m_ObjectHideFlags: 0
@@ -14098,6 +14149,7 @@ MonoBehaviour:
   - {fileID: 378743221}
   - {fileID: 1666674732}
   monsterAttacks: []
+  dotDamage: {fileID: 0}
   count: -1
 --- !u!1 &2146477062
 GameObject:
