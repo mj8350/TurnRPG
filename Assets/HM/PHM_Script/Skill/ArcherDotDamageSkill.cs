@@ -9,19 +9,23 @@ public class ArcherDotDamageSkill : BaseSkill
     private GameObject targetObject;
     private int dotDamage = 5; // 도트 데미지
     public Roulette roulette;
-    private int successProbability = 100;
+    private int successProbability;
 
     public int damage;
 
     private void Awake()
     {
+        TryGetComponent<PHM_CharStat>(out stat);
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
+
+        successProbability = 10+ (stat.Accuracy * 2); // 15+(Ac*4)
+        Debug.Log(successProbability);
     }
 
     public override void Skill_Active()
     {
-        if (roulette.randomNumber < successProbability)
+        if (roulette.randomNumber <= successProbability || roulette.randomNumber_2 <= 40)
         {
             Debug.Log("도트뎀 스킬 발동");
 
@@ -63,5 +67,6 @@ public class ArcherDotDamageSkill : BaseSkill
             Debug.Log("스킬 실패!");
             roulette.InvokeInitRoulette();
         }
+        
     }
 }

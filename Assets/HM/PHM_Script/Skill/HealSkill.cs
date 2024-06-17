@@ -13,8 +13,10 @@ public class HealSkill : BaseSkill
 
     private void Awake()
     {
+        TryGetComponent<PHM_CharStat>(out stat);
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
+        successProbability = 10 + (stat.Accuracy * 4);
     }
 
     public override void Skill_Active()

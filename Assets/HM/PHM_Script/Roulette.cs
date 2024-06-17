@@ -26,6 +26,7 @@ public class Roulette : MonoBehaviour
     //public Button stopButton;
 
     public int randomNumber;
+    public int randomNumber_2;
     public int successProbability = 60;
     private bool isRoulette = false;
 
@@ -68,7 +69,7 @@ public class Roulette : MonoBehaviour
         InitRoulette();
     }
 
-    void StartRoulette()
+    public void StartRoulette()
     {
         if (!isRouletteRunning)
         {
@@ -101,6 +102,7 @@ public class Roulette : MonoBehaviour
             StopCoroutine(rouletteCoroutine);
             isRouletteRunning = false;
             Debug.Log($"Random number: {randomNumber}");
+            Debug.Log($"Random number: {randomNumber_2}");
 
             //AttackJudgment();
 
@@ -129,6 +131,7 @@ public class Roulette : MonoBehaviour
         {
             // 1부터 100까지 랜덤한 숫자 선택하여 표시
             randomNumber = UnityEngine.Random.Range(1, 101);
+            randomNumber_2 = UnityEngine.Random.Range(1, 101);
             showText.text = randomNumber.ToString();
 
             // 잠시 대기
@@ -154,6 +157,11 @@ public class Roulette : MonoBehaviour
         clickEvent.DestroySelectRing();
     }
 
+    public void ShowRoulette()
+    {
+        gameObject.transform.localScale = Vector3.one;
+    }
+
     public void InvokeInitRoulette()
     {
         Invoke("InitRoulette", 1);
@@ -166,9 +174,10 @@ public class Roulette : MonoBehaviour
 
     public void AttackJudgment()
     {
-        Debug.Log("일반공격 성공확률" + successProbability);
+        Debug.Log("일반공격 성공확률" + FightManager.Instance.AccuracyPercent(GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Accuracy));
+
         // 랜덤 숫자에 따라 공격 성공 또는 실패 판정
-        if (randomNumber <= successProbability)
+        if (randomNumber <= FightManager.Instance.AccuracyPercent(GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Accuracy))
         {
             isAttackSuccessful = true;
             Debug.Log("공격 성공!");

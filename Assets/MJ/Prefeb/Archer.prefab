@@ -1328,7 +1328,7 @@ MonoBehaviour:
   Critical: 9
   Speed: 12
   Helth: 7
-  SpecialAB: "40% \uD655\uB960\uB85C \uD655\uC815\uACF5\uACA9"
+  SpecialAB: "40% \uD655\uB960\uB85C \uC2A4\uD0AC\uD655\uC815\uACF5\uACA9"
   Skill01: "\uD654\uC5FC\uD654\uC0B4"
   Skill02: "\uD654\uC0B4\uBE44"
   onPlayerDead: 0

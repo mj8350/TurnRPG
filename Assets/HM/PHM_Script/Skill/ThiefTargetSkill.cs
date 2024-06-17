@@ -8,12 +8,14 @@ public class ThiefTargetSkill : BaseSkill
     private ClickEvent click;
     private GameObject targetObject;
     public Roulette roulette;
-    private int successProbability = 100;
+    private int successProbability;
 
     private void Awake()
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
+        TryGetComponent<PHM_CharStat>(out stat);
+        successProbability = 10 + (stat.Accuracy * 3);
     }
 
 

@@ -214,8 +214,12 @@ public class FightManager : MonoBehaviour
     }
 
     Vector3 damagePos;
+
     public void Damage(GameObject obj, int damage, bool onCri)
     {
+        if (onCri)
+            damage *= 2;
+
         if (obj.TryGetComponent<IDamage>(out IDamage idam))
         {
             idam.TakeDamage(damage);
@@ -234,8 +238,16 @@ public class FightManager : MonoBehaviour
                 }
             }
         }
-        
     }
+
+    //public bool ThiefAB(bool onCri, int damage)
+    //{
+    //    if (TurnQueue.Peek() < 3)
+    //    {
+            
+    //    }
+        
+    //}
 
 
     private IEnumerator getDamage(int i, int damage)
@@ -378,7 +390,7 @@ public class FightManager : MonoBehaviour
         Debug.Log(ran);
         if (10 + (critical * 2) >= ran)
         {
-            finalDmg *= 2;
+            //finalDmg *= 2;
             onCri = true;
         }
         else

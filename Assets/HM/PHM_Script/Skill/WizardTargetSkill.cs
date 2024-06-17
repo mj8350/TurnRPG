@@ -14,6 +14,8 @@ public class WizardTargetSkill : BaseSkill
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
+        TryGetComponent<PHM_CharStat>(out stat);
+        successProbability = 10 + (stat.Accuracy * 3);
     }
 
 

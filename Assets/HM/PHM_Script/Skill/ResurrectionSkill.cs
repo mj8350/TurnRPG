@@ -13,8 +13,10 @@ public class ResurrectionSkill : BaseSkill
 
     private void Awake()
     {
+        TryGetComponent<PHM_CharStat>(out stat);
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
+        successProbability = 10 + (stat.Accuracy);
     }
 
     public override void Skill_Active()

@@ -39,6 +39,7 @@ public class MonsterAttack : MonoBehaviour
                 AttackProvokedTarget(pos);
             else
             {
+                Invoke("Stunning", 1f);
                 // todo: 실패시 텍스트표시
             }
         }
@@ -48,6 +49,7 @@ public class MonsterAttack : MonoBehaviour
                 AttackNormalTarget(pos);
             else
             {
+                Invoke("Stunning", 1f);
                 // todo: 실패시 텍스트표시
             }
         }
