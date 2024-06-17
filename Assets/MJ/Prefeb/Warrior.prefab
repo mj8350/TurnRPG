@@ -19059,6 +19059,7 @@ MonoBehaviour:
   SpecialAB: "30% \uD655\uB960\uB85C \uBAA8\uB4E0 \uB370\uBBF8\uC9C0 \uBB34\uD6A8\uD654"
   Skill01: "\uB3C4\uBC1C"
   Skill02: "\uBC29\uD328 \uBC00\uCE58\uAE30"
+  onPlayerDead: 0
 --- !u!114 &299793194186717245
 MonoBehaviour:
   m_ObjectHideFlags: 0

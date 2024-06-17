@@ -4,6 +4,40 @@ using UnityEngine;
 
 public class MonsterChar : MonoBehaviour, IDamage
 {
+    public GameObject Angry;
+    public GameObject Poison;
+    public GameObject Fire;
+    public GameObject Stun;
+
+    private void Awake()
+    {
+        Angry.SetActive(false);
+        Poison.SetActive(false);
+        Fire.SetActive(false);
+        Stun.SetActive(false);
+    }
+
+    public void AngryInit(bool on)
+    {
+        Angry.SetActive(on);
+    }
+
+    public void PoisonInit(bool on)
+    {
+        Poison.SetActive(on);
+    }
+
+    public void FireInit(bool on)
+    {
+        Fire.SetActive(on);
+    }
+
+    public void StunInit(bool on) 
+    { 
+        Stun.SetActive(on);
+    }
+
+
 
     public void TakeDamage(int damage)
     {

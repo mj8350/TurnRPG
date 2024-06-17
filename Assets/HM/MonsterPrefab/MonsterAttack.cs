@@ -15,11 +15,15 @@ public class MonsterAttack : MonoBehaviour
     public GameObject tauntTarget;
     public bool onCri;
 
+    private MonsterChar monsterChar;
+
     private void Awake()
     {
         onAttack = false;
         onTaunt = false;
         onStun = false;
+        if (!TryGetComponent<MonsterChar>(out monsterChar))
+            Debug.Log("MonsterAttack.cs - Awake() - monsterChar참조 오류");
     }
 
     public void MonsterTurn(int pos)
@@ -37,6 +41,7 @@ public class MonsterAttack : MonoBehaviour
 
             Invoke("Stunning", 1f);
             onStun = false;
+            monsterChar.StunInit(onStun);
         }
     }
 
@@ -44,21 +49,25 @@ public class MonsterAttack : MonoBehaviour
     {
         onTaunt = true;
         tauntTarget = target;
+        monsterChar.AngryInit(onTaunt);
     }
 
     public void SetStunTarget() 
     {
         onStun = true;
+        monsterChar.StunInit(onStun);
     }
 
     public void SetDotDamage()
     {
         onDotDamage = true;
+        monsterChar.PoisonInit(onDotDamage);
     }
 
     public void SetDotDamage_2()
     {
         onDotDamage_2 = true;
+        monsterChar.FireInit(onDotDamage_2);
     }
 
     private void AttackProvokedTarget(int pos)
@@ -68,6 +77,7 @@ public class MonsterAttack : MonoBehaviour
         //FightManager.Instance.Damage(targetPlayer, 5);
         FightManager.Instance.TauntMonsterTurn(pos, tauntTarget, onCri);
         onTaunt = false;
+        monsterChar.AngryInit(onTaunt);
     }
 
     private void AttackNormalTarget(int pos)
