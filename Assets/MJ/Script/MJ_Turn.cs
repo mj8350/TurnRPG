@@ -56,7 +56,9 @@ public class MJ_Turn : MonoBehaviour
         foreach (KeyValuePair<int, int> dic in turnDic)
         {
             turnList.Add(dic);
+            FightManager.Instance.LiveList.Add(dic.Key);
         }
+        FightManager.Instance.LiveList.Sort();
         //turnList.Sort((y, x) =>
         //{
         //    int sort = x.Value.CompareTo(y.Value);

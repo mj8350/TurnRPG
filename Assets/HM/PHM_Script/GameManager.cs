@@ -72,8 +72,8 @@ public class GameManager : Singleton<GameManager>
         //    CreateUserData(i, ran);
         //}
 
-        CreateUserData(0, 0);
-        CreateUserData(1, 4);
+        CreateUserData(0, 4);
+        CreateUserData(1, 1);
         CreateUserData(2, 2);
     }
 

@@ -92,86 +92,111 @@ public class FightUI : MonoBehaviour
     private bool dead;
     public void DrawTurn()
     {
-        
-        if (FightManager.Instance.TurnQueue.Count == 0)
+        if (!FightManager.Instance.WhoWin())
         {
-            FightManager.Instance.NewTurn();
-            NewTurn();
-            count = -1;
-            Debug.Log("라운드 리셋");
-            
-        }
-
-        int pos = FightManager.Instance.TurnQueue.Peek();
-        if (pos < 3)
-        {
-            if (FightManager.Instance.DeadList.Count > 0)
+            HPChange();
+            if (FightManager.Instance.TurnQueue.Count == 0)
             {
-                for (int i = 0; i < FightManager.Instance.DeadList.Count; i++)
+                FightManager.Instance.NewTurn();
+                NewTurn();
+                count = -1;
+                Debug.Log("라운드 리셋");
+
+            }
+
+            int pos = FightManager.Instance.TurnQueue.Peek();
+            if (pos < 3)
+            {
+                if (FightManager.Instance.DeadList.Count > 0)
                 {
-                    if (pos == FightManager.Instance.DeadList[i])
-                        dead = true;
-                }
+                    for (int i = 0; i < FightManager.Instance.DeadList.Count; i++)
+                    {
+                        if (pos == FightManager.Instance.DeadList[i])
+                            dead = true;
+                    }
 
+                }
+                if (!dead)
+                {
+                    Debug.Log(FightManager.Instance.PlayerPos[pos].GetChild(0).gameObject.name); // 큐에서 빼기 전에 이름 확인
+                    SkillTextInfo(pos); // 큐에서 빼온 숫자를 인자로 넘겨줌
+                }
+                count++;
+                Debug.Log("턴 드로우");
+                //HPChange();
+                if (dead)
+                {
+                    FightManager.Instance.TurnQueue.Dequeue();
+                    dead = false;
+                    FightManager.Instance.TurnDraw();
+                }
             }
-            if (!dead)
+            else
             {
-                Debug.Log(FightManager.Instance.PlayerPos[pos].GetChild(0).gameObject.name); // 큐에서 빼기 전에 이름 확인
-                SkillTextInfo(pos); // 큐에서 빼온 숫자를 인자로 넘겨줌
+                Debug.Log("몬스터 공격턴");
+                //monsterAi.MonsterStart(pos-3);
+                //FightManager.Instance.MonsterTurn(pos - 3);
+
+                //if (!dead)
+                StartCoroutine("Dot", pos);
+
+                //if (FightManager.Instance.DeadList.Count > 0)
+                //{
+                //    for(int i = 0; i<FightManager.Instance.DeadList.Count; i++)
+                //    {
+                //        if (pos == FightManager.Instance.DeadList[i])
+                //            dead = true;
+                //    }
+                //}
+
+                //if (!dead)
+                //StartCoroutine("monTurn", pos);
+                //HPChange();
             }
-            count++;
-            Debug.Log("턴 드로우");
-            HPChange(); 
-            if (dead)
-            {
-                FightManager.Instance.TurnQueue.Dequeue();
-                dead = false;
-                FightManager.Instance.TurnDraw();
-            }
+
+            //if (dead)
+            //{
+            //    FightManager.Instance.TurnQueue.Dequeue();
+            //    dead = false;
+            //    FightManager.Instance.TurnDraw();
+            //}
         }
         else
         {
-            Debug.Log("몬스터 공격턴");
-            //monsterAi.MonsterStart(pos-3);
-            //FightManager.Instance.MonsterTurn(pos - 3);
-
-            //if (!dead)
-            StartCoroutine("Dot", pos);
-
-            //if (FightManager.Instance.DeadList.Count > 0)
-            //{
-            //    for(int i = 0; i<FightManager.Instance.DeadList.Count; i++)
-            //    {
-            //        if (pos == FightManager.Instance.DeadList[i])
-            //            dead = true;
-            //    }
-            //}
-
-            //if (!dead)
-            //StartCoroutine("monTurn", pos);
-            HPChange();
+            if(FightManager.Instance.PlayerWin)
+            {
+                Debug.Log("플레이어 우승");
+            }
+            else if(FightManager.Instance.MonsterWin)
+            {
+                Debug.Log("몬스터 우승");
+            }
         }
-        
-        //if (dead)
-        //{
-        //    FightManager.Instance.TurnQueue.Dequeue();
-        //    dead = false;
-        //    FightManager.Instance.TurnDraw();
-        //}
     }
 
     IEnumerator Dot(int pos)
     {
-        if (monsterAttacks[pos - 3].onDotDamage)
+        if (FightManager.Instance.DeadList.Count > 0)
         {
-            dotCount[pos - 3] += 1;
-            FightManager.Instance.Damage(monsterAttacks[pos - 3].gameObject, 3 * dotCount[pos - 3], false);
+            for (int i = 0; i < FightManager.Instance.DeadList.Count; i++)
+            {
+                if (pos == FightManager.Instance.DeadList[i])
+                    dead = true;
+            }
         }
-        yield return new WaitForSeconds(0.2f);
-        if (monsterAttacks[pos - 3].onDotDamage_2)
+        if (!dead)
         {
-            dotCount_2[pos - 3] += 1;
-            FightManager.Instance.Damage(monsterAttacks[pos - 3].gameObject, 5, false);
+            if (monsterAttacks[pos - 3].onDotDamage)
+            {
+                dotCount[pos - 3] += 1;
+                FightManager.Instance.Damage(monsterAttacks[pos - 3].gameObject, 3 * dotCount[pos - 3], false);
+            }
+            yield return new WaitForSeconds(0.2f);
+            if (monsterAttacks[pos - 3].onDotDamage_2)
+            {
+                dotCount_2[pos - 3] += 1;
+                FightManager.Instance.Damage(monsterAttacks[pos - 3].gameObject, 5, false);
+            }
         }
 
         if (FightManager.Instance.DeadList.Count > 0)
@@ -186,7 +211,7 @@ public class FightUI : MonoBehaviour
             monsterAttacks[pos - 3].MonsterTurn(pos - 3);
         yield return new WaitForSeconds(0.5f);
         count++;
-        HPChange();
+        //HPChange();
         if (dead)
         {
             FightManager.Instance.TurnQueue.Dequeue();

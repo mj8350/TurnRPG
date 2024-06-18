@@ -26,6 +26,7 @@ public class FightManager : MonoBehaviour
     public List<GameObject> provokedMonsters = new List<GameObject>(); // 도발당한 몬스터 리스트
     public List<GameObject> stunedMonsters = new List<GameObject>(); // 스턴당한 몬스터 리스트
     public List<int> DeadList = new List<int>();// 데드리스트
+    public List<int> LiveList = new List<int>();//라이브 리스트
 
     public CharSkillManager skillManager;
 
@@ -300,20 +301,47 @@ public class FightManager : MonoBehaviour
     {
         monsterAi.monsterDie(obj);
         DeadList.Add(MTChar(obj));
-        DeadList = DeadList.Distinct().ToList();
+        LiveCut(MTChar(obj));
+        DeadList = DeadList.Distinct().ToList();//중복제거;
         turn.FindKeyAndDelete(MTChar(obj));
         Destroy(obj.GetComponent<Collider2D>());
     }
 
-    //public bool ThiefAB(bool onCri, int damage)
-    //{
-    //    if (TurnQueue.Peek() < 3)
-    //    {
-            
-    //    }
-        
-    //}
+    public void LiveCut(int key)
+    {
+        for(int i = 0;i < LiveList.Count;i++)
+        {
+            if (LiveList[i]==key)
+                LiveList.RemoveAt(i);
+        }
+    }
 
+    public bool PlayerWin = false;
+    public bool MonsterWin = false;
+    public bool GameOver = false;
+
+    public bool WhoWin()
+    {
+        if (LiveList[0] > 2)
+        {
+            MonsterWin = true;
+            GameOver = true;
+            onAttack = false;
+            return GameOver;
+        }
+        else if (LiveList[LiveList.Count - 1] < 3)
+        {
+            PlayerWin = true;
+            GameOver = true;
+            onAttack = false;
+            return GameOver;
+        }
+        else
+        {
+            GameOver = false;
+            return GameOver;
+        }
+    }
 
     private IEnumerator getDamage(int i, int damage)
     {
@@ -326,6 +354,8 @@ public class FightManager : MonoBehaviour
             GameManager.Instance.player[i].onPlayerDead = true;
             playerManager.PlayerDeath(i, 6); // 죽음 애니메이션 표시
             DeadList.Add(i);// 캐릭터의 턴은 넘기도록.
+            LiveCut(i);
+            DeadList = DeadList.Distinct().ToList();//중복제거;
             turn.FindKeyAndDelete(i);
         }
         
@@ -355,6 +385,7 @@ public class FightManager : MonoBehaviour
                 dt.TextChange(damage);
             else
                 dt.TextChange("막기");
+            fightUI.HPChange();
             dt.StartUp();
         }
     }
@@ -420,6 +451,19 @@ public class FightManager : MonoBehaviour
         {
             GameManager.Instance.player[i].CurHP = GameManager.Instance.player[i].MaxHP / 2;
             GameManager.Instance.player[i].onPlayerDead = false;
+            playerManager.PlayerDeath(i, 0); // 일어서는 애니메이션 표시
+            // 데드리스트에서 부활한 대상을 빼야 함.
+            for(int j = 0; j <DeadList.Count; j++)
+            {
+                if (DeadList[j] == i)
+                {
+                    DeadList.RemoveAt(i);
+                }
+            }
+            LiveList.Add(i); // 라이브리스트에 추가
+            LiveList.Sort(); // 정렬
+            turn.FindKeyAndAdd(i);
+
         }
         else
             Debug.Log("부활대상이 아닙니다.");
@@ -440,6 +484,7 @@ public class FightManager : MonoBehaviour
         {
             DT.transform.position = damagePos;
             dt.TextChange(heal);
+            fightUI.HPChange();
             dt.StartUp();
         }
     }

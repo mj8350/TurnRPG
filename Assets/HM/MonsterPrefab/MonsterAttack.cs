@@ -44,7 +44,7 @@ public class MonsterAttack : MonoBehaviour
                 Invoke("Stunning", 1f);
                 // todo: 실패시 텍스트표시
                 onTaunt = false;
-                monsterChar.AngryInit(onTaunt);
+                StartCoroutine(InvokeAngryInit(1.3f));
                 StartCoroutine(DamageT(gameObject, 1));
 
             }
@@ -67,6 +67,12 @@ public class MonsterAttack : MonoBehaviour
             onStun = false;
             monsterChar.StunInit(onStun);
         }
+    }
+
+    private IEnumerator InvokeAngryInit(float time)
+    {
+        yield return new WaitForSeconds(time);
+        monsterChar.AngryInit(onTaunt);
     }
     private IEnumerator DamageT(GameObject obj, float time)
     {
@@ -116,7 +122,7 @@ public class MonsterAttack : MonoBehaviour
         //FightManager.Instance.Damage(targetPlayer, 5);
         FightManager.Instance.TauntMonsterTurn(pos, tauntTarget, onCri);
         onTaunt = false;
-        monsterChar.AngryInit(onTaunt);
+        StartCoroutine(InvokeAngryInit(2));
     }
 
     private void AttackNormalTarget(int pos)
