@@ -261,6 +261,24 @@ public class FightManager : MonoBehaviour
 
     public void Damage(GameObject obj, int damage, bool onCri)
     {
+
+
+        if (!onCri)
+        {
+            if (turn.turnList[fightUI.count].Key < 3)
+            {
+                GameObject ply = PlayerPos[turn.turnList[fightUI.count].Key].GetChild(0).gameObject;
+                if (ply.TryGetComponent<Thief>(out Thief thief))
+                {
+                    int ran = Random.Range(1, 101);
+                    if (ran <= 30)
+                    {
+                        onCri = true;
+                        Debug.Log("도적 고유스킬 발동");
+                    }
+                }
+            }
+        }
         if (onCri)
             damage *= 2;
 

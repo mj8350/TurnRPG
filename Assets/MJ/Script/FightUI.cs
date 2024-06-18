@@ -176,14 +176,14 @@ public class FightUI : MonoBehaviour
 
     IEnumerator Dot(int pos)
     {
-        if (FightManager.Instance.DeadList.Count > 0)
-        {
-            for (int i = 0; i < FightManager.Instance.DeadList.Count; i++)
-            {
-                if (pos == FightManager.Instance.DeadList[i])
-                    dead = true;
-            }
-        }
+        //if (FightManager.Instance.DeadList.Count > 0)
+        //{
+        //    for (int i = 0; i < FightManager.Instance.DeadList.Count; i++)
+        //    {
+        //        if (pos == FightManager.Instance.DeadList[i])
+        //            dead = true;
+        //    }
+        //}
         if (!dead)
         {
             if (monsterAttacks[pos - 3].onDotDamage)
@@ -198,7 +198,7 @@ public class FightUI : MonoBehaviour
                 FightManager.Instance.Damage(monsterAttacks[pos - 3].gameObject, 5, false);
             }
         }
-
+        yield return new WaitForSeconds(1f);
         if (FightManager.Instance.DeadList.Count > 0)
         {
             for (int i = 0; i < FightManager.Instance.DeadList.Count; i++)

@@ -108,7 +108,7 @@ public class GameManager : Singleton<GameManager>
 
         player[id].onPlayerDead = charStat.onPlayerDead = false;
 
-        playerObjectToId.Add(Prefeb[charactor], id);
+        //playerObjectToId.Add(Prefeb[charactor], id);
     }
 
     public void Player_Select(int pos, int charactor)
