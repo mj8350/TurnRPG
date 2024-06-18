@@ -20,7 +20,6 @@ public class ArcherDotDamageSkill : BaseSkill
         roulette = GameObject.FindFirstObjectByType<Roulette>();
 
         successProbability = 10+ (stat.Accuracy * 2); // 15+(Ac*4)
-        Debug.Log(successProbability);
     }
 
     public override void Skill_Active()
