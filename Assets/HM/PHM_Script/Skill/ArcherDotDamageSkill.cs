@@ -24,7 +24,7 @@ public class ArcherDotDamageSkill : BaseSkill
 
     public override void Skill_Active()
     {
-        if (roulette.randomNumber <= successProbability || roulette.randomNumber_2 <= 40)
+        if (roulette.randomNumber <= 100 || roulette.randomNumber_2 <= 40)
         {
             Debug.Log("도트뎀 스킬 발동");
 

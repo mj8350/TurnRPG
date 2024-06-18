@@ -451,6 +451,19 @@ public class FightManager : MonoBehaviour
         {
             GameManager.Instance.player[i].CurHP = GameManager.Instance.player[i].MaxHP / 2;
             GameManager.Instance.player[i].onPlayerDead = false;
+            playerManager.PlayerDeath(i, 0); // 일어서는 애니메이션 표시
+            // 데드리스트에서 부활한 대상을 빼야 함.
+            for(int j = 0; j <DeadList.Count; j++)
+            {
+                if (DeadList[j] == i)
+                {
+                    DeadList.RemoveAt(i);
+                }
+            }
+            LiveList.Add(i); // 라이브리스트에 추가
+            LiveList.Sort(); // 정렬
+            turn.FindKeyAndAdd(i);
+
         }
         else
             Debug.Log("부활대상이 아닙니다.");

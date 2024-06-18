@@ -24,7 +24,7 @@ public class ResurrectionSkill : BaseSkill
         targetObject = click.selectedObj;
         if (FightManager.Instance.IsResurrectionTarget(targetObject))
         {
-            if (roulette.randomNumber < successProbability)
+            if (roulette.randomNumber <= 100)
             {
                 Debug.Log("부활 스킬 발동");
                 roulette.isAttackSuccessful = true;
