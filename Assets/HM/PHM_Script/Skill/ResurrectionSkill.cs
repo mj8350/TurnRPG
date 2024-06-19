@@ -8,15 +8,15 @@ public class ResurrectionSkill : BaseSkill
     private ClickEvent click;
     public Roulette roulette;
     private GameObject targetObject;
-    private int successProbability = 100;
+    private int successProbability;
 
 
     private void Awake()
     {
-        TryGetComponent<PHM_CharStat>(out stat);
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
-        successProbability = 10 + (stat.Accuracy);
+        //successProbability = 10 + (stat.Accuracy);
+        successProbability = 10 + ((GameManager.Instance.player[FightManager.Instance.GMChar(gameObject)].Accuracy));
     }
 
     public override void Skill_Active()
@@ -24,9 +24,9 @@ public class ResurrectionSkill : BaseSkill
         targetObject = click.selectedObj;
         if (FightManager.Instance.IsResurrectionTarget(targetObject))
         {
-            if (roulette.randomNumber <= 100)
+            if (roulette.randomNumber <= successProbability)
             {
-                Debug.Log("부활 스킬 발동");
+                Debug.Log("부활 발동");
                 roulette.isAttackSuccessful = true;
                 roulette.InvokeInitRoulette();
                 gameObject.TryGetComponent<AttackingExample>(out AttackingExample motion);
@@ -38,6 +38,7 @@ public class ResurrectionSkill : BaseSkill
             {
                 roulette.isAttackSuccessful = false;
                 Debug.Log("부활 실패!");
+                StartCoroutine(DamageT(gameObject));
                 roulette.InvokeInitRoulette();
             }
         }

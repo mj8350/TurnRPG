@@ -11,8 +11,6 @@ public class SkillMouseOver_2 : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public TextMeshProUGUI SKInfoText;
     public string InfoT;
     public int Accuracy;
-    //private int Strength;
-    //private int Magic;
     private int Critical;
     private string WhatDmg;
     private int damage;
@@ -22,31 +20,53 @@ public class SkillMouseOver_2 : MonoBehaviour, IPointerEnterHandler, IPointerExi
         if (FightManager.Instance.TurnQueue.Peek() < 3)
         {
             Accuracy = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Accuracy;
-            //Strength = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Strength;
-            //Magic = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Magic;
             Critical = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Critical;
-            /*if (FightManager.Instance.big(Strength, Magic) == Strength)
-            {
-                damage = Strength;
-                WhatDmg = "물리데미지";
-            }
-            else
-            {
-                damage = Magic;
-                WhatDmg = "마법데미지";
-            }*/
 
+            switch (GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].id)
+            {
+                case 0:
+                    InfoT = "대상의 기절시켜 한 턴을 제압";
+                    Accuracy = 25 + (Accuracy * 2);
+                    WhatDmg = "공격력";
+                    damage = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Strength / 2;
+                    break;
+                case 1:
+                    InfoT = "낮은 확률로 지정 대상(플레이어)을 부활";
+                    Accuracy = 10 + (Accuracy);
+                    WhatDmg = "마법력";
+                    damage = 0;
+                    break;
+                case 2:
+                    InfoT = "대상의 방어력을 무시하는 공격";
+                    Accuracy = 10 + (Accuracy * 3);
+                    WhatDmg = "공격력";
+                    damage = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Strength * 2;
+                    break;
+                case 3:
+                    InfoT = "마법력 만큼 지정 대상 공격";
+                    Accuracy = 10 + (Accuracy * 3);
+                    WhatDmg = "마법력";
+                    damage = (int)(GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Magic * 1.5f);
+                    break;
+                case 4:
+                    InfoT = "공격력 만큼 광역 공격";
+                    Accuracy = 10 + (Accuracy * 3);
+                    WhatDmg = "공격력";
+                    damage = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Strength;
+                    break;
+            }
+
+            FightManager.Instance.percent = Accuracy;
+            Critical = 10 + (Critical * 2);
 
             SKInfo.gameObject.SetActive(true);
 
-            Accuracy = 15 + (Accuracy * 4);
-            Critical = 10 + (Critical * 2);
 
             SKInfoText.text = $"{InfoT} \n\n" +
                 $"확률: {Accuracy}%, \n" +
                 $"{WhatDmg}: {damage}\n" +
                 $"치명타율: {Critical}%";
-            FightManager.Instance.percent = Accuracy;
+
         }
     }
 

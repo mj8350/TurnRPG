@@ -12,8 +12,6 @@ public class SkillMouseOver_1 : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public TextMeshProUGUI SKInfoText;
     private string InfoT;
     private int Accuracy;
-    //private int Strength;
-    //private int Magic;
     private int Critical;
     private string WhatDmg;
     private int damage;
@@ -23,64 +21,53 @@ public class SkillMouseOver_1 : MonoBehaviour, IPointerEnterHandler, IPointerExi
         if (FightManager.Instance.TurnQueue.Peek() < 3)
         {
             Accuracy = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Accuracy;
-            //Strength = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Strength;
-            //Magic = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Magic;
             Critical = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Critical;
-            /*if (FightManager.Instance.big(Strength, Magic) == Strength)
-            {
-                damage = Strength;
-                WhatDmg = "물리데미지";
-            }
-            else
-            {
-                damage = Magic;
-                WhatDmg = "마법데미지";
-            }*/
 
             switch(GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].id)
             {
                 case 0:
-                    InfoT = "";
+                    InfoT = "대상의 한 턴을 자신만 공격하게 함";
                     Accuracy = 34 + (Accuracy * 4);
                     WhatDmg = "공격력";
-                    damage = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Strength;
+                    damage = 0;
                     break;
                 case 1:
-                    InfoT = "";
-                    Accuracy = 34 + (Accuracy * 4);
+                    InfoT = "마법력 만큼 지정 대상 회복";
+                    Accuracy = 10 + (Accuracy * 4);
+                    WhatDmg = "마법력";
+                    damage = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Magic / 2;
+                    break;
+                case 2:
+                    InfoT = "지정 대상에게 매 턴마다 데미지가 증가하는 맹독 부여";
+                    Accuracy = 10 + (Accuracy * 2);
+                    WhatDmg = "공격력";
+                    damage = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Strength / 2;
+                    break;
+                case 3:
+                    InfoT = "마법력 만큼 광역 공격";
+                    Accuracy = 20 + (Accuracy * 3);
                     WhatDmg = "마법력";
                     damage = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Magic;
                     break;
-                case 2:
-                    InfoT = "";
-                    Accuracy = 34 + (Accuracy * 4);
-                    WhatDmg = "물리데미지";
-                    damage = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Strength;
-                    break;
-                case 3:
-                    InfoT = "";
-                    Accuracy = 34 + (Accuracy * 4);
-                    WhatDmg = "물리데미지";
-                    damage = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Strength;
-                    break;
                 case 4:
-                    InfoT = "";
-                    Accuracy = 34 + (Accuracy * 4);
-                    WhatDmg = "물리데미지";
-                    damage = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Strength;
+                    InfoT = "지정 대상에게 매 턴마다 데미지를 주는 화상을 입힘";
+                    Accuracy = 10 + (Accuracy * 2);
+                    WhatDmg = "공격력";
+                    damage = GameManager.Instance.player[FightManager.Instance.TurnQueue.Peek()].Strength / 2;
                     break;
             }
 
+            FightManager.Instance.percent = Accuracy;
+            Critical = 10 + (Critical * 2);
 
             SKInfo.gameObject.SetActive(true);
 
-            Critical = 10 + (Critical * 2);
 
             SKInfoText.text = $"{InfoT} \n\n" +
                 $"확률: {Accuracy}%, \n" +
                 $"{WhatDmg}: {damage}\n" +
                 $"치명타율: {Critical}%";
-            FightManager.Instance.percent = Accuracy;
+            
         }
     }
 

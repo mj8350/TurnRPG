@@ -13,8 +13,8 @@ public class ArcherWideSkill : BaseSkill
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
-        TryGetComponent<PHM_CharStat>(out stat);
-        successProbability = 10 + (stat.Accuracy * 3);
+        //successProbability = 10 + (stat.Accuracy * 3);
+        successProbability = 10 + ((GameManager.Instance.player[FightManager.Instance.GMChar(gameObject)].Accuracy * 3));
     }
 
     public override void Skill_Active()
@@ -32,7 +32,8 @@ public class ArcherWideSkill : BaseSkill
         else
         {
             roulette.isAttackSuccessful = false;
-            Debug.Log("공격 실패!");
+            Debug.Log("화살비 실패!");
+            StartCoroutine(DamageT(gameObject));
             roulette.InvokeInitRoulette();
         }
     }
@@ -51,21 +52,17 @@ public class ArcherWideSkill : BaseSkill
     {
         if (monster != null)
         {
-            // 몬스터에게 데미지 적용
-            PHM_CharStat stat = GetComponent<PHM_CharStat>();
             monster.TryGetComponent<PHM_MonsterStat>(out PHM_MonsterStat monStat);
-            if (stat != null)
-            {
-                // 캐릭터의 공격력을 기반으로 데미지 계산 // 추후 데미지 계산식 적용
-                //int damage = stat.Magic - monStat.M_Defense;
-                int number = FightManager.Instance.GMChar(gameObject);
-                int damage = FightManager.Instance.DamageSum(GameManager.Instance.player[number].Strength, GameManager.Instance.player[number].Critical, monStat.P_Defense, out onCri);
-                FightManager.Instance.Damage(monster, damage, onCri);
-            }
-            else
-            {
-                Debug.LogWarning("MonsterStats 컴포넌트를 찾을 수 없습니다.");
-            }
+            // 캐릭터의 공격력을 기반으로 데미지 계산 // 추후 데미지 계산식 적용
+            //int damage = stat.Magic - monStat.M_Defense;
+            int number = FightManager.Instance.GMChar(gameObject);
+            int damage = FightManager.Instance.DamageSum(GameManager.Instance.player[number].Strength, GameManager.Instance.player[number].Critical, monStat.P_Defense, out onCri);
+            FightManager.Instance.Damage(monster, damage, onCri);
+            
+        }
+        else
+        {
+            Debug.LogWarning("MonsterStats 컴포넌트를 찾을 수 없습니다.");
         }
     }
 }
