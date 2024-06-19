@@ -176,7 +176,7 @@ public class ClickEvent : MonoBehaviour
             
             Debug.Log("어택킨다");
 
-            percentText.text = FightManager.Instance.percent.ToString();
+            //percentText.text = FightManager.Instance.percent.ToString();
 
             FightManager.Instance.onAttack = true;
             

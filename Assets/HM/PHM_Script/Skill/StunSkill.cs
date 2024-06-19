@@ -15,18 +15,17 @@ public class StunSkill : BaseSkill
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
-        TryGetComponent<PHM_CharStat>(out stat);
-        successProbability = 25 + (stat.Accuracy * 2);
+        //successProbability = 25 + (stat.Accuracy * 2);
+        successProbability = 25 + ((GameManager.Instance.player[FightManager.Instance.GMChar(gameObject)].Accuracy*2));
 
-
-        stunTargets = new List<GameObject>();
+        //stunTargets = new List<GameObject>();
     }
 
     public override void Skill_Active()
     {
-        if (roulette.randomNumber < successProbability)
+        if (roulette.randomNumber <= successProbability)
         {
-            Debug.Log("스턴 스킬 발동");
+            Debug.Log("방패 밀치기 발동");
 
             // 룰렛 성공 여부 설정
             roulette.isAttackSuccessful = true;
@@ -43,8 +42,10 @@ public class StunSkill : BaseSkill
                 PHM_CharStat stat = GetComponent<PHM_CharStat>();
                 targetObject.TryGetComponent<MonsterAttack>(out MonsterAttack stunTargetScript);
                 if (stunTargetScript != null)
-                { 
-                    int damage = stat.Strength / 2;
+                {
+                    click.selectedObj.TryGetComponent<PHM_MonsterStat>(out PHM_MonsterStat monStat);
+                    int number = FightManager.Instance.GMChar(gameObject);
+                    int damage = FightManager.Instance.DamageSum((int)(GameManager.Instance.player[number].Strength /2), GameManager.Instance.player[number].Critical, monStat.P_Defense, out onCri);
                     FightManager.Instance.Damage(targetObject, damage, onCri);
                     stunTargetScript.SetStunTarget(); // 스턴된 몬스터의 타겟 설정
                     
@@ -59,7 +60,8 @@ public class StunSkill : BaseSkill
         {
             // 룰렛 실패시 처리
             roulette.isAttackSuccessful = false;
-            Debug.Log("스턴 스킬 실패!");
+            Debug.Log("방패 밀치기 실패!");
+            StartCoroutine(DamageT(gameObject));
             roulette.InvokeInitRoulette();
         }
     }

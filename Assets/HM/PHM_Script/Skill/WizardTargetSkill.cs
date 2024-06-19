@@ -8,14 +8,14 @@ public class WizardTargetSkill : BaseSkill
     private ClickEvent click;
     private GameObject targetObject;
     public Roulette roulette;
-    private int successProbability = 100;
+    private int successProbability;
 
     private void Awake()
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
-        TryGetComponent<PHM_CharStat>(out stat);
-        successProbability = 10 + (stat.Accuracy * 3);
+        //successProbability = 10 + (stat.Accuracy * 3);
+        successProbability = 10 + ((GameManager.Instance.player[FightManager.Instance.GMChar(gameObject)].Accuracy * 3));
     }
 
 
@@ -24,7 +24,7 @@ public class WizardTargetSkill : BaseSkill
         if (roulette.randomNumber <= successProbability)
         {
             // 3%의 확률로 99999의 데미지를 입힘
-            if (Random.Range(0, 100) <= 3)
+            if (Random.Range(1, 101) <= 3)
             {
                 Debug.Log("고유능력 발동!");
                 roulette.isAttackSuccessful = true;
@@ -53,15 +53,11 @@ public class WizardTargetSkill : BaseSkill
                 targetObject = click.selectedObj;
                 if (targetObject != null)
                 {
-                    PHM_CharStat stat = GetComponent<PHM_CharStat>();
                     click.selectedObj.TryGetComponent<PHM_MonsterStat>(out PHM_MonsterStat monStat);
-                    if (stat != null)
-                    {
-                        // 캐릭터의 공격력을 기반으로 데미지 계산
-                        int number = FightManager.Instance.GMChar(gameObject);
-                        int damage = FightManager.Instance.DamageSum((int)(GameManager.Instance.player[number].Magic * 1.5f), GameManager.Instance.player[number].Critical, monStat.M_Defense, out onCri);
-                        FightManager.Instance.Damage(targetObject, damage, onCri);
-                    }
+                    // 캐릭터의 공격력을 기반으로 데미지 계산
+                    int number = FightManager.Instance.GMChar(gameObject);
+                    int damage = FightManager.Instance.DamageSum((int)(GameManager.Instance.player[number].Magic * 1.5f), GameManager.Instance.player[number].Critical, monStat.M_Defense, out onCri);
+                    FightManager.Instance.Damage(targetObject, damage, onCri);
 
                 }
                 else
@@ -73,7 +69,8 @@ public class WizardTargetSkill : BaseSkill
         else
         {
             roulette.isAttackSuccessful = false;
-            Debug.Log("공격 실패!");
+            Debug.Log("고압절단 실패!");
+            StartCoroutine(DamageT(gameObject));
             roulette.InvokeInitRoulette();
         }
 
