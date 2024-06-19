@@ -15,4 +15,21 @@ public class BaseSkill : MonoBehaviour
     {
         Debug.Log("스킬 발동");
     }
+
+    Vector3 damagePos;
+    public IEnumerator DamageT(GameObject obj)
+    {
+        yield return new WaitForSeconds(1);
+        GameObject DT;
+        damagePos = obj.transform.position;
+        damagePos.y += 1;
+        DT = PoolManager.Inst.pools[3].Pop();
+
+        if (DT.TryGetComponent<DamageText>(out DamageText dt))
+        {
+            DT.transform.position = damagePos;
+            dt.TextChange("실패");
+            dt.StartUp();
+        }
+    }
 }

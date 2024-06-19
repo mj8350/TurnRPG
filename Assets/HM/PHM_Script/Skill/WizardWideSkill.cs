@@ -8,23 +8,24 @@ public class WizardWideSkill : BaseSkill
 {
     private ClickEvent click;
     public Roulette roulette;
-    private int successProbability = 100;
+    private int successProbability;
 
     private void Awake()
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
         TryGetComponent<PHM_CharStat>(out stat);
-        successProbability = 20 + (stat.Accuracy * 3);
+        //successProbability = 20 + (stat.Accuracy * 3);
+        successProbability = 20 + ((GameManager.Instance.player[FightManager.Instance.GMChar(gameObject)].Accuracy * 3));
     }
 
     public override void Skill_Active()
     {
 
-        if (roulette.randomNumber < successProbability)
+        if (roulette.randomNumber <= successProbability)
         {
             // 1%의 확률로 99999의 데미지를 입힘
-            if (Random.Range(0, 100) <= 1)
+            if (Random.Range(1, 101) <= 1)
             {
                 Debug.Log("고유능력 발동!");
                 roulette.isAttackSuccessful = true;
@@ -48,7 +49,8 @@ public class WizardWideSkill : BaseSkill
         else
         {
             roulette.isAttackSuccessful = false;
-            Debug.Log("공격 실패!");
+            Debug.Log("해일 실패!");
+            StartCoroutine(DamageT(gameObject));
             roulette.InvokeInitRoulette();
         }
     }
@@ -67,21 +69,16 @@ public class WizardWideSkill : BaseSkill
     {
         if (monster != null)
         {
-            // 몬스터에게 데미지 적용
-            PHM_CharStat stat = GetComponent<PHM_CharStat>();
             monster.TryGetComponent<PHM_MonsterStat>(out PHM_MonsterStat monStat);
-            if (stat != null)
-            {
-                // 캐릭터의 공격력을 기반으로 데미지 계산 // 추후 데미지 계산식 적용
-                //int damage = stat.Magic - monStat.M_Defense;
-                int number = FightManager.Instance.GMChar(gameObject);
-                int damage = FightManager.Instance.DamageSum(GameManager.Instance.player[number].Magic, GameManager.Instance.player[number].Critical, monStat.M_Defense, out onCri);
-                FightManager.Instance.Damage(monster, damage, onCri);
-            }
-            else
-            {
-                Debug.LogWarning("MonsterStats 컴포넌트를 찾을 수 없습니다.");
-            }
+            // 캐릭터의 공격력을 기반으로 데미지 계산 // 추후 데미지 계산식 적용
+            //int damage = stat.Magic - monStat.M_Defense;
+            int number = FightManager.Instance.GMChar(gameObject);
+            int damage = FightManager.Instance.DamageSum(GameManager.Instance.player[number].Magic, GameManager.Instance.player[number].Critical, monStat.M_Defense, out onCri);
+            FightManager.Instance.Damage(monster, damage, onCri);
+        }
+        else
+        {
+            Debug.Log("대상 몬스터가 없습니다.");
         }
     }
 
@@ -98,18 +95,12 @@ public class WizardWideSkill : BaseSkill
     {
         if (monster != null)
         {
-            // 몬스터에게 데미지 적용
-            PHM_CharStat stat = GetComponent<PHM_CharStat>();
             monster.TryGetComponent<PHM_MonsterStat>(out PHM_MonsterStat monStat);
-            if (stat != null)
-            {
-                
-                FightManager.Instance.Damage(monster, 99999, onCri);
-            }
-            else
-            {
-                Debug.LogWarning("MonsterStats 컴포넌트를 찾을 수 없습니다.");
-            }
+            FightManager.Instance.Damage(monster, 99999, onCri);
+        }
+        else
+        {
+            Debug.Log("대상 몬스터가 없습니다.");
         }
     }
 }

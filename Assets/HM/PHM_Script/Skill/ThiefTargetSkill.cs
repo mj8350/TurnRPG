@@ -14,14 +14,14 @@ public class ThiefTargetSkill : BaseSkill
     {
         click = GameObject.FindFirstObjectByType<ClickEvent>();
         roulette = GameObject.FindFirstObjectByType<Roulette>();
-        TryGetComponent<PHM_CharStat>(out stat);
-        successProbability = 10 + (stat.Accuracy * 3);
+        //successProbability = 10 + (stat.Accuracy * 3);
+        successProbability = 10 + ((GameManager.Instance.player[FightManager.Instance.GMChar(gameObject)].Accuracy * 3));
     }
 
 
     public override void Skill_Active()
     {
-        if (roulette.randomNumber < successProbability)
+        if (roulette.randomNumber <= successProbability)
         {
             Debug.Log("영혼참 발동");
             roulette.isAttackSuccessful = true;
@@ -31,15 +31,11 @@ public class ThiefTargetSkill : BaseSkill
             targetObject = click.selectedObj;
             if (targetObject != null)
             {
-                PHM_CharStat stat = GetComponent<PHM_CharStat>();
                 click.selectedObj.TryGetComponent<PHM_MonsterStat>(out PHM_MonsterStat monStat);
-                if (stat != null)
-                {
-                    // 캐릭터의 공격력을 기반으로 데미지 계산
-                    int number = FightManager.Instance.GMChar(gameObject);
-                    int damage = FightManager.Instance.DamageSum((int)(GameManager.Instance.player[number].Strength * 2f), GameManager.Instance.player[number].Critical, 0, out onCri);
-                    FightManager.Instance.Damage(targetObject, damage, onCri);
-                }
+                // 캐릭터의 공격력을 기반으로 데미지 계산
+                int number = FightManager.Instance.GMChar(gameObject);
+                int damage = FightManager.Instance.DamageSum((int)(GameManager.Instance.player[number].Strength * 2f), GameManager.Instance.player[number].Critical, 0, out onCri);
+                FightManager.Instance.Damage(targetObject, damage, onCri);
 
             }
             else
@@ -51,7 +47,8 @@ public class ThiefTargetSkill : BaseSkill
         else
         {
             roulette.isAttackSuccessful = false;
-            Debug.Log("공격 실패!");
+            Debug.Log("영혼참 실패!");
+            StartCoroutine(DamageT(gameObject));
             roulette.InvokeInitRoulette();
         }
 

@@ -26,7 +26,7 @@ public class Roulette : MonoBehaviour
     //public Button stopButton;
 
     public int randomNumber;
-    public int randomNumber_2;
+    public int randomNumber_2; // 궁수의 고유능력 발동을 위해
     public int successProbability = 60;
     private bool isRoulette = false;
 
