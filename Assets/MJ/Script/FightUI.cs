@@ -33,6 +33,12 @@ public class FightUI : MonoBehaviour
     public MonsterAttack[] monsterAttacks;
     public DotDamageSkill dotDamage;
 
+    public Button AttackBtn;
+    public Button SkillBtn_1;
+    public Button SkillBtn_2;
+    public Image SKInfo;
+    public TextMeshProUGUI SKInfoText;
+
 
     private void Awake()
     {

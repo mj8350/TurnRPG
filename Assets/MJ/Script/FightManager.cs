@@ -43,6 +43,11 @@ public class FightManager : MonoBehaviour
 
     private PlayerManager playerManager;
 
+    public string InfoT;
+    public int percent;
+    public string WhatDmg;
+    public int damage;
+
     private void Awake()
     {
         if (Instance == null)
@@ -210,7 +215,7 @@ public class FightManager : MonoBehaviour
             monDef = monsterStat.M_Defense;
         Damage(obj, DamageSum(dftDmg, GameManager.Instance.player[who].Critical,monDef , out onCri), onCri);
     }
-    int big(int a, int b)
+    public int big(int a, int b)
     {
         return a > b ? a : b;
     }

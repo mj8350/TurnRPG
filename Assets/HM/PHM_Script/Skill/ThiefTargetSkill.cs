@@ -52,6 +52,7 @@ public class ThiefTargetSkill : BaseSkill
         {
             roulette.isAttackSuccessful = false;
             Debug.Log("공격 실패!");
+            StartCoroutine(DamageT(gameObject));
             roulette.InvokeInitRoulette();
         }
 

@@ -22,7 +22,7 @@ public class TauntSkill : BaseSkill
 
     public override void Skill_Active()
     {
-        if (roulette.randomNumber <= 100)
+        if (roulette.randomNumber <= successProbability)
         {
             Debug.Log("도발스킬 발동");
             roulette.isAttackSuccessful = true;
