@@ -29,6 +29,7 @@ public class ClickEvent : MonoBehaviour
     public Button skill2Button; // 스킬2 버튼
 
     public TextMeshProUGUI percentText;
+    public Image SKInfo;
 
     // 클릭된 버튼 타입
     private Roulette.ButtonType clickedButtonType = Roulette.ButtonType.None;
@@ -176,7 +177,9 @@ public class ClickEvent : MonoBehaviour
             
             Debug.Log("어택킨다");
 
-            //percentText.text = FightManager.Instance.percent.ToString();
+            percentText.text = FightManager.Instance.percent.ToString();
+            SKInfo.gameObject.SetActive(false);
+
 
             FightManager.Instance.onAttack = true;
             
