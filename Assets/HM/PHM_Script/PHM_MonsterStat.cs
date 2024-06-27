@@ -23,7 +23,7 @@ public class PHM_MonsterStat : MonoBehaviour
     {
         maxHP = 10 + (Helth * 2);
         curHP = maxHP;
-        Level = 1;
+        Level = GameManager.Instance.MonsterLevel;
     }
     private void Update()
     {

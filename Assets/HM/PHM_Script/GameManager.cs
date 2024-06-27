@@ -50,17 +50,33 @@ public class Monsters
     public bool onMonsterDead;
 }
 
+public enum SceneState
+{
+    TitleScene,
+    SelectScene,
+    MoveScene,
+    BattleScene
+}
+
 public class GameManager : Singleton<GameManager>
 {
     public Player[] player = new Player[3];
     public PHM_CharStat charStat;
     public Transform[] transforms;
+    public SceneState sceneState;
+    public Transform movePlayer;//선택->이동시 처음 지정, 이동>배틀시마다 지정
 
     private Dictionary<GameObject, int> playerObjectToId = new Dictionary<GameObject, int>();
 
     public GameObject[] Prefeb;
 
     public int[] MaxEXP = { 10, 20, 30, 40, 50, 60, 70, 80, 90 };
+
+    public int MonsterLevel;
+    public int ClearEXP;
+
+    public int Dice;
+    public int movePoint=0;
 
     private void Awake()
     {
@@ -71,6 +87,8 @@ public class GameManager : Singleton<GameManager>
         //    int ran = Random.Range(0, Prefeb.Length);
         //    CreateUserData(i, ran);
         //}
+
+        MonsterLevel = 1;
 
         CreateUserData(0, 0);
         CreateUserData(1, 3);
@@ -151,6 +169,19 @@ public class GameManager : Singleton<GameManager>
         // 예를 들어:
         player[playerId].onPlayerDead = false;
         player[playerId].CurHP = player[playerId].MaxHP; // 체력 회복 등의 처리 추가 가능
+    }
+
+    public void RoundEnd()
+    {
+        StartCoroutine("RoundChange");
+
+    }
+
+    private IEnumerator RoundChange()
+    {
+        yield return new WaitForSeconds(5f);
+        Dice = 5;
+        MonsterLevel++;
     }
 
 }

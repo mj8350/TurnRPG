@@ -8,18 +8,22 @@ public class Warrior : MonoBehaviour
 
     void Start()
     {
-        // 스킬 매니저 설정
-        skillsManager = gameObject.AddComponent<CharSkillManager>();
+        if (GameManager.Instance.sceneState == SceneState.BattleScene)
+        {
+            // 스킬 매니저 설정
+            skillsManager = gameObject.AddComponent<CharSkillManager>();
 
-        // 스킬 설정
-        skillsManager.primarySkill = gameObject.AddComponent<TauntSkill>();
-        skillsManager.secondarySkill = gameObject.AddComponent<StunSkill>();
+            // 스킬 설정
+            skillsManager.primarySkill = gameObject.AddComponent<TauntSkill>();
+            skillsManager.secondarySkill = gameObject.AddComponent<StunSkill>();
 
-        //// 필요한 경우 스킬 활성화
-        //skillsManager.ActivatePrimarySkill();
-        //skillsManager.ActivateSecondarySkill();
+            //// 필요한 경우 스킬 활성화
+            //skillsManager.ActivatePrimarySkill();
+            //skillsManager.ActivateSecondarySkill();
+        }
     }
 
+    /*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -31,5 +35,5 @@ public class Warrior : MonoBehaviour
         {
             skillsManager.ActivateSecondarySkill();
         }
-    }
+    }*/
 }
