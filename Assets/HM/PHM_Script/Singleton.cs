@@ -25,8 +25,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     protected void Awake()
     {
+        if (Instance != this) //중복으로 존재할시에는 파괴! 
+            Destroy(this.gameObject);
 
-        
         if (transform.parent != null && transform.root != null)
         {
             DontDestroyOnLoad(transform.root.gameObject);
