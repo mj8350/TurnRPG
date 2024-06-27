@@ -7,6 +7,9 @@ TagManager:
   - ArcherArmL
   - SelectRing
   - Monster
+  - ground
+  - Water
+  - Object
   layers:
   - Default
   - TransparentFX
