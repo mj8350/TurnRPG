@@ -22,8 +22,10 @@ public class MoveCollider : MonoBehaviour
     {
         if (player.CanMove&&Arrow.activeSelf)
         {
+            player.LastPosChange();
             GameManager.Instance.movePoint--;
-            Debug.Log(GameManager.Instance.movePoint);
+            //Debug.Log(GameManager.Instance.movePoint);
+            GameManager.Instance.MoveUIText();
             player.ClickCollider(transPos);
             Arrow.SetActive(false);
         }
@@ -49,13 +51,10 @@ public class MoveCollider : MonoBehaviour
     {
         if (collision.CompareTag("Monster"))
         {
-            Debug.Log("몬스터 발견");
-
         }
 
-        if (collision.CompareTag("Object")|| collision.CompareTag("Water"))
+        if (collision.CompareTag("Object") || collision.CompareTag("Water"))
         {
-            Debug.Log("걸림");
             isGround = false;
         }
     }

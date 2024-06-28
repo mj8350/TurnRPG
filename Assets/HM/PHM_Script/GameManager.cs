@@ -62,7 +62,8 @@ public class GameManager : Singleton<GameManager>
 {
     public Player[] player = new Player[3];
     public PHM_CharStat charStat;
-    public Transform[] transforms;
+    //public Transform[] transforms;
+    private SelectPlayerPos PlayerPos;
     public SceneState sceneState;
     public Transform movePlayer;//선택->이동시 처음 지정, 이동>배틀시마다 지정
 
@@ -77,6 +78,7 @@ public class GameManager : Singleton<GameManager>
 
     public int Dice;
     public int movePoint=0;
+    public Vector3 PlayerMovePos;
 
     private void Awake()
     {
@@ -90,9 +92,9 @@ public class GameManager : Singleton<GameManager>
 
         MonsterLevel = 1;
 
-        CreateUserData(0, 0);
-        CreateUserData(1, 3);
-        CreateUserData(2, 4);
+        //CreateUserData(0, 0);
+        //CreateUserData(1, 3);
+        //CreateUserData(2, 4);
     }
 
     public void CreateUserData(int id, int charactor)
@@ -131,10 +133,11 @@ public class GameManager : Singleton<GameManager>
 
     public void Player_Select(int pos, int charactor)
     {
-        if (transforms[pos].childCount > 0)
-            Destroy(transforms[pos].GetChild(0).gameObject);
-        GameObject obj = Instantiate(Prefeb[charactor], transforms[pos]);
-        obj.transform.SetParent(transforms[pos]);
+        PlayerPos = GameObject.FindFirstObjectByType<SelectPlayerPos>();
+        if (PlayerPos.transforms[pos].childCount > 0)
+            Destroy(PlayerPos.transforms[pos].GetChild(0).gameObject);
+        GameObject obj = Instantiate(Prefeb[charactor], PlayerPos.transforms[pos]);
+        obj.transform.SetParent(PlayerPos.transforms[pos]);
     }
 
     //public void RegisterPlayerGameObject(GameObject playerObject, int playerId)
@@ -171,6 +174,8 @@ public class GameManager : Singleton<GameManager>
         player[playerId].CurHP = player[playerId].MaxHP; // 체력 회복 등의 처리 추가 가능
     }
 
+    private MoveUIManager M_UI;
+
     public void RoundEnd()
     {
         StartCoroutine("RoundChange");
@@ -179,9 +184,18 @@ public class GameManager : Singleton<GameManager>
 
     private IEnumerator RoundChange()
     {
+        M_UI = GameObject.FindFirstObjectByType<MoveUIManager>();
         yield return new WaitForSeconds(5f);
         Dice = 5;
         MonsterLevel++;
+        M_UI.D_TextChange();
+    }
+
+    public void MoveUIText()
+    {
+        M_UI = GameObject.FindFirstObjectByType<MoveUIManager>();
+        M_UI.D_TextChange();
+        M_UI.P_TextChange();
     }
 
 }

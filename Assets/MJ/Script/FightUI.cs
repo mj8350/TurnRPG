@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FightUI : MonoBehaviour
 {
@@ -316,5 +317,12 @@ public class FightUI : MonoBehaviour
                 M_MD[i].text = (monsterStat.M_Defense/2).ToString();
             }
         }
+    }
+
+    public void OnClick_RunBtn()
+    {
+        SceneManager.LoadScene("Move3");
+        GameManager.Instance.sceneState = SceneState.MoveScene;
+        Destroy(FightManager.Instance.gameObject);
     }
 }
