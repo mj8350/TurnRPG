@@ -4,23 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// ë‚ ì§œ : 2021-04-01 PM 8:33:22
-// ì‘ì„±ì : Rito
+// ³¯Â¥ : 2021-04-01 PM 8:33:22
+// ÀÛ¼ºÀÚ : Rito
 
 namespace Rito.InventorySystem
 {
-    /// <summary> ìŠ¬ë¡¯ ë‚´ì˜ ì•„ì´í…œ ì•„ì´ì½˜ì— ë§ˆìš°ìŠ¤ë¥¼ ì˜¬ë ¸ì„ ë•Œ ë³´ì´ëŠ” íˆ´íŒ </summary>
-    public class ItemTooltipUI : MonoBehaviour
+    /// <summary> ½½·Ô ³»ÀÇ ¾ÆÀÌÅÛ ¾ÆÀÌÄÜ¿¡ ¸¶¿ì½º¸¦ ¿Ã·ÈÀ» ¶§ º¸ÀÌ´Â ÅøÆÁ </summary>
+    public class ItemTooltipUI_2 : MonoBehaviour
     {
         /***********************************************************************
         *                           Inspector Option Fields
         ***********************************************************************/
         #region .
         [SerializeField]
-        private Text _titleText;   // ì•„ì´í…œ ì´ë¦„ í…ìŠ¤íŠ¸
+        private Text _titleText;   // ¾ÆÀÌÅÛ ÀÌ¸§ ÅØ½ºÆ®
 
         [SerializeField]
-        private Text _contentText; // ì•„ì´í…œ ì„¤ëª… í…ìŠ¤íŠ¸
+        private Text _contentText; // ¾ÆÀÌÅÛ ¼³¸í ÅØ½ºÆ®
 
         #endregion
         /***********************************************************************
@@ -60,15 +60,15 @@ namespace Rito.InventorySystem
             DisableAllChildrenRaycastTarget(transform);
         }
 
-        /// <summary> ëª¨ë“  ìì‹ UIì— ë ˆì´ìºìŠ¤íŠ¸ íƒ€ê²Ÿ í•´ì œ </summary>
+        /// <summary> ¸ğµç ÀÚ½Ä UI¿¡ ·¹ÀÌÄ³½ºÆ® Å¸°Ù ÇØÁ¦ </summary>
         private void DisableAllChildrenRaycastTarget(Transform tr)
         {
-            // ë³¸ì¸ì´ Graphic(UI)ë¥¼ ìƒì†í•˜ë©´ ë ˆì´ìºìŠ¤íŠ¸ íƒ€ê²Ÿ í•´ì œ
+            // º»ÀÎÀÌ Graphic(UI)¸¦ »ó¼ÓÇÏ¸é ·¹ÀÌÄ³½ºÆ® Å¸°Ù ÇØÁ¦
             tr.TryGetComponent(out Graphic gr);
-            if(gr != null)
+            if (gr != null)
                 gr.raycastTarget = false;
 
-            // ìì‹ì´ ì—†ìœ¼ë©´ ì¢…ë£Œ
+            // ÀÚ½ÄÀÌ ¾øÀ¸¸é Á¾·á
             int childCount = tr.childCount;
             if (childCount == 0) return;
 
@@ -83,57 +83,57 @@ namespace Rito.InventorySystem
         *                               Public Methods
         ***********************************************************************/
         #region .
-        /// <summary> íˆ´íŒ UIì— ì•„ì´í…œ ì •ë³´ ë“±ë¡ </summary>
+        /// <summary> ÅøÆÁ UI¿¡ ¾ÆÀÌÅÛ Á¤º¸ µî·Ï </summary>
         public void SetItemInfo(ItemData data)
         {
             _titleText.text = data.Name;
             _contentText.text = data.Tooltip;
         }
 
-        /// <summary> íˆ´íŒì˜ ìœ„ì¹˜ ì¡°ì • </summary>
+        /// <summary> ÅøÆÁÀÇ À§Ä¡ Á¶Á¤ </summary>
         public void SetRectPosition(RectTransform slotRect)
         {
-            // ìº”ë²„ìŠ¤ ìŠ¤ì¼€ì¼ëŸ¬ì— ë”°ë¥¸ í•´ìƒë„ ëŒ€ì‘
+            // Äµ¹ö½º ½ºÄÉÀÏ·¯¿¡ µû¸¥ ÇØ»óµµ ´ëÀÀ
             float wRatio = Screen.width / _canvasScaler.referenceResolution.x;
             float hRatio = Screen.height / _canvasScaler.referenceResolution.y;
-            float ratio = 
+            float ratio =
                 wRatio * (1f - _canvasScaler.matchWidthOrHeight) +
                 hRatio * (_canvasScaler.matchWidthOrHeight);
 
             float slotWidth = slotRect.rect.width * ratio;
             float slotHeight = slotRect.rect.height * ratio;
 
-            // íˆ´íŒ ì´ˆê¸° ìœ„ì¹˜(ìŠ¬ë¡¯ ìš°í•˜ë‹¨) ì„¤ì •
-            _rt.position = slotRect.position - new Vector3(-128, 128);
+            // ÅøÆÁ ÃÊ±â À§Ä¡(½½·Ô ¿ìÇÏ´Ü) ¼³Á¤
+            _rt.position = slotRect.position - new Vector3(-800, 0);
             Vector2 pos = _rt.position;
 
-            // íˆ´íŒì˜ í¬ê¸°
+            // ÅøÆÁÀÇ Å©±â
             float width = _rt.rect.width * ratio;
             float height = _rt.rect.height * ratio;
 
-            // ìš°ì¸¡, í•˜ë‹¨ì´ ì˜ë ¸ëŠ”ì§€ ì—¬ë¶€
+            // ¿ìÃø, ÇÏ´ÜÀÌ Àß·È´ÂÁö ¿©ºÎ
             bool rightTruncated = pos.x + width > Screen.width;
             bool bottomTruncated = pos.y - height < 0f;
 
             ref bool R = ref rightTruncated;
             ref bool B = ref bottomTruncated;
 
-            // ì˜¤ë¥¸ìª½ë§Œ ì˜ë¦¼ => ìŠ¬ë¡¯ì˜ Left Bottom ë°©í–¥ìœ¼ë¡œ í‘œì‹œ
+            // ¿À¸¥ÂÊ¸¸ Àß¸² => ½½·ÔÀÇ Left Bottom ¹æÇâÀ¸·Î Ç¥½Ã
             if (R && !B)
             {
                 _rt.position = new Vector2(pos.x - width - slotWidth, pos.y);
             }
-            // ì•„ë˜ìª½ë§Œ ì˜ë¦¼ => ìŠ¬ë¡¯ì˜ Right Top ë°©í–¥ìœ¼ë¡œ í‘œì‹œ
+            // ¾Æ·¡ÂÊ¸¸ Àß¸² => ½½·ÔÀÇ Right Top ¹æÇâÀ¸·Î Ç¥½Ã
             else if (!R && B)
             {
                 _rt.position = slotRect.position + new Vector3(128, 128);
             }
-            // ëª¨ë‘ ì˜ë¦¼ => ìŠ¬ë¡¯ì˜ Left Top ë°©í–¥ìœ¼ë¡œ í‘œì‹œ
+            // ¸ğµÎ Àß¸² => ½½·ÔÀÇ Left Top ¹æÇâÀ¸·Î Ç¥½Ã
             else if (R && B)
             {
                 _rt.position = new Vector2(pos.x - width - slotWidth, pos.y + height + slotHeight);
             }
-            // ì˜ë¦¬ì§€ ì•ŠìŒ => ìŠ¬ë¡¯ì˜ Right Bottom ë°©í–¥ìœ¼ë¡œ í‘œì‹œ
+            // Àß¸®Áö ¾ÊÀ½ => ½½·ÔÀÇ Right Bottom ¹æÇâÀ¸·Î Ç¥½Ã
             // Do Nothing
         }
 

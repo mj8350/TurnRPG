@@ -87,6 +87,8 @@ namespace Rito.InventorySystem
         [SerializeField]
         private Item[] _items;
 
+        public ItemData[] _itemDataArray;
+
         /// <summary> 업데이트 할 인덱스 목록 </summary>
         private readonly HashSet<int> _indexSetForUpdate = new HashSet<int>();
 
@@ -131,6 +133,9 @@ namespace Rito.InventorySystem
         private void Start()
         {
             UpdateAccessibleStatesAll();
+
+            Add(_itemDataArray[0], 10);
+            Add(_itemDataArray[1], 10);
         }
 
         #endregion

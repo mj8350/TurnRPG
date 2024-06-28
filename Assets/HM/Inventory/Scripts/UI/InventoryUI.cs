@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Spine;
 
 /*
     [기능 - 에디터 전용]
@@ -68,6 +69,7 @@ namespace Rito.InventorySystem
         [SerializeField] private RectTransform _contentAreaRT; // 슬롯들이 위치할 영역
         [SerializeField] private GameObject _slotUiPrefab;     // 슬롯의 원본 프리팹
         [SerializeField] private ItemTooltipUI _itemTooltip;   // 아이템 정보를 보여줄 툴팁 UI
+        
         [SerializeField] private InventoryPopupUI _popup;      // 팝업 UI 관리 객체
 
         [Header("Buttons")]
@@ -137,8 +139,8 @@ namespace Rito.InventorySystem
             OnPointerEnterAndExit();
             if(_showTooltip) ShowOrHideItemTooltip();
             OnPointerDown();
-            OnPointerDrag();
-            OnPointerUp();
+            //OnPointerDrag();
+            //OnPointerUp();
         }
 
         public void ShowInventoryUI()
@@ -344,45 +346,52 @@ namespace Rito.InventorySystem
                 _itemTooltip.Hide();
         }
         /// <summary> 슬롯에 클릭하는 경우 </summary>
-        private void OnPointerDown()
+        public void OnPointerDown()
         {
             // Left Click : Begin Drag
-            if (Input.GetMouseButtonDown(_leftClick))
-            {
-                _beginDragSlot = RaycastAndGetFirstComponent<ItemSlotUI>();
+            //if (Input.GetMouseButtonDown(_leftClick))
+            //{
+            //    _beginDragSlot = RaycastAndGetFirstComponent<ItemSlotUI>();
 
-                // 아이템을 갖고 있는 슬롯만 해당
-                if (_beginDragSlot != null && _beginDragSlot.HasItem && _beginDragSlot.IsAccessible)
-                {
-                    EditorLog($"Drag Begin : Slot [{_beginDragSlot.Index}]");
+            //    // 아이템을 갖고 있는 슬롯만 해당
+            //    if (_beginDragSlot != null && _beginDragSlot.HasItem && _beginDragSlot.IsAccessible)
+            //    {
+            //        EditorLog($"Drag Begin : Slot [{_beginDragSlot.Index}]");
 
-                    // 위치 기억, 참조 등록
-                    _beginDragIconTransform = _beginDragSlot.IconRect.transform;
-                    _beginDragIconPoint = _beginDragIconTransform.position;
-                    _beginDragCursorPoint = Input.mousePosition;
+            //        // 위치 기억, 참조 등록
+            //        _beginDragIconTransform = _beginDragSlot.IconRect.transform;
+            //        _beginDragIconPoint = _beginDragIconTransform.position;
+            //        _beginDragCursorPoint = Input.mousePosition;
 
-                    // 맨 위에 보이기
-                    _beginDragSlotSiblingIndex = _beginDragSlot.transform.GetSiblingIndex();
-                    _beginDragSlot.transform.SetAsLastSibling();
+            //        // 맨 위에 보이기
+            //        _beginDragSlotSiblingIndex = _beginDragSlot.transform.GetSiblingIndex();
+            //        _beginDragSlot.transform.SetAsLastSibling();
 
-                    // 해당 슬롯의 하이라이트 이미지를 아이콘보다 뒤에 위치시키기
-                    _beginDragSlot.SetHighlightOnTop(false);
-                }
-                else
-                {
-                    _beginDragSlot = null;
-                }
-            }
+            //        // 해당 슬롯의 하이라이트 이미지를 아이콘보다 뒤에 위치시키기
+            //        _beginDragSlot.SetHighlightOnTop(false);
+            //    }
+            //    else
+            //    {
+            //        _beginDragSlot = null;
+            //    }
+            //}
 
             // Right Click : Use Item
-            else if (Input.GetMouseButtonDown(_rightClick))
+            if (Input.GetMouseButtonDown(_rightClick))
             {
-                ItemSlotUI slot = RaycastAndGetFirstComponent<ItemSlotUI>();
 
-                if (slot != null && slot.HasItem && slot.IsAccessible)
-                {
-                    TryUseItem(slot.Index);
-                }
+                //UseItem();
+                
+            }
+        }
+
+        public void UseItem()
+        {
+            ItemSlotUI slot = RaycastAndGetFirstComponent<ItemSlotUI>();
+
+            if (slot != null && slot.HasItem && slot.IsAccessible)
+            {
+                TryUseItem(slot.Index);
             }
         }
         /// <summary> 드래그하는 도중 </summary>
