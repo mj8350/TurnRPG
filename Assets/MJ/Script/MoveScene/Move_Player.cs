@@ -15,6 +15,10 @@ public class Move_Player : MonoBehaviour
 
     private void Start()
     {
+        //юс╫ц
+        //GameManager.Instance.PlayerMovePos = Vector3.zero;
+        transform.position = GameManager.Instance.PlayerMovePos;
+
         M_UI = GameObject.FindFirstObjectByType<MoveUIManager>();
         GameManager.Instance.MoveUIText();
         CanMove = true;
@@ -103,4 +107,10 @@ public class Move_Player : MonoBehaviour
         if (GameManager.Instance.Dice == 0 && GameManager.Instance.movePoint == 0)
             GameManager.Instance.RoundEnd();
     }
+    public Vector3 lastPos;
+    public void LastPosChange()
+    {
+        lastPos = transform.position;
+    }
+
 }

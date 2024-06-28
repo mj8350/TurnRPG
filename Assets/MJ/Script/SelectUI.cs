@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class SelectUI : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class SelectUI : MonoBehaviour
     public TextMeshProUGUI[] NameUI_C;
     public TextMeshProUGUI[] StatUI_C;
     public TextMeshProUGUI[] AbilityUI_C;
+
 
     private int[] curChar = { -1, -1, -1 };
 
@@ -106,6 +108,22 @@ public class SelectUI : MonoBehaviour
     {
         if (!ClassBtn[index].gameObject.activeSelf)
             ClassBtn[index].gameObject.SetActive(true);
+    }
+
+    public void OnClick_StartBtn()
+    {
+        if (curChar[0] != -1 && curChar[1] != -1 && curChar[2] != -1)
+        {
+            SceneManager.LoadScene("Move3");
+            GameManager.Instance.sceneState = SceneState.MoveScene;
+            GameManager.Instance.PlayerMovePos = Vector3.zero;
+        }
+    }
+
+    public void OnClick_Title()
+    {
+        SceneManager.LoadScene("TitleScene");
+        GameManager.Instance.sceneState = SceneState.TitleScene;
     }
 
 }

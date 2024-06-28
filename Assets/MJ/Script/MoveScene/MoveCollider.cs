@@ -22,6 +22,7 @@ public class MoveCollider : MonoBehaviour
     {
         if (player.CanMove&&Arrow.activeSelf)
         {
+            player.LastPosChange();
             GameManager.Instance.movePoint--;
             //Debug.Log(GameManager.Instance.movePoint);
             GameManager.Instance.MoveUIText();

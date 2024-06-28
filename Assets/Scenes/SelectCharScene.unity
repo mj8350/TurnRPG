@@ -1140,7 +1140,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 346610847}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 369816278}
+        m_TargetAssemblyTypeName: SelectUI, Assembly-CSharp
+        m_MethodName: OnClick_Title
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &346610847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2555,6 +2567,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 489107492}
   m_CullTransparentMesh: 1
+--- !u!1 &541808785
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 541808787}
+  - component: {fileID: 541808786}
+  m_Layer: 0
+  m_Name: PlayerPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &541808786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541808785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4132e6626ad3ef46bca0ed5508bb240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transforms:
+  - {fileID: 213034817}
+  - {fileID: 1634150121}
+  - {fileID: 1953544993}
+--- !u!4 &541808787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541808785}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1232.7384, y: 403.58472, z: -8.559757}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &576865577
 GameObject:
   m_ObjectHideFlags: 0
@@ -4984,7 +5044,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1298949426}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 369816278}
+        m_TargetAssemblyTypeName: SelectUI, Assembly-CSharp
+        m_MethodName: OnClick_StartBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1298949426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7167,17 +7239,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93aa43202d459594a8b008d05889f7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player:
+  - id: 0
+    CharName: 
+    CharJob: 
+    Accuracy: 0
+    P_Defense: 0
+    M_Defense: 0
+    Strength: 0
+    Magic: 0
+    Critical: 0
+    Speed: 0
+    Helth: 0
+    SpecialAB: 
+    Skill01: 
+    Skill02: 
+    MaxHP: 0
+    CurHP: 0
+    Level: 0
+    EXP: 0
+    onPlayerDead: 0
+  - id: 0
+    CharName: 
+    CharJob: 
+    Accuracy: 0
+    P_Defense: 0
+    M_Defense: 0
+    Strength: 0
+    Magic: 0
+    Critical: 0
+    Speed: 0
+    Helth: 0
+    SpecialAB: 
+    Skill01: 
+    Skill02: 
+    MaxHP: 0
+    CurHP: 0
+    Level: 0
+    EXP: 0
+    onPlayerDead: 0
+  - id: 0
+    CharName: 
+    CharJob: 
+    Accuracy: 0
+    P_Defense: 0
+    M_Defense: 0
+    Strength: 0
+    Magic: 0
+    Critical: 0
+    Speed: 0
+    Helth: 0
+    SpecialAB: 
+    Skill01: 
+    Skill02: 
+    MaxHP: 0
+    CurHP: 0
+    Level: 0
+    EXP: 0
+    onPlayerDead: 0
   charStat: {fileID: 0}
-  transforms:
-  - {fileID: 213034817}
-  - {fileID: 1634150121}
-  - {fileID: 1953544993}
+  sceneState: 0
+  movePlayer: {fileID: 0}
   Prefeb:
   - {fileID: 5476095651855104634, guid: 44f8524edc64f2146b22fb2807ad88fc, type: 3}
   - {fileID: 7507203005261002806, guid: f09935441256f564e88dcf948abe8435, type: 3}
   - {fileID: 8751584375282102596, guid: 0af6b2f1449dd1c44bd4a3ff877a57c9, type: 3}
   - {fileID: 8638968109146237064, guid: e2ef385d7619b3a42abca1c8d79aad87, type: 3}
   - {fileID: 1119582640003751012, guid: ef4fdcc67e1451c46bd56d1cbfe8fdae, type: 3}
+  MaxEXP: 0a000000140000001e00000028000000320000003c00000046000000500000005a000000
+  MonsterLevel: 0
+  ClearEXP: 0
+  Dice: 5
+  movePoint: 0
+  PlayerMovePos: {x: 0, y: 0, z: 0}
 --- !u!4 &1914784795
 Transform:
   m_ObjectHideFlags: 0
@@ -7997,3 +8131,4 @@ SceneRoots:
   - {fileID: 1122806628}
   - {fileID: 369816279}
   - {fileID: 1914784795}
+  - {fileID: 541808787}

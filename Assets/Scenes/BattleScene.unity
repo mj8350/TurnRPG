@@ -1865,7 +1865,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 193631662}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2140791267}
+        m_TargetAssemblyTypeName: FightUI, Assembly-CSharp
+        m_MethodName: OnClick_RunBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &193631662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2544,6 +2556,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  sceneState: 0
+  movePlayer: {fileID: 0}
   Prefeb:
   - {fileID: 5476095651855104634, guid: 44f8524edc64f2146b22fb2807ad88fc, type: 3}
   - {fileID: 7507203005261002806, guid: f09935441256f564e88dcf948abe8435, type: 3}
@@ -2551,6 +2565,11 @@ MonoBehaviour:
   - {fileID: 8638968109146237064, guid: e2ef385d7619b3a42abca1c8d79aad87, type: 3}
   - {fileID: 1119582640003751012, guid: ef4fdcc67e1451c46bd56d1cbfe8fdae, type: 3}
   MaxEXP: 0a000000140000001e00000028000000320000003c00000046000000500000005a000000
+  MonsterLevel: 0
+  ClearEXP: 0
+  Dice: 0
+  movePoint: 0
+  PlayerMovePos: {x: 0, y: 0, z: 0}
 --- !u!4 &289529605
 Transform:
   m_ObjectHideFlags: 0
