@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Move_Player : MonoBehaviour
 {
+    private MoveUIManager M_UI;
     public Transform[] playerPos;
     public GameObject obj;
 
@@ -14,6 +15,8 @@ public class Move_Player : MonoBehaviour
 
     private void Start()
     {
+        M_UI = GameObject.FindFirstObjectByType<MoveUIManager>();
+        GameManager.Instance.MoveUIText();
         CanMove = true;
         StartCoroutine("Create");
 
@@ -26,9 +29,10 @@ public class Move_Player : MonoBehaviour
             if (GameManager.Instance.Dice > 0&&GameManager.Instance.movePoint==0)
             {
                 int ran = Random.Range(1, 7);
-                Debug.Log(ran);
+                //Debug.Log(ran);
                 GameManager.Instance.movePoint += ran;
                 GameManager.Instance.Dice--;
+                GameManager.Instance.MoveUIText();
             }
         }
     }

@@ -171,6 +171,8 @@ public class GameManager : Singleton<GameManager>
         player[playerId].CurHP = player[playerId].MaxHP; // 체력 회복 등의 처리 추가 가능
     }
 
+    private MoveUIManager M_UI;
+
     public void RoundEnd()
     {
         StartCoroutine("RoundChange");
@@ -179,9 +181,18 @@ public class GameManager : Singleton<GameManager>
 
     private IEnumerator RoundChange()
     {
+        M_UI = GameObject.FindFirstObjectByType<MoveUIManager>();
         yield return new WaitForSeconds(5f);
         Dice = 5;
         MonsterLevel++;
+        M_UI.D_TextChange();
+    }
+
+    public void MoveUIText()
+    {
+        M_UI = GameObject.FindFirstObjectByType<MoveUIManager>();
+        M_UI.D_TextChange();
+        M_UI.P_TextChange();
     }
 
 }
