@@ -173,6 +173,7 @@ public class FightUI : MonoBehaviour
             if(FightManager.Instance.PlayerWin)
             {
                 Debug.Log("플레이어 우승");
+                GameManager.Instance.PlayerExp += GameManager.Instance.MonsterLevel * 15;
             }
             else if(FightManager.Instance.MonsterWin)
             {
@@ -294,9 +295,9 @@ public class FightUI : MonoBehaviour
         int MaxEXP, CurEXP;
         for(int i = 0;i<3 ; i++)
         {
-            if (GameManager.Instance.player[i].Level < 10) {
-                MaxEXP = GameManager.Instance.MaxEXP[GameManager.Instance.player[i].Level-1];
-                CurEXP = GameManager.Instance.player[i].EXP;
+            if (GameManager.Instance.PlayerLevel < 10) {
+                MaxEXP = GameManager.Instance.MaxEXP[GameManager.Instance.PlayerLevel -1];
+                CurEXP = GameManager.Instance.PlayerExp;
                 EXPSlider[i].value = ((float)CurEXP/MaxEXP);
                 EXPText[i].text = $"{CurEXP}/{MaxEXP}";
             }
@@ -321,8 +322,11 @@ public class FightUI : MonoBehaviour
 
     public void OnClick_RunBtn()
     {
-        SceneManager.LoadScene("Move3");
-        GameManager.Instance.sceneState = SceneState.MoveScene;
-        Destroy(FightManager.Instance.gameObject);
+        if (FightManager.Instance.TurnQueue.Peek() < 3)
+        {
+            SceneManager.LoadScene("Move3");
+            GameManager.Instance.sceneState = SceneState.MoveScene;
+            Destroy(FightManager.Instance.gameObject);
+        }
     }
 }

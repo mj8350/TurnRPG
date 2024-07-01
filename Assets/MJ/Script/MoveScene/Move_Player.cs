@@ -104,6 +104,7 @@ public class Move_Player : MonoBehaviour
         transform.position = pos;
         PlayerAnim(0);
         CanMove = true;
+        GameManager.Instance.PlayerMovePosClear = transform.position;
         if (GameManager.Instance.Dice == 0 && GameManager.Instance.movePoint == 0)
             GameManager.Instance.RoundEnd();
     }

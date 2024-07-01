@@ -21,9 +21,12 @@ public class PHM_MonsterStat : MonoBehaviour
 
     private void Awake()
     {
+        Level = GameManager.Instance.MonsterLevel;
+
+        LevelUpdate();
+
         maxHP = 10 + (Helth * 2);
         curHP = maxHP;
-        Level = GameManager.Instance.MonsterLevel;
     }
     private void Update()
     {
@@ -31,5 +34,17 @@ public class PHM_MonsterStat : MonoBehaviour
         {
             curHP = 0;
         }
+    }
+
+    private void LevelUpdate()//레벨에 따른 스탯조정
+    {
+        Accuracy += (Level-1) * 2;
+        P_Defense += (Level - 1) * 2;
+        M_Defense += (Level - 1) * 2;
+        Strength += (Level - 1) * 2;
+        Magic += (Level - 1) * 2;
+        Critical += (Level - 1) * 2;
+        Speed += (Level - 1) * 2;
+        Helth += (Level - 1) * 2;
     }
 }

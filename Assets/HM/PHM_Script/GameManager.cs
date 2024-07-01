@@ -23,8 +23,8 @@ public class Player
     public int MaxHP;
     public int CurHP;
 
-    public int Level;
-    public int EXP;
+    //public int Level;
+    //public int EXP;
 
     public bool onPlayerDead;
 }
@@ -65,7 +65,7 @@ public class GameManager : Singleton<GameManager>
     //public Transform[] transforms;
     private SelectPlayerPos PlayerPos;
     public SceneState sceneState;
-    public Transform movePlayer;//선택->이동시 처음 지정, 이동>배틀시마다 지정
+    //public Transform movePlayer;//선택->이동시 처음 지정, 이동>배틀시마다 지정
 
     private Dictionary<GameObject, int> playerObjectToId = new Dictionary<GameObject, int>();
 
@@ -73,12 +73,17 @@ public class GameManager : Singleton<GameManager>
 
     public int[] MaxEXP = { 10, 20, 30, 40, 50, 60, 70, 80, 90 };
 
+    public int PlayerLevel;
+    public int PlayerExp;
+
     public int MonsterLevel;
     public int ClearEXP;
 
     public int Dice;
     public int movePoint=0;
     public Vector3 PlayerMovePos;
+    public Vector3 PlayerMovePosClear;
+    public bool[] MonsterLife;
 
     private void Awake()
     {
@@ -91,6 +96,8 @@ public class GameManager : Singleton<GameManager>
         //}
 
         MonsterLevel = 1;
+        PlayerLevel = 1;
+        PlayerExp = 0;
 
         //CreateUserData(0, 0);
         //CreateUserData(1, 3);
@@ -123,8 +130,8 @@ public class GameManager : Singleton<GameManager>
         player[id].MaxHP = 10 + (player[id].Helth * 2);
         player[id].CurHP = player[id].MaxHP;
 
-        player[id].Level = 1;
-        player[id].EXP = 0;
+        //player[id].Level = 1;
+        //player[id].EXP = 0;
 
         player[id].onPlayerDead = charStat.onPlayerDead = false;
 
@@ -196,6 +203,26 @@ public class GameManager : Singleton<GameManager>
         M_UI = GameObject.FindFirstObjectByType<MoveUIManager>();
         M_UI.D_TextChange();
         M_UI.P_TextChange();
+    }
+
+    public void PlayerLevelUp()
+    {
+        for(int i = 0; i < player.Length; i++)
+        {
+            Prefeb[player[i].id].TryGetComponent<PHM_CharStat>(out charStat);
+            player[i].Accuracy = charStat.Accuracy + (int)((PlayerLevel - 1) / 2);
+            player[i].P_Defense = charStat.P_Defense + (PlayerLevel - 1);
+            player[i].M_Defense = charStat.M_Defense + (PlayerLevel - 1);
+            player[i].Strength = charStat.Strength + (PlayerLevel - 1);
+            player[i].Magic = charStat.Magic + (PlayerLevel - 1);
+            player[i].Critical = charStat.Critical + (int)((PlayerLevel - 1) / 2);
+            player[i].Speed = charStat.Speed + (int)((PlayerLevel - 1) / 2);
+            player[i].Helth = charStat.Helth + (PlayerLevel - 1);
+
+            player[i].MaxHP = 10 + (player[i].Helth * 2);
+            player[i].CurHP = player[i].MaxHP;
+
+        }
     }
 
 }

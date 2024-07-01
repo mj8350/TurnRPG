@@ -7299,7 +7299,6 @@ MonoBehaviour:
     onPlayerDead: 0
   charStat: {fileID: 0}
   sceneState: 0
-  movePlayer: {fileID: 0}
   Prefeb:
   - {fileID: 5476095651855104634, guid: 44f8524edc64f2146b22fb2807ad88fc, type: 3}
   - {fileID: 7507203005261002806, guid: f09935441256f564e88dcf948abe8435, type: 3}
@@ -7312,6 +7311,8 @@ MonoBehaviour:
   Dice: 5
   movePoint: 0
   PlayerMovePos: {x: 0, y: 0, z: 0}
+  PlayerMovePosClear: {x: 0, y: 0, z: 0}
+  MonsterLife: 0101010101010101010101010101
 --- !u!4 &1914784795
 Transform:
   m_ObjectHideFlags: 0
