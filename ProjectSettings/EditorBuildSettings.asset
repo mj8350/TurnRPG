@@ -12,9 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SelectCharScene.unity
     guid: c856617b3143030468e49f148ee66a82
   - enabled: 1
-    path: Assets/YS/Move3.unity
+    path: Assets/Scenes/Move3.unity
     guid: 2e4f78e0e6b744349837653803d7131a
   - enabled: 1
     path: Assets/Scenes/BattleScene.unity
     guid: 7d182e1f36deeea41b294d80d7461d63
+  - enabled: 1
+    path: Assets/Scenes/BossScene.unity
+    guid: e820e4e1dbe1f42448904c9d333b4f2e
   m_configObjects: {}

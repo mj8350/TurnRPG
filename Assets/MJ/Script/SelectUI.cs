@@ -116,7 +116,7 @@ public class SelectUI : MonoBehaviour
         {
             SceneManager.LoadScene("Move3");
             GameManager.Instance.sceneState = SceneState.MoveScene;
-            GameManager.Instance.PlayerMovePos = Vector3.zero;
+            GameManager.Instance.PlayerMovePos = new Vector3(-27.264f,-3.4f,0);
         }
     }
 

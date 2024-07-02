@@ -19,6 +19,9 @@ public class PHM_MonsterStat : MonoBehaviour
 
     public int Level;
 
+    public int Stage;
+    public int Value;
+
     private void Awake()
     {
         Level = GameManager.Instance.MonsterLevel;

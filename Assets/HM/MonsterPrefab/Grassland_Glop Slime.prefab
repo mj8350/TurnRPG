@@ -154,6 +154,8 @@ MonoBehaviour:
   Speed: 7
   Helth: 5
   Level: 0
+  Stage: 0
+  Value: 1
 --- !u!114 &660672491317194116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,6 +172,7 @@ MonoBehaviour:
   Poison: {fileID: 5869953161511885018}
   Fire: {fileID: 9021023369891724426}
   Stun: {fileID: 5377338508351607457}
+  monStat: {fileID: 0}
 --- !u!58 &6619010851002610957
 CircleCollider2D:
   m_ObjectHideFlags: 0

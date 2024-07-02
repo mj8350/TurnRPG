@@ -68,9 +68,14 @@ public class MJ_Turn : MonoBehaviour
         //});
 
         NewTurn();
+        //FightManager.Instance.TurnDraw();
+        StartCoroutine("StartTurn");
+
+    }
+    IEnumerator StartTurn()
+    {
+        yield return new WaitForSeconds(0.3f);
         FightManager.Instance.TurnDraw();
-
-
     }
 
     public void ListSort()

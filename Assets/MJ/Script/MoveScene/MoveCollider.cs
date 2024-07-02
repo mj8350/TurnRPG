@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 
 public class MoveCollider : MonoBehaviour
 {
@@ -9,10 +9,11 @@ public class MoveCollider : MonoBehaviour
     private Move_Player player;
     public Vector3 transPos;
     public bool isGround;
-
+    private MoveUIManager M_UI;
 
     private void Awake()
     {
+        M_UI = GameObject.FindFirstObjectByType<MoveUIManager>();
         player = GameObject.FindFirstObjectByType<Move_Player>();
         Arrow.SetActive(false);
         isGround = true;
@@ -20,14 +21,18 @@ public class MoveCollider : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (player.CanMove&&Arrow.activeSelf)
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            player.LastPosChange();
-            GameManager.Instance.movePoint--;
-            //Debug.Log(GameManager.Instance.movePoint);
-            GameManager.Instance.MoveUIText();
-            player.ClickCollider(transPos);
-            Arrow.SetActive(false);
+            if (player.CanMove && Arrow.activeSelf)
+            {
+                player.LastPosChange();
+                GameManager.Instance.movePoint--;
+                M_UI.RText();
+                //Debug.Log(GameManager.Instance.movePoint);
+                GameManager.Instance.MoveUIText();
+                player.ClickCollider(transPos);
+                Arrow.SetActive(false);
+            }
         }
     }
 

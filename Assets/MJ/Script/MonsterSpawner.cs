@@ -7,6 +7,8 @@ public class MonsterSpawner : MonoBehaviour
 
     public List<GameObject> MonsterList = new List<GameObject>();
 
+    private GameObject obj;
+
     public Transform[] MonsterPos;
 
     // Start is called before the first frame update
@@ -17,11 +19,13 @@ public class MonsterSpawner : MonoBehaviour
 
     public void MonsterSp()
     {
-        for (int i = 0; i < MonsterPos.Length; i++)
-        //for (int i = 0; i < 2; i++)
+        obj = Instantiate(MonsterList[GameManager.Instance.MonsterStage * 5 + GameManager.Instance.MonsterValue], MonsterPos[0]);
+        obj.transform.parent = MonsterPos[0];
+        
+        for (int i = 1; i < MonsterPos.Length; i++)
         {
-            int ran = Random.Range(0, MonsterList.Count);
-            GameObject obj = Instantiate(MonsterList[ran], MonsterPos[i]);
+            int ran = Random.Range(0, 5);
+            obj = Instantiate(MonsterList[GameManager.Instance.MonsterStage*5 + ran], MonsterPos[i]);
             obj.transform.parent = MonsterPos[i];
         }
     }

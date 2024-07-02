@@ -85,6 +85,11 @@ public class GameManager : Singleton<GameManager>
     public Vector3 PlayerMovePosClear;
     public bool[] MonsterLife;
 
+    public int MonsterStage;
+    public int MonsterValue;
+    public int WhatMonster;
+
+
     private void Awake()
     {
         base.Awake();
@@ -102,6 +107,7 @@ public class GameManager : Singleton<GameManager>
         //CreateUserData(0, 0);
         //CreateUserData(1, 3);
         //CreateUserData(2, 4);
+        //sceneState = SceneState.BattleScene;
     }
 
     public void CreateUserData(int id, int charactor)
@@ -185,16 +191,16 @@ public class GameManager : Singleton<GameManager>
 
     public void RoundEnd()
     {
+        M_UI = GameObject.FindFirstObjectByType<MoveUIManager>();
         StartCoroutine("RoundChange");
-
+        M_UI.RoundEND();
     }
 
     private IEnumerator RoundChange()
     {
-        M_UI = GameObject.FindFirstObjectByType<MoveUIManager>();
-        yield return new WaitForSeconds(5f);
-        Dice = 5;
         MonsterLevel++;
+        yield return new WaitForSeconds(6f);
+        Dice = 5;
         M_UI.D_TextChange();
     }
 
@@ -207,21 +213,29 @@ public class GameManager : Singleton<GameManager>
 
     public void PlayerLevelUp()
     {
-        for(int i = 0; i < player.Length; i++)
+        if (PlayerExp >= MaxEXP[PlayerLevel - 1])
         {
-            Prefeb[player[i].id].TryGetComponent<PHM_CharStat>(out charStat);
-            player[i].Accuracy = charStat.Accuracy + (int)((PlayerLevel - 1) / 2);
-            player[i].P_Defense = charStat.P_Defense + (PlayerLevel - 1);
-            player[i].M_Defense = charStat.M_Defense + (PlayerLevel - 1);
-            player[i].Strength = charStat.Strength + (PlayerLevel - 1);
-            player[i].Magic = charStat.Magic + (PlayerLevel - 1);
-            player[i].Critical = charStat.Critical + (int)((PlayerLevel - 1) / 2);
-            player[i].Speed = charStat.Speed + (int)((PlayerLevel - 1) / 2);
-            player[i].Helth = charStat.Helth + (PlayerLevel - 1);
+            PlayerLevel++;
 
-            player[i].MaxHP = 10 + (player[i].Helth * 2);
-            player[i].CurHP = player[i].MaxHP;
+            for (int i = 0; i < player.Length; i++)
+            {
+                Prefeb[player[i].id].TryGetComponent<PHM_CharStat>(out charStat);
+                player[i].Accuracy = charStat.Accuracy + (int)((PlayerLevel - 1) / 2);
+                player[i].P_Defense = charStat.P_Defense + (PlayerLevel - 1);
+                player[i].M_Defense = charStat.M_Defense + (PlayerLevel - 1);
+                player[i].Strength = charStat.Strength + (PlayerLevel - 1);
+                player[i].Magic = charStat.Magic + (PlayerLevel - 1);
+                player[i].Critical = charStat.Critical + (int)((PlayerLevel - 1) / 2);
+                player[i].Speed = charStat.Speed + (int)((PlayerLevel - 1) / 2);
+                player[i].Helth = charStat.Helth + (PlayerLevel - 1);
 
+                player[i].MaxHP = 10 + (player[i].Helth * 2);
+                player[i].CurHP += 4;
+                if(player[i].CurHP>player[i].MaxHP)
+                    player[i].CurHP = player[i].MaxHP;
+            }
+            if (PlayerExp >= MaxEXP[PlayerLevel - 1])
+                PlayerLevelUp();
         }
     }
 

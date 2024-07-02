@@ -32,6 +32,8 @@ public class Move_Player : MonoBehaviour
         {
             if (GameManager.Instance.Dice > 0&&GameManager.Instance.movePoint==0)
             {
+                if (M_UI.R.gameObject.activeSelf)
+                    M_UI.R.gameObject.SetActive(false);
                 int ran = Random.Range(1, 7);
                 //Debug.Log(ran);
                 GameManager.Instance.movePoint += ran;

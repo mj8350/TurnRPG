@@ -48,6 +48,8 @@ public class FightManager : MonoBehaviour
     public string WhatDmg;
     public int damage;
 
+    public AudioSource audio;
+
     private void Awake()
     {
         if (Instance == null)
@@ -59,6 +61,8 @@ public class FightManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        TryGetComponent<AudioSource>(out audio);
 
         onAttack = false;
         onTaunt = false;
@@ -262,13 +266,19 @@ public class FightManager : MonoBehaviour
         }
     }
 
+    IEnumerator Sound(float t)
+    {
+        yield return new WaitForSeconds(t);
+        audio.Play();
+    }
+
     Vector3 damagePos;
 
     public void Damage(GameObject obj, int damage, bool onCri)
     {
 
 
-        if (!onCri)
+        if (!onCri && turn.turnList != null && fightUI.count>=0)
         {
             if (turn.turnList[fightUI.count].Key < 3)
             {
@@ -304,6 +314,7 @@ public class FightManager : MonoBehaviour
             }
 
             StartCoroutine(DamageT(obj, damage, 1, onCri));
+            StartCoroutine("Sound",0.5f);
         }
 
         if (obj.TryGetComponent<PHM_CharStat>(out PHM_CharStat charStat))
@@ -315,6 +326,7 @@ public class FightManager : MonoBehaviour
                     charStat.TakeDamage(damage);
                     StartCoroutine(getDamage(i, damage));
                     StartCoroutine(DamageT(obj, damage, 2.3f, onCri));
+                    StartCoroutine("Sound",1.7f);
                 }
             }
         }
@@ -365,12 +377,11 @@ public class FightManager : MonoBehaviour
             return GameOver;
         }
     }
-
+    
     private IEnumerator getDamage(int i, int damage)
     {
         yield return new WaitForSeconds(1f);
         GameManager.Instance.player[i].CurHP -= damage;
-
         if (GameManager.Instance.player[i].CurHP <= 0)
         {
             GameManager.Instance.player[i].CurHP = 0;

@@ -40,6 +40,10 @@ public class FightUI : MonoBehaviour
     public Image SKInfo;
     public TextMeshProUGUI SKInfoText;
 
+    public Image EndImg;
+    public TextMeshProUGUI whowin;
+    public Button EndBtn;
+    public TextMeshProUGUI EndBtnTxt;
 
     private void Awake()
     {
@@ -172,12 +176,32 @@ public class FightUI : MonoBehaviour
         {
             if(FightManager.Instance.PlayerWin)
             {
-                Debug.Log("플레이어 우승");
-                GameManager.Instance.PlayerExp += GameManager.Instance.MonsterLevel * 15;
+                if (GameManager.Instance.MonsterValue > 4)
+                {
+                    EndImg.gameObject.SetActive(true);
+                    whowin.text = "Boss Clear!";
+                    EndBtnTxt.text = "타이틀로";
+                    EndBtn.onClick.AddListener(() => OnClick_LoseBtn());
+                }
+                else
+                {
+                    Debug.Log("플레이어 우승");
+                    GameManager.Instance.PlayerExp += GameManager.Instance.MonsterLevel * 15;
+                    GameManager.Instance.PlayerLevelUp();
+                    EXPChange();
+                    EndImg.gameObject.SetActive(true);
+                    whowin.text = "Win!";
+                    EndBtnTxt.text = "맵으로";
+                    EndBtn.onClick.AddListener(() => OnClick_WinBtn());
+                }
             }
             else if(FightManager.Instance.MonsterWin)
             {
                 Debug.Log("몬스터 우승");
+                EndImg.gameObject.SetActive(true);
+                whowin.text = "Lose...";
+                EndBtnTxt.text = "타이틀로";
+                EndBtn.onClick.AddListener(() => OnClick_LoseBtn());
             }
         }
     }
@@ -328,5 +352,21 @@ public class FightUI : MonoBehaviour
             GameManager.Instance.sceneState = SceneState.MoveScene;
             Destroy(FightManager.Instance.gameObject);
         }
+    }
+
+    private void OnClick_WinBtn()
+    {
+        SceneManager.LoadScene("Move3");
+        GameManager.Instance.sceneState = SceneState.MoveScene;
+        GameManager.Instance.PlayerMovePos = GameManager.Instance.PlayerMovePosClear;
+        GameManager.Instance.MonsterLife[GameManager.Instance.WhatMonster] = false;
+        Destroy(FightManager.Instance.gameObject);
+    }
+
+    private void OnClick_LoseBtn()
+    {
+        SceneManager.LoadScene("TitleScene");
+        Destroy(FightManager.Instance.gameObject);
+        Destroy(GameManager.Instance.gameObject);
     }
 }
